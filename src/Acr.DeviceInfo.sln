@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo", "Acr.DeviceInfo\Acr.DeviceInfo.csproj", "{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo.Interfaces", "Acr.DeviceInfo.Interfaces\Acr.DeviceInfo.Interfaces.csproj", "{20F2FA46-D503-4384-914B-B2AFE040EC1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo.iOS", "Acr.DeviceInfo.iOS\Acr.DeviceInfo.iOS.csproj", "{8786FFFE-E5DC-4147-B04C-C68F3F01A024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo.Android", "Acr.DeviceInfo.Android\Acr.DeviceInfo.Android.csproj", "{81F160C8-E15B-4D75-8580-A27757E1C4C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{842D84E4-CC94-4D47-AED3-6C6AB698A57B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B46D2F8-5264-44C7-93F1-BE0DAA9DF061}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuspec\Acr.DeviceInfo.nuspec = ..\nuspec\Acr.DeviceInfo.nuspec
+		..\nuspec\pack.cmd = ..\nuspec\pack.cmd
+		..\nuspec\push.cmd = ..\nuspec\push.cmd
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Acr.DeviceInfo.Shared", "Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.shproj", "{362383F5-16BD-4E6D-842D-3DC780E6F20E}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems*{8786fffe-e5dc-4147-b04c-c68f3f01a024}*SharedItemsImports = 4
+		Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems*{81f160c8-e15b-4d75-8580-a27757e1c4c9}*SharedItemsImports = 4
+		Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems*{362383f5-16bd-4e6d-842d-3dc780e6f20e}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8786FFFE-E5DC-4147-B04C-C68F3F01A024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8786FFFE-E5DC-4147-B04C-C68F3F01A024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8786FFFE-E5DC-4147-B04C-C68F3F01A024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8786FFFE-E5DC-4147-B04C-C68F3F01A024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F160C8-E15B-4D75-8580-A27757E1C4C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F160C8-E15B-4D75-8580-A27757E1C4C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F160C8-E15B-4D75-8580-A27757E1C4C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F160C8-E15B-4D75-8580-A27757E1C4C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7} = {842D84E4-CC94-4D47-AED3-6C6AB698A57B}
+		{8786FFFE-E5DC-4147-B04C-C68F3F01A024} = {842D84E4-CC94-4D47-AED3-6C6AB698A57B}
+		{81F160C8-E15B-4D75-8580-A27757E1C4C9} = {842D84E4-CC94-4D47-AED3-6C6AB698A57B}
+	EndGlobalSection
+EndGlobal

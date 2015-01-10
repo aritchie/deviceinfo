@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Acr.DeviceInfo</id>
+        <version>2.0.0</version>
+        <title>Device Info Plugin for Xamarin and Windows</title>
+        <description>Device Information Xplat Plugin for Xamarin and Windows</description>
+        <authors>Allan Ritchie</authors>
+        <owners>Allan Ritchie</owners>
+        <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+        <projectUrl>https://github.com/aritchie/deviceinfo</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>xamarin xam.pcl deviceinfo</tags>
+        <releaseNotes>
+2.0
+Moving to bait and switch design
+
+1.5
+Update to profile 259
+Fix iOS bug when reading properties outside main thread
+
+1.4
+Adding AppVersion property
+
+1.3.2
+Fix nuspec pcl target
+
+1.3.1
+Fix bad nuspec dependency
+
+1.3
+Switching to profile78 to support MvvmCross 3.2.1
+
+1.2
+BREAKING: Android library no longer has the readphonestate permission built-in to allow the user the choice if they want to use it or not
+Certrain properties now lazy load, so you don't need to use them and the appropriate permissions
+
+1.1
+Adds Windows Phone 8 Support
+Add DeviceId - useful for tracking phones
+
+1.0
+Initial Release
+        </releaseNotes>
+    </metadata>
+    <files>
+        <!-- PCL -->
+        <file src="..\src\Acr.DeviceInfo\Release\bin\Acr.DeviceInfo.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.DeviceInfo.dll" />
+
+        <!-- android -->
+        <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.dll" />
+
+        <!-- ios -->
+        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
+
+        <!-- win universal -->
+        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.dll" target="lib\wp8\Acr.DeviceInfo.dll" />
+    </files>
+</package>
