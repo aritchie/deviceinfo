@@ -15,16 +15,5 @@ namespace Acr.DeviceInfo {
         bool IsFrontCameraAvailable { get; }
         bool IsRearCameraAvailable { get; }
         bool IsSimulator { get; }
-
-        // shutdown, suspended, backgrounded, started, resumed
-        // IsFlashAvailable
-        // Camera resolution?
-
-
-    //UIApplication.Notifications.ObserveWillResignActive((EventHandler<NSNotificationEventArgs>) ((sender, args) => this.EmitBackgroundChange(true)));
-    //  UIApplication.Notifications.ObserveDidEnterBackground((EventHandler<NSNotificationEventArgs>) ((sender, args) => this.EmitBackgroundChange(true)));
-    //  UIApplication.Notifications.ObserveWillEnterForeground((EventHandler<NSNotificationEventArgs>) ((sender, args) => this.EmitBackgroundChange(false)));
-    //  UIApplication.Notifications.ObserveDidBecomeActive((EventHandler<NSNotificationEventArgs>) ((sender, args) => this.EmitBackgroundChange(false)));
-    //  UIApplication.Notifications.ObserveWillTerminate((EventHandler<NSNotificationEventArgs>) ((sender, args) => this.WillTerminate()));
     }
 }
