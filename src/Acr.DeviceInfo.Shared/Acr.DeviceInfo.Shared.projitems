@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeviceInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDeviceInfo.cs" />
   </ItemGroup>
 </Project>

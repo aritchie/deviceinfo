@@ -5,7 +5,7 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3a5afe2f-3287-4fe3-9283-239d60ce38e7}</ProjectGuid>
+    <ProjectGuid>{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Acr.DeviceInfo</RootNamespace>
@@ -41,7 +41,6 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -52,5 +51,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
 </Project>

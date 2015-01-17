@@ -39,12 +39,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Acr.DeviceInfo.Interfaces\Acr.DeviceInfo.Interfaces.csproj">
-      <Project>{20f2fa46-d503-4384-914b-b2afe040ec1a}</Project>
-      <Name>Acr.DeviceInfo.Interfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />

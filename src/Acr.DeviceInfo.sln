@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo", "Acr.DeviceInfo\Acr.DeviceInfo.csproj", "{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo.Interfaces", "Acr.DeviceInfo.Interfaces\Acr.DeviceInfo.Interfaces.csproj", "{20F2FA46-D503-4384-914B-B2AFE040EC1A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo.iOS", "Acr.DeviceInfo.iOS\Acr.DeviceInfo.iOS.csproj", "{8786FFFE-E5DC-4147-B04C-C68F3F01A024}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo.Android", "Acr.DeviceInfo.Android\Acr.DeviceInfo.Android.csproj", "{81F160C8-E15B-4D75-8580-A27757E1C4C9}"
@@ -46,14 +44,6 @@ Global
 		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}.Release|ARM.ActiveCfg = Release|Any CPU
 		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7}.Release|x86.ActiveCfg = Release|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Release|ARM.ActiveCfg = Release|Any CPU
-		{20F2FA46-D503-4384-914B-B2AFE040EC1A}.Release|x86.ActiveCfg = Release|Any CPU
 		{8786FFFE-E5DC-4147-B04C-C68F3F01A024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8786FFFE-E5DC-4147-B04C-C68F3F01A024}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8786FFFE-E5DC-4147-B04C-C68F3F01A024}.Debug|ARM.ActiveCfg = Debug|Any CPU

@@ -52,12 +52,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Acr.DeviceInfo.Interfaces\Acr.DeviceInfo.Interfaces.csproj">
-      <Project>{20f2fa46-d503-4384-914b-b2afe040ec1a}</Project>
-      <Name>Acr.DeviceInfo.Interfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="..\Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems" Label="Shared" Condition="Exists('..\Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
