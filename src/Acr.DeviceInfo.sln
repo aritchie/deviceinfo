@@ -21,11 +21,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Acr.DeviceInfo.Shared", "Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.shproj", "{362383F5-16BD-4E6D-842D-3DC780E6F20E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.DeviceInfo.WindowsPhone", "Acr.DeviceInfo.WindowsPhone\Acr.DeviceInfo.WindowsPhone.csproj", "{5FB7DD2C-A013-481E-B9BD-B267B4E42854}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems*{8786fffe-e5dc-4147-b04c-c68f3f01a024}*SharedItemsImports = 4
 		Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems*{81f160c8-e15b-4d75-8580-a27757e1c4c9}*SharedItemsImports = 4
 		Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems*{362383f5-16bd-4e6d-842d-3dc780e6f20e}*SharedItemsImports = 13
+		Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems*{5fb7dd2c-a013-481e-b9bd-b267b4e42854}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +63,18 @@ Global
 		{81F160C8-E15B-4D75-8580-A27757E1C4C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81F160C8-E15B-4D75-8580-A27757E1C4C9}.Release|ARM.ActiveCfg = Release|Any CPU
 		{81F160C8-E15B-4D75-8580-A27757E1C4C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Debug|ARM.ActiveCfg = Debug|ARM
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Debug|ARM.Build.0 = Debug|ARM
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Debug|x86.ActiveCfg = Debug|x86
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Debug|x86.Build.0 = Debug|x86
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Release|ARM.ActiveCfg = Release|ARM
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Release|ARM.Build.0 = Release|ARM
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Release|x86.ActiveCfg = Release|x86
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +83,6 @@ Global
 		{3A5AFE2F-3287-4FE3-9283-239D60CE38E7} = {842D84E4-CC94-4D47-AED3-6C6AB698A57B}
 		{8786FFFE-E5DC-4147-B04C-C68F3F01A024} = {842D84E4-CC94-4D47-AED3-6C6AB698A57B}
 		{81F160C8-E15B-4D75-8580-A27757E1C4C9} = {842D84E4-CC94-4D47-AED3-6C6AB698A57B}
+		{5FB7DD2C-A013-481E-B9BD-B267B4E42854} = {842D84E4-CC94-4D47-AED3-6C6AB698A57B}
 	EndGlobalSection
 EndGlobal
