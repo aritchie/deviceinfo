@@ -18,32 +18,6 @@ namespace Acr.DeviceInfo {
                 var deviceIdBytes = (byte[])DeviceExtendedProperties.GetValue("DeviceUniqueId");
                 return Convert.ToBase64String(deviceIdBytes);
             });
-            switch (GetScaleFactor()) {
-
-                case 150:
-                    this.ScreenWidth = 720;
-                    this.ScreenHeight = 1280;
-                    break;
-
-                case 160:
-                    this.ScreenWidth = 768;
-                    this.ScreenHeight = 1280;
-                    break;
-
-                case 100:
-                default:
-                    this.ScreenWidth = 480;
-                    this.ScreenHeight = 800;
-                    break;
-            }
-        }
-
-
-        private static int GetScaleFactor()  {  
-            var instance = Application.Current.Host.Content;
-            var getMethod = instance.GetType().GetProperty("ScaleFactor").GetGetMethod();
-            var value = (int)getMethod.Invoke(instance, null);
-            return value;
         }
 
 
@@ -52,8 +26,14 @@ namespace Acr.DeviceInfo {
         }
 
 
-        public int ScreenHeight { get; private set; }
-        public int ScreenWidth { get; private set; }
+        public int ScreenHeight {
+            get { return (int)Application.Current.Host.Content.ActualHeight; }
+        }
+
+
+        public int ScreenWidth {
+            get { return (int)Application.Current.Host.Content.ActualWidth; }
+        }
 
 
         public string DeviceId {

@@ -55,5 +55,8 @@ Initial Release
 
         <!-- wp8 -->
         <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.dll" target="lib\wp8\Acr.DeviceInfo.dll" />
+
+        <!-- win universal -->
+        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.dll" target="lib\portable-win8+wpa81\Acr.DeviceInfo.dll" />
     </files>
 </package>
