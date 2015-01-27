@@ -8,6 +8,10 @@ namespace Acr.DeviceInfo {
         private static readonly object syncLock = new object();
 
 
+        // useless method to deal with linkers
+        public static void Init() { }
+
+
         public static IDeviceInfo Instance {
             get {
                 if (instance == null) {
