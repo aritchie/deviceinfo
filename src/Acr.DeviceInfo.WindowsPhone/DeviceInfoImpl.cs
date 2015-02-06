@@ -36,6 +36,10 @@ namespace Acr.DeviceInfo {
         }
 
 
+        public int ScreenDensity {
+            get { return 0; }
+        }
+
         public string DeviceId {
             get { return this.deviceId.Value; }
         }

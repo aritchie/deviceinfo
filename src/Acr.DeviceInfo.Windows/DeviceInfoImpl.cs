@@ -46,6 +46,11 @@ namespace Acr.DeviceInfo {
         }
 
 
+        public int ScreenDensity {
+            get { return 0; }
+        }
+
+
         public string AppVersion {
             get { return Package.Current.Id.Version.ToString(); }
         }

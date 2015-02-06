@@ -15,16 +15,16 @@ namespace Acr.DeviceInfo {
         private readonly Lazy<string> deviceId;
         private readonly Lazy<int> screenHeight;
         private readonly Lazy<int> screenWidth;
+        private readonly Lazy<int> screenDensity;
 
 
         public DeviceInfoImpl() {
-            this.appVersion = new Lazy<string>(() =>
-                App
-                    .Context
-                    .ApplicationContext
-                    .PackageManager
-                    .GetPackageInfo(App.Context.PackageName, 0)
-                    .VersionName
+            this.appVersion = new Lazy<string>(() => App
+                .Context
+                .ApplicationContext
+                .PackageManager
+                .GetPackageInfo(App.Context.PackageName, 0)
+                .VersionName
             );
             this.screenHeight = new Lazy<int>(() => {
                 var d = Resources.System.DisplayMetrics;
@@ -34,6 +34,9 @@ namespace Acr.DeviceInfo {
                 var d = Resources.System.DisplayMetrics;
                 return (int)(d.WidthPixels / d.Density);
             });
+            this.screenDensity = new Lazy<int>(() =>
+                (int)Resources.System.DisplayMetrics.Density
+            );
             this.deviceId = new Lazy<string>(() => {
                 var tel = (TelephonyManager)App.Context.GetSystemService(Context.TelephonyService);
                 return tel.DeviceId;
@@ -53,6 +56,11 @@ namespace Acr.DeviceInfo {
 
         public int ScreenWidth {
             get { return this.screenWidth.Value; }
+        }
+
+
+        public int ScreenDensity {
+            get { return this.screenDensity.Value; }
         }
 
 
