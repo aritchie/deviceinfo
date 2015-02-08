@@ -13,7 +13,7 @@ namespace Acr.DeviceInfo {
 			this.AppVersion = NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
 			this.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
 			this.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
-            this.ScreenDensity = 0; //UIScreen.MainScreen.Scale;
+			this.ScreenDensity = (int)UIScreen.MainScreen.Scale;
 			this.DeviceId = UIDevice.CurrentDevice.IdentifierForVendor.AsString();
 			this.Manufacturer = "Apple";
 			this.Model = UIDevice.CurrentDevice.Model;

@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D053B505-4911-4602-9982-4BB7DCDC0CCD}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
@@ -51,6 +49,8 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchI18n>
+    </MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -95,17 +95,18 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
-    <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Acr.DeviceInfo.iOS\Acr.DeviceInfo.iOS.csproj">
-      <Project>{8786fffe-e5dc-4147-b04c-c68f3f01a024}</Project>
+      <Project>{8786FFFE-E5DC-4147-B04C-C68F3F01A024}</Project>
       <Name>Acr.DeviceInfo.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
+      <IsAppExtension>False</IsAppExtension>
     </ProjectReference>
     <ProjectReference Include="..\Samples\Samples.csproj">
       <Name>Samples</Name>
+      <Project>{5B47DDBE-E702-4D70-8E37-B6CFB03FA8DA}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
