@@ -7,7 +7,6 @@ namespace Acr.DeviceInfo {
 
         int ScreenHeight { get; }
         int ScreenWidth { get; }
-        int ScreenDensity { get; }
         string AppVersion { get; }
         string DeviceId { get; }
         string Manufacturer { get; }

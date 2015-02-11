@@ -42,10 +42,6 @@ namespace Samples {
                         new TextCell {
                             Text = "Height",
                             Detail = dev.ScreenHeight.ToString()
-                        },
-                        new TextCell {
-                            Text = "Density",
-                            Detail = dev.ScreenDensity.ToString()
                         }
                     },
                     new TableSection("Camera") {

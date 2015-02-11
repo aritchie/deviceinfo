@@ -15,7 +15,6 @@ namespace Acr.DeviceInfo {
         private readonly Lazy<string> deviceId;
         private readonly Lazy<int> screenHeight;
         private readonly Lazy<int> screenWidth;
-        private readonly Lazy<int> screenDensity;
 
 
         public DeviceInfoImpl() {
@@ -34,9 +33,6 @@ namespace Acr.DeviceInfo {
                 var d = Resources.System.DisplayMetrics;
                 return (int)(d.WidthPixels / d.Density);
             });
-            this.screenDensity = new Lazy<int>(() =>
-                (int)Resources.System.DisplayMetrics.Density
-            );
             this.deviceId = new Lazy<string>(() => {
                 var tel = (TelephonyManager)App.Context.GetSystemService(Context.TelephonyService);
                 return tel.DeviceId;
@@ -56,11 +52,6 @@ namespace Acr.DeviceInfo {
 
         public int ScreenWidth {
             get { return this.screenWidth.Value; }
-        }
-
-
-        public int ScreenDensity {
-            get { return this.screenDensity.Value; }
         }
 
 
@@ -103,8 +94,3 @@ namespace Acr.DeviceInfo {
         }
     }
 }
-////var filter = new IntentFilter(Intent.ActionBatteryChanged);
-////var battery = RegisterReceiver(null, filter);
-////var level = battery.GetIntExtra(BatteryManager.ExtraLevel, -1);
-////var scale = battery.GetIntExtra(BatteryManager.ExtraScale, -1);
-////this.BatteryPercentage = Convert.ToInt32(Math.Floor(level * 100D / scale));
