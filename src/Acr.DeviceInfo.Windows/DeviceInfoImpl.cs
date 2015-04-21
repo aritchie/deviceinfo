@@ -37,65 +37,18 @@ namespace Acr.DeviceInfo {
         }
 
 
-        public int ScreenHeight {
-            get { return (int)Window.Current.Bounds.Height; }
-        }
-
-
-        public int ScreenWidth {
-            get { return (int)Window.Current.Bounds.Width; }
-        }
-
-
-        public string AppVersion {
-            get { return Package.Current.Id.Version.ToString(); }
-        }
-
-
-        public string DeviceId {
-            get { return this.deviceInfo.Id.ToString(); }
-        }
-
-
-        public string Manufacturer {
-            get { return this.deviceInfo.SystemManufacturer; }
-        }
-
-
-        public string Model {
-            get { return this.deviceInfo.SystemSku; }
-        }
-
-
-        public string OperatingSystem {
-            get { return this.deviceInfo.OperatingSystem; }
-        }
-
-
-        public bool IsFrontCameraAvailable {
-            get { throw new NotImplementedException(); }
-        }
-
-
-        public bool IsRearCameraAvailable {
-            get { throw new NotImplementedException(); }
-        }
-
-
-        public bool IsSimulator {
-            get { return Package.Current.Id.Architecture == ProcessorArchitecture.Unknown; }
-        }
-
-
-        public CultureInfo Locale {
-            get { return CultureInfo.CurrentCulture; }
-        }
-
-
-        public DeviceType DeviceType {
-            get {
-                return DeviceType.Unknown;
-            }
-        }
+        public int ScreenHeight { get { return (int)Window.Current.Bounds.Height; }}
+        public int ScreenWidth { get { return (int)Window.Current.Bounds.Width; }}
+        public string AppVersion { get { return Package.Current.Id.Version.ToString(); }}
+        public string DeviceId { get { return this.deviceInfo.Id.ToString(); }}
+        public string Manufacturer { get { return this.deviceInfo.SystemManufacturer; }}
+        public string Model { get { return this.deviceInfo.SystemSku; }}
+        public string OperatingSystem { get { return this.deviceInfo.OperatingSystem; }}
+        public bool IsFrontCameraAvailable { get { throw new NotImplementedException(); }}
+        public bool IsRearCameraAvailable { get { throw new NotImplementedException(); }}
+        public bool IsSimulator { get { return Package.Current.Id.Architecture == ProcessorArchitecture.Unknown; }}
+        public bool IsTablet { get { return true; }}
+        public CultureInfo Locale { get { return CultureInfo.CurrentCulture; }}
+        public OperatingSystemType OS { get { return OperatingSystemType.Windows; }}
     }
 }

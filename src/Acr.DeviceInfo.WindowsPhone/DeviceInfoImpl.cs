@@ -22,69 +22,18 @@ namespace Acr.DeviceInfo {
         }
 
 
-        public string AppVersion {
-            get {  return Package.Current.Id.Version.ToString(); }
-        }
-
-
-        public int ScreenHeight {
-            get { return (int)Application.Current.Host.Content.ActualHeight; }
-        }
-
-
-        public int ScreenWidth {
-            get { return (int)Application.Current.Host.Content.ActualWidth; }
-        }
-
-
-        public int ScreenDensity {
-            get { return 0; }
-        }
-
-        public string DeviceId {
-            get { return this.deviceId.Value; }
-        }
-
-
-        public string Manufacturer {
-            get { return DeviceStatus.DeviceManufacturer; }
-        }
-
-
-        public string Model {
-            get { return DeviceStatus.DeviceName; }
-        }
-
-
-        public string OperatingSystem {
-            get { return Env.OSVersion.ToString(); }
-        }
-
-
-        public bool IsFrontCameraAvailable {
-            get { return PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing); }
-        }
-
-
-        public bool IsRearCameraAvailable {
-            get { return PhotoCamera.IsCameraTypeSupported(CameraType.Primary); }
-        }
-
-
-        public bool IsSimulator {
-            get { return (DevEnv.DeviceType == Microsoft.Devices.DeviceType.Emulator); }
-        }
-
-
-        public CultureInfo Locale {
-            get { return CultureInfo.CurrentCulture; }
-        }
-
-
-        public DeviceType DeviceType {
-            get {
-                return DeviceType.WindowsPhone;
-            }
-        }
+        public string AppVersion { get {  return Package.Current.Id.Version.ToString(); }}
+        public int ScreenHeight { get { return (int)Application.Current.Host.Content.ActualHeight; }}
+        public int ScreenWidth { get { return (int)Application.Current.Host.Content.ActualWidth; }}
+        public string DeviceId { get { return this.deviceId.Value; }}
+        public string Manufacturer { get { return DeviceStatus.DeviceManufacturer; }}
+        public string Model { get { return DeviceStatus.DeviceName; }}
+        public string OperatingSystem { get { return Env.OSVersion.ToString(); }}
+        public bool IsFrontCameraAvailable { get { return PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing); }}
+        public bool IsRearCameraAvailable { get { return PhotoCamera.IsCameraTypeSupported(CameraType.Primary); }}
+        public bool IsSimulator { get { return (DevEnv.DeviceType == DeviceType.Emulator); }}
+        public bool IsTablet { get { return false; }}
+        public CultureInfo Locale { get { return CultureInfo.CurrentCulture; }}
+        public OperatingSystemType OS { get { return OperatingSystemType.WindowsPhone; }}
     }
 }

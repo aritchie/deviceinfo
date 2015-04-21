@@ -16,8 +16,9 @@ namespace Acr.DeviceInfo {
         bool IsFrontCameraAvailable { get; }
         bool IsRearCameraAvailable { get; }
         bool IsSimulator { get; }
+        bool IsTablet { get; }
 
         CultureInfo Locale { get; }
-        DeviceType DeviceType { get; }
+        OperatingSystemType OS { get; }
     }
 }

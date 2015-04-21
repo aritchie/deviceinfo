@@ -35,8 +35,9 @@ namespace Acr.DeviceInfo {
 		public bool IsFrontCameraAvailable { get; private set; }
 		public bool IsRearCameraAvailable { get; private set; }
 		public bool IsSimulator { get; private set; }
+        public bool IsTablet { get { return (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad); }}
+        public OperatingSystemType OS { get { return OperatingSystemType.iOS; }}
         public CultureInfo Locale { get; private set; }
-
 
         private CultureInfo GetLocale() {
 			var netLocale = NSLocale.AutoUpdatingCurrentLocale.LocaleIdentifier.Replace("_", "-");
@@ -51,16 +52,6 @@ namespace Acr.DeviceInfo {
                     : new CultureInfo(pl);
 			}
             return value;
-        }
-
-
-        public DeviceType DeviceType {
-            get {
-                if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-                    return DeviceType.iPad;
-
-                return DeviceType.iPhone;
-            }
         }
     }
 }

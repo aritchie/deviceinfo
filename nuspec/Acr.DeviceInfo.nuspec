@@ -14,38 +14,9 @@
         <releaseNotes>
 2.1
 [Android] - Fix device ID for android tablets
-* NEW Feature - Device Type Enum
+* NEW Feature - OS Type Enum
 * NEW Feature - Device Locale (CultureInfo.Current(UI)Culture never seems to work on iOS or Android)
-
-2.0
-Moving to bait and switch design
-
-1.5
-Update to profile 259
-Fix iOS bug when reading properties outside main thread
-
-1.4
-Adding AppVersion property
-
-1.3.2
-Fix nuspec pcl target
-
-1.3.1
-Fix bad nuspec dependency
-
-1.3
-Switching to profile78 to support MvvmCross 3.2.1
-
-1.2
-BREAKING: Android library no longer has the readphonestate permission built-in to allow the user the choice if they want to use it or not
-Certrain properties now lazy load, so you don't need to use them and the appropriate permissions
-
-1.1
-Adds Windows Phone 8 Support
-Add DeviceId - useful for tracking phones
-
-1.0
-Initial Release
+* NEW Feature - Tablet Detection
         </releaseNotes>
     </metadata>
     <files>

@@ -26,8 +26,8 @@ namespace Samples {
                             Detail = dev.Model
                         },
                         new TextCell {
-                            Text = "Device Type",
-                            Detail = dev.DeviceType.ToString()
+                            Text = "OS Type",
+                            Detail = dev.OS.ToString()
                         },
                         new TextCell {
                             Text = "Simulator",
@@ -36,6 +36,10 @@ namespace Samples {
                         new TextCell {
                             Text = "App Version",
                             Detail = dev.AppVersion
+                        },
+                        new TextCell {
+                            Text = "Tablet",
+                            Detail = dev.IsTablet.ToString()
                         },
                         new TextCell {
                             Text = "Device Locale",

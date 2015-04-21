@@ -19,7 +19,7 @@ namespace Acr.DeviceInfo {
         private readonly Lazy<int> screenHeight;
         private readonly Lazy<int> screenWidth;
         private readonly Lazy<CultureInfo> locale;
-        private readonly Lazy<DeviceType> deviceType;
+        private readonly Lazy<bool> isTablet;
 
 
         public DeviceInfoImpl() {
@@ -45,15 +45,9 @@ namespace Acr.DeviceInfo {
 
                 return tel.DeviceId;
             });
-            this.deviceType = new Lazy<DeviceType>(() => {
+            this.isTablet = new Lazy<bool>(() => {
                 var tel = App.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
-                if (tel == null)
-                    return DeviceType.Unknown;
-
-                if (tel.PhoneType == PhoneType.None)
-                    return DeviceType.AndroidTablet;
-
-                return DeviceType.AndroidPhone;
+                return (tel != null && tel.PhoneType == PhoneType.None);
             });
             this.locale = new Lazy<CultureInfo>(() => {
                 //			TODO: detect changes
@@ -119,15 +113,18 @@ namespace Acr.DeviceInfo {
         }
 
 
+        public bool IsTablet {
+            get { return this.isTablet.Value; }
+        }
+
+
         public CultureInfo Locale {
             get { return this.locale.Value; }
         }
 
 
-        public DeviceType DeviceType {
-            get {
-                return DeviceType.AndroidPhone;
-            }
+        public OperatingSystemType OS {
+            get { return OperatingSystemType.Android; }
         }
     }
 }
