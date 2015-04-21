@@ -26,12 +26,20 @@ namespace Samples {
                             Detail = dev.Model
                         },
                         new TextCell {
+                            Text = "Device Type",
+                            Detail = dev.DeviceType.ToString()
+                        },
+                        new TextCell {
                             Text = "Simulator",
                             Detail = dev.IsSimulator.ToString()
                         },
                         new TextCell {
                             Text = "App Version",
                             Detail = dev.AppVersion
+                        },
+                        new TextCell {
+                            Text = "Device Locale",
+                            Detail = dev.Locale.ToString()
                         }
                     },
                     new TableSection("Display") {

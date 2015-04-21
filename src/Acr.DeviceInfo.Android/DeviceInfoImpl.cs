@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Globalization;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
 using Android.Telephony;
+using Android.Provider;
 using B = Android.OS.Build;
 using App = Android.App.Application;
 
@@ -15,6 +18,8 @@ namespace Acr.DeviceInfo {
         private readonly Lazy<string> deviceId;
         private readonly Lazy<int> screenHeight;
         private readonly Lazy<int> screenWidth;
+        private readonly Lazy<CultureInfo> locale;
+        private readonly Lazy<DeviceType> deviceType;
 
 
         public DeviceInfoImpl() {
@@ -34,8 +39,28 @@ namespace Acr.DeviceInfo {
                 return (int)(d.WidthPixels / d.Density);
             });
             this.deviceId = new Lazy<string>(() => {
-                var tel = (TelephonyManager)App.Context.GetSystemService(Context.TelephonyService);
+                var tel = App.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
+                if (tel == null || tel.DeviceId == null)
+                    return Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
+
                 return tel.DeviceId;
+            });
+            this.deviceType = new Lazy<DeviceType>(() => {
+                var tel = App.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
+                if (tel == null)
+                    return DeviceType.Unknown;
+
+                if (tel.PhoneType == PhoneType.None)
+                    return DeviceType.AndroidTablet;
+
+                return DeviceType.AndroidPhone;
+            });
+            this.locale = new Lazy<CultureInfo>(() => {
+                //			TODO: detect changes
+                //			Android.App.Application.Context.Resources.Configuration.Locale
+			    //			RegionInfo.CurrentRegion
+			    var value = Java.Util.Locale.Default.ToString().Replace("_", "-");
+			    return new CultureInfo(value);
             });
         }
 
@@ -91,6 +116,18 @@ namespace Acr.DeviceInfo {
 
         public bool IsSimulator {
             get { return B.Product.Equals("google_sdk"); }
+        }
+
+
+        public CultureInfo Locale {
+            get { return this.locale.Value; }
+        }
+
+
+        public DeviceType DeviceType {
+            get {
+                return DeviceType.AndroidPhone;
+            }
         }
     }
 }

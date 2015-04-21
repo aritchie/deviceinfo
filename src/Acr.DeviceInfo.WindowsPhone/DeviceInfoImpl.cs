@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using Windows.ApplicationModel;
 using Microsoft.Devices;
@@ -71,7 +72,19 @@ namespace Acr.DeviceInfo {
 
 
         public bool IsSimulator {
-            get { return (DevEnv.DeviceType == DeviceType.Emulator); }
+            get { return (DevEnv.DeviceType == Microsoft.Devices.DeviceType.Emulator); }
+        }
+
+
+        public CultureInfo Locale {
+            get { return CultureInfo.CurrentCulture; }
+        }
+
+
+        public DeviceType DeviceType {
+            get {
+                return DeviceType.WindowsPhone;
+            }
         }
     }
 }

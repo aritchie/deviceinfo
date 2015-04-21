@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Windows.ApplicationModel;
 using Windows.Devices.Enumeration;
 using Windows.Security.ExchangeActiveSyncProvisioning;
@@ -83,6 +84,18 @@ namespace Acr.DeviceInfo {
 
         public bool IsSimulator {
             get { return Package.Current.Id.Architecture == ProcessorArchitecture.Unknown; }
+        }
+
+
+        public CultureInfo Locale {
+            get { return CultureInfo.CurrentCulture; }
+        }
+
+
+        public DeviceType DeviceType {
+            get {
+                return DeviceType.Unknown;
+            }
         }
     }
 }

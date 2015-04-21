@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 using Foundation;
 using ObjCRuntime;
 using UIKit;
@@ -7,7 +9,6 @@ using UIKit;
 namespace Acr.DeviceInfo {
 
     public class DeviceInfoImpl : IDeviceInfo {
-
 
 		public DeviceInfoImpl() {
 			this.AppVersion = NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
@@ -20,6 +21,7 @@ namespace Acr.DeviceInfo {
 			this.IsFrontCameraAvailable = UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front);
 			this.IsRearCameraAvailable = UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear);
 			this.IsSimulator = (Runtime.Arch == Arch.SIMULATOR);
+            NSLocale.Notifications.ObserveCurrentLocaleDidChange((sender, args) => this.Locale = this.GetLocale());
 		}
 
 
@@ -33,6 +35,33 @@ namespace Acr.DeviceInfo {
 		public bool IsFrontCameraAvailable { get; private set; }
 		public bool IsRearCameraAvailable { get; private set; }
 		public bool IsSimulator { get; private set; }
+        public CultureInfo Locale { get; private set; }
+
+
+        private CultureInfo GetLocale() {
+			var netLocale = NSLocale.AutoUpdatingCurrentLocale.LocaleIdentifier.Replace("_", "-");
+            CultureInfo value;
+			try {
+				value = new CultureInfo(netLocale);
+			}
+			catch {
+				var pl = NSLocale.PreferredLanguages.FirstOrDefault();
+                value = pl == null
+                    ? CultureInfo.CurrentUICulture
+                    : new CultureInfo(pl);
+			}
+            return value;
+        }
+
+
+        public DeviceType DeviceType {
+            get {
+                if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+                    return DeviceType.iPad;
+
+                return DeviceType.iPhone;
+            }
+        }
     }
 }
 /*

@@ -12,6 +12,11 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+2.1
+[Android] - Fix device ID for android tablets
+* NEW Feature - Device Type Enum
+* NEW Feature - Device Locale (CultureInfo.Current(UI)Culture never seems to work on iOS or Android)
+
 2.0
 Moving to bait and switch design
 

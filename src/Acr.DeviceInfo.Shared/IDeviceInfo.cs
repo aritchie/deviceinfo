@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 
 namespace Acr.DeviceInfo {
@@ -15,5 +16,8 @@ namespace Acr.DeviceInfo {
         bool IsFrontCameraAvailable { get; }
         bool IsRearCameraAvailable { get; }
         bool IsSimulator { get; }
+
+        CultureInfo Locale { get; }
+        DeviceType DeviceType { get; }
     }
 }
