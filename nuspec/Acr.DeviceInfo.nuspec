@@ -3,7 +3,7 @@
     <metadata>
         <id>Acr.DeviceInfo</id>
         <version>2.1.0</version>
-        <title>ACR Device Info for Xamarin and Windows</title>
+        <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>Get device information such as screen resolution, IMEI, OS, and more</description>
         <authors>Allan Ritchie</authors>
         <owners>Allan Ritchie</owners>
