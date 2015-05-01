@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -56,75 +57,32 @@ namespace Acr.DeviceInfo {
 			    var value = Java.Util.Locale.Default.ToString().Replace("_", "-");
 			    return new CultureInfo(value);
             });
+            this.OperatingSystem = String.Format("{0} - SDK: {1}", B.VERSION.Release, B.VERSION.SdkInt);
         }
 
 
-        public string AppVersion {
-            get { return this.appVersion.Value; }
-        }
+        public string AppVersion {  get { return this.appVersion.Value; }}
+        public int ScreenHeight { get { return this.screenHeight.Value; }}
+        public int ScreenWidth { get { return this.screenWidth.Value; }}
+        public string DeviceId { get { return this.deviceId.Value; }}
+        public string Manufacturer { get { return B.Manufacturer; }}
+        public string Model { get { return B.Model; }}
+        public string OperatingSystem { get; private set; }
+        public bool IsFrontCameraAvailable { get { return App.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCameraFront); }}
+        public bool IsRearCameraAvailable { get { return App.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCamera); }}
+        public bool IsSimulator { get { return B.Product.Equals("google_sdk"); }}
+        public bool IsTablet { get { return this.isTablet.Value; }}
 
-
-        public int ScreenHeight {
-            get { return this.screenHeight.Value; }
-        }
-
-
-        public int ScreenWidth {
-            get { return this.screenWidth.Value; }
-        }
-
-
-        public string DeviceId {
-            get { return this.deviceId.Value; }
-        }
-
-
-        public string Manufacturer {
-            get { return B.Manufacturer; }
-        }
-
-
-        public string Model {
-            get { return B.Model; }
-        }
-
-
-        private string os;
-        public string OperatingSystem {
+        public bool IsAppInBackground {
             get {
-                this.os = this.os ?? String.Format("{0} - SDK: {1}", B.VERSION.Release, B.VERSION.SdkInt);
-                return this.os;
+                var mgr = (ActivityManager)Application.Context.GetSystemService(Context.ActivityService);
+                var tasks = mgr.GetRunningTasks(Int16.MaxValue);
+                var result = tasks.Any(x => x.TopActivity.PackageName.Equals(Application.Context.PackageName));
+                return result;
             }
         }
 
-
-        public bool IsFrontCameraAvailable {
-            get { return App.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCameraFront); }
-        }
-
-
-        public bool IsRearCameraAvailable {
-            get { return App.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCamera); }
-        }
-
-
-        public bool IsSimulator {
-            get { return B.Product.Equals("google_sdk"); }
-        }
-
-
-        public bool IsTablet {
-            get { return this.isTablet.Value; }
-        }
-
-
-        public CultureInfo Locale {
-            get { return this.locale.Value; }
-        }
-
-
-        public OperatingSystemType OS {
-            get { return OperatingSystemType.Android; }
-        }
+        public CultureInfo Locale { get { return this.locale.Value; }}
+        public OperatingSystemType OS { get { return OperatingSystemType.Android; }}
     }
 }

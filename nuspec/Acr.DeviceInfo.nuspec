@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>2.1.0</version>
+        <version>2.1.1</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>Get device information such as screen resolution, IMEI, OS, and more</description>
         <authors>Allan Ritchie</authors>
@@ -12,6 +12,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+2.1.1
+Remove Init() as it is unnecessary
+Add flag to check if app is running in the background
+
 2.1
 [Android] - Fix device ID for android tablets
 * NEW Feature - OS Type Enum

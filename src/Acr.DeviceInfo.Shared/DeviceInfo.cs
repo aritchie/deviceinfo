@@ -4,26 +4,20 @@
 namespace Acr.DeviceInfo {
 
     public static class DeviceInfo {
-        private static IDeviceInfo instance;
-        private static readonly object syncLock = new object();
 
-
-        public static IDeviceInfo Instance {
-            get {
-                if (instance == null) {
-                    lock (syncLock) {
-                        if (instance == null) {
+        private readonly static Lazy<IDeviceInfo> instanceInit = new Lazy<IDeviceInfo>(() => {
 #if __PLATFORM__
-                            instance = new DeviceInfoImpl();
+            return new DeviceInfoImpl();
 #else
-                            throw new Exception("Platform implementation not found.  Have you added a nuget reference to your platform project?");
+            throw new Exception("Platform implementation not found.  Have you added a nuget reference to your platform project?");
 #endif
-                        }
-                    }
-                }
-                return instance;
-            }
-            set { instance = value; }
+        }, false);
+
+
+        private static IDeviceInfo customInstance;
+        public static IDeviceInfo Instance {
+            get { return customInstance ?? instanceInit.Value; }
+            set { customInstance = value; }
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Acr.DeviceInfo {
 
 
         public DeviceInfoImpl() {
+            //Window.Current.VisibilityChanged += Current_VisibilityChanged;
+            //Application.Current.
             this.deviceWatcher = DeviceInformation.CreateWatcher(DeviceClass.VideoCapture);
             this.deviceWatcher.Added += (sender, args) => {
                 //this.videoDevices.Add(deviceInformation);
@@ -48,6 +50,7 @@ namespace Acr.DeviceInfo {
         public bool IsRearCameraAvailable { get { throw new NotImplementedException(); }}
         public bool IsSimulator { get { return Package.Current.Id.Architecture == ProcessorArchitecture.Unknown; }}
         public bool IsTablet { get { return true; }}
+        public bool IsAppInBackground { get { return false; }}
         public CultureInfo Locale { get { return CultureInfo.CurrentCulture; }}
         public OperatingSystemType OS { get { return OperatingSystemType.Windows; }}
     }

@@ -36,6 +36,8 @@ namespace Acr.DeviceInfo {
 		public bool IsRearCameraAvailable { get; private set; }
 		public bool IsSimulator { get; private set; }
         public bool IsTablet { get { return (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad); }}
+        public bool IsAppInBackground { get { return (UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active); }}
+
         public OperatingSystemType OS { get { return OperatingSystemType.iOS; }}
         public CultureInfo Locale { get; private set; }
 

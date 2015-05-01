@@ -4,6 +4,7 @@ using System.Windows;
 using Windows.ApplicationModel;
 using Microsoft.Devices;
 using Microsoft.Phone.Info;
+using Microsoft.Phone.Shell;
 using Env = System.Environment;
 using DevEnv = Microsoft.Devices.Environment;
 
@@ -15,6 +16,9 @@ namespace Acr.DeviceInfo {
 
 
         public DeviceInfoImpl() {
+            PhoneApplicationService.Current.Activated += (sender, args) => this.IsAppInBackground = false;
+            PhoneApplicationService.Current.RunningInBackground += (sender, args) => this.IsAppInBackground = true;
+
             this.deviceId = new Lazy<string>(() => {
                 var deviceIdBytes = (byte[])DeviceExtendedProperties.GetValue("DeviceUniqueId");
                 return Convert.ToBase64String(deviceIdBytes);
@@ -33,6 +37,8 @@ namespace Acr.DeviceInfo {
         public bool IsRearCameraAvailable { get { return PhotoCamera.IsCameraTypeSupported(CameraType.Primary); }}
         public bool IsSimulator { get { return (DevEnv.DeviceType == DeviceType.Emulator); }}
         public bool IsTablet { get { return false; }}
+        public bool IsAppInBackground { get; private set; }
+
         public CultureInfo Locale { get { return CultureInfo.CurrentCulture; }}
         public OperatingSystemType OS { get { return OperatingSystemType.WindowsPhone; }}
     }
