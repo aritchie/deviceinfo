@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>2.1.1</version>
+        <version>2.1.2</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>Get device information such as screen resolution, IMEI, OS, and more</description>
         <authors>Allan Ritchie</authors>
@@ -12,6 +12,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+2.1.2
+Fix nuspec for profile 259 PCL
+
 2.1.1
 Remove Init() as it is unnecessary
 Add flag to check if app is running in the background
@@ -25,7 +28,7 @@ Add flag to check if app is running in the background
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.DeviceInfo.dll" />
 
         <!-- android -->
         <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.dll" />

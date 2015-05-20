@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.MvvmCross.Plugins.DeviceInfo</id>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <title>MvvmCross Device Information</title>
         <description>Device information platform plugin for MvvmCross (iOS, Android, and WP8)</description>
         <authors>Allan Ritchie</authors>
@@ -13,7 +13,7 @@
         <tags>xamarin mvvmcross android ios winphone</tags>
         <dependencies>
             <dependency id="MvvmCross.HotTuna.CrossCore" version="[3.5, 4.0)" />
-            <dependency id="Acr.DeviceInfo" version="[2.1.1, 3.0)" />
+            <dependency id="Acr.DeviceInfo" version="[2.1.2, 3.0)" />
         </dependencies>
         <releaseNotes>
 Built on Acr.DeviceInfo
@@ -21,7 +21,7 @@ Built on Acr.DeviceInfo
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.MvvmCross.Plugins.DeviceInfo\bin\Release\Acr.MvvmCross.Plugins.DeviceInfo.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.MvvmCross.Plugins.DeviceInfo.dll" />
+        <file src="..\src\Acr.MvvmCross.Plugins.DeviceInfo\bin\Release\Acr.MvvmCross.Plugins.DeviceInfo.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.MvvmCross.Plugins.DeviceInfo.dll" />
 
         <!-- droid -->
         <file src="..\src\Acr.MvvmCross.Plugins.DeviceInfo\bin\Release\Acr.MvvmCross.Plugins.DeviceInfo.dll" target="lib\MonoAndroid10\Acr.MvvmCross.Plugins.DeviceInfo.dll" />
