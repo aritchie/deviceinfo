@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>2.1.2</version>
+        <version>2.2.0</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>Get device information such as screen resolution, IMEI, OS, and more</description>
         <authors>Allan Ritchie</authors>
@@ -12,6 +12,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+2.2
+Fix nuget issues with wp81
+Separate interface library for proper design
+
 2.1.2
 Fix nuspec for profile 259 PCL
 
@@ -29,17 +33,27 @@ Add flag to check if app is running in the background
     <files>
         <!-- PCL -->
         <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.DeviceInfo.Interface.dll" />
 
         <!-- android -->
         <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.Interface.dll" />
 
         <!-- ios -->
         <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
 
-        <!-- wp8 -->
+        <!-- wp8 silverlight -->
         <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.dll" target="lib\wp8\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\wp8\Acr.DeviceInfo.Interface.dll" />
 
-        <!-- win universal -->
-        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.dll" target="lib\portable-win8+wpa81\Acr.DeviceInfo.dll" />
+        <!-- wp81 -->
+        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.dll" target="lib\wpa81\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\wpa81\Acr.DeviceInfo.Interface.dll" />
+
+        <!-- win8 -->
+        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.dll" target="lib\win8\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\win8\Acr.DeviceInfo.Interface.dll" />
+
     </files>
 </package>

@@ -49,6 +49,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Acr.DeviceInfo.Interface\Acr.DeviceInfo.Interface.csproj">
+      <Project>{48d0e994-7454-44ed-952b-9e9fafa5101f}</Project>
+      <Name>Acr.DeviceInfo.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Acr.DeviceInfo\Acr.DeviceInfo.csproj">
       <Project>{0AE46DB6-F7C4-40E2-A8DF-1E22D9EB2BB5}</Project>
       <Name>Acr.DeviceInfo</Name>

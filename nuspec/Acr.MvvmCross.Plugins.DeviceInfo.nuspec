@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.MvvmCross.Plugins.DeviceInfo</id>
-        <version>2.0.1</version>
+        <version>2.0.2</version>
         <title>MvvmCross Device Information</title>
         <description>Device information platform plugin for MvvmCross (iOS, Android, and WP8)</description>
         <authors>Allan Ritchie</authors>
@@ -13,10 +13,10 @@
         <tags>xamarin mvvmcross android ios winphone</tags>
         <dependencies>
             <dependency id="MvvmCross.HotTuna.CrossCore" version="[3.5, 4.0)" />
-            <dependency id="Acr.DeviceInfo" version="[2.1.2, 3.0)" />
+            <dependency id="Acr.DeviceInfo" version="[2.2.0, 3.0)" />
         </dependencies>
         <releaseNotes>
-Built on Acr.DeviceInfo
+Update to 2.2
         </releaseNotes>
     </metadata>
     <files>
