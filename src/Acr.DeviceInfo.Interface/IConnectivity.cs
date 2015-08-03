@@ -9,5 +9,6 @@ namespace Acr.DeviceInfo {
         bool IsInternetAvailable { get; }
         bool IsWifi { get; }
         bool IsCellular { get; }
+        string CellularNetworkCarrier { get; }
     }
 }

@@ -47,7 +47,7 @@
     <Compile Include="IApp.cs" />
     <Compile Include="IBattery.cs" />
     <Compile Include="IConnectivity.cs" />
-    <Compile Include="IDeviceInfo.cs" />
+    <Compile Include="IHardware.cs" />
     <Compile Include="OperatingSystemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,7 +5,7 @@
              Title="Device Info">
     <TableView Intent="Data">
         <TableRoot>
-            <TableSection Title="Device">
+            <TableSection x:Name="InfoSection" Title="Device">
                 <TextCell Text="Device ID" Detail="{Binding DeviceId}" />
                 <TextCell Text="Manufacturer" Detail="{Binding Manufacturer}" />
                 <TextCell Text="Model" Detail="{Binding Model}" />
@@ -16,19 +16,29 @@
                 <TextCell Text="Locale" Detail="{Binding Locale}" />
             </TableSection>
 
-            <TableSection Title="Display">
+            <TableSection x:Name="DisplaySection" Title="Display">
                 <TextCell Text="Height" BindingContext="{Binding ScreenHeight}" />
                 <TextCell Text="Width" BindingContext="{Binding ScreenWidth}" />
             </TableSection>
 
-            <TableSection Title="Camera">
+            <TableSection x:Name="CameraSection" Title="Camera">
                 <SwitchCell Text="Front" IsEnabled="false" On="{Binding IsFrontCameraAvailable}" />
                 <SwitchCell Text="Back" IsEnabled="false" On="{Binding IsBackCameraAvailable}" />
             </TableSection>
 
-            <TableSection Title="Battery">
+            <TableSection x:Name="BatterySection" Title="Battery">
                 <TextCell Text="Percentage" Detail="{Binding BatteryPercentage}" />
                 <SwitchCell Text="Charging" IsEnabled="false" On="{Binding IsBatteryCharging}" />
+            </TableSection>
+
+            <TableSection x:Name="AppSection" Title="App Info">
+                <TextCell Text="Version" Detail="{Binding Version}" />
+                <TextCell Text="Locale" Detail="{Binding Locale}" />
+            </TableSection>
+
+            <TableSection x:Name="ConnectSection" Title="Network">
+                <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
+                <SwitchCell Text="Internet Available?" IsEnabled="false" On="{Binding IsInternetAvailable}" />
             </TableSection>
         </TableRoot>
     </TableView>

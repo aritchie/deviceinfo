@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using App = Android.App.Application;
 
 
@@ -9,14 +8,12 @@ namespace Acr.DeviceInfo {
 
 
         public AppImpl() {
+            AppStateLifecyle.StatusChanged = (sender, args) => this.IsBackgrounded = !AppStateLifecyle.IsActive;
             AppStateLifecyle.Register();
 
-            var value = Java.Util.Locale.Default.ToString().Replace("_", "-");
-            this.Locale = new CultureInfo(value);
+            LocaleBroadcastReceiver.Changed += (sender, args) => this.Locale = LocaleBroadcastReceiver.Current;
+            LocaleBroadcastReceiver.Register();
 
-            //TODO: detect changes
-            //http://developer.android.com/reference/android/content/Intent.html#ACTION_LOCALE_CHANGED
-            //intent filter/broadcast receiver on Intent.ActionLocaleChanged
             this.Version = App
                 .Context
                 .ApplicationContext
@@ -24,6 +21,7 @@ namespace Acr.DeviceInfo {
                 .GetPackageInfo(App.Context.PackageName, 0)
                 .VersionName;
         }
+
 
         //public bool IsAppInBackground {
         //    get {

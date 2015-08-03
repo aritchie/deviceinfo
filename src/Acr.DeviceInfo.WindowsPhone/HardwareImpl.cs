@@ -9,13 +9,10 @@ using DevEnv = Microsoft.Devices.Environment;
 
 namespace Acr.DeviceInfo {
 
-    public class DeviceInfoImpl : AbstractNpc, IDeviceInfo {
+    public class HardwareImpl : AbstractNpc, IHardware {
         readonly Lazy<string> deviceId;
 
-        public DeviceInfoImpl() {
-
-
-
+        public HardwareImpl() {
             this.deviceId = new Lazy<string>(() => {
                 try {
 //var token = HardwareIdentification.GetPackageSpecificToken(null);
@@ -45,7 +42,6 @@ namespace Acr.DeviceInfo {
         public string Manufacturer { get; } =  DeviceStatus.DeviceManufacturer;
         public string Model { get; } = DeviceStatus.DeviceName;
         public string OperatingSystem { get; } = Env.OSVersion.ToString();
-        public string CellularNetworkCarrier { get; } = DeviceNetworkInformation.CellularMobileOperator;
         public bool IsFrontCameraAvailable { get; } = PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing);
         public bool IsRearCameraAvailable { get; } = PhotoCamera.IsCameraTypeSupported(CameraType.Primary);
         public bool IsSimulator { get; } = (DevEnv.DeviceType == DeviceType.Emulator);

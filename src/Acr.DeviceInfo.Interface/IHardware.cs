@@ -3,7 +3,7 @@
 
 namespace Acr.DeviceInfo {
 
-    public interface IDeviceInfo {
+    public interface IHardware {
 
         int ScreenHeight { get; }
         int ScreenWidth { get; }
@@ -12,7 +12,6 @@ namespace Acr.DeviceInfo {
         string Manufacturer { get; }
         string Model { get; }
         string OperatingSystem { get; }
-        string CellularNetworkCarrier { get; }
         bool IsFrontCameraAvailable { get; }
         bool IsRearCameraAvailable { get; }
         bool IsSimulator { get; }

@@ -11,15 +11,14 @@ using Windows.UI.ViewManagement;
 
 namespace Acr.DeviceInfo {
 
-    public class DeviceInfoImpl : IDeviceInfo {
+    public class HardwareImpl : IHardware {
 
-        public DeviceInfoImpl() {
+        public HardwareImpl() {
             var deviceInfo = new EasClientDeviceInformation();
             this.DeviceId = deviceInfo.Id.ToString();
             this.Manufacturer = deviceInfo.SystemManufacturer;
             this.Model = deviceInfo.SystemSku;
             this.OperatingSystem = deviceInfo.OperatingSystem;
-            this.CellularNetworkCarrier = "TODO";
             //PhoneCallManager.RequestStoreAccess();
             this.DetectCameras().Wait();
 
@@ -47,7 +46,6 @@ namespace Acr.DeviceInfo {
         public string Manufacturer { get; }
         public string Model { get; }
         public string OperatingSystem { get; }
-        public string CellularNetworkCarrier { get; }
         public bool IsFrontCameraAvailable { get; private set; }
         public bool IsRearCameraAvailable { get; private set; }
         public bool IsSimulator { get; } = (Package.Current.Id.Architecture == ProcessorArchitecture.Unknown);

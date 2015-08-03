@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -11,18 +10,17 @@ using B = Android.OS.Build;
 
 namespace Acr.DeviceInfo {
 
-    public class DeviceInfoImpl : IDeviceInfo {
+    public class HardwareImpl : IHardware {
         readonly Lazy<string> deviceId;
 
 
-        public DeviceInfoImpl() {
+        public HardwareImpl() {
             var d = Resources.System.DisplayMetrics;
             this.ScreenHeight = (int)(d.HeightPixels / d.Density);
             this.ScreenWidth = (int)(d.WidthPixels / d.Density);
 
             var tel = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
             this.IsTablet = (tel?.PhoneType == PhoneType.None);
-            this.CellularNetworkCarrier = tel?.NetworkOperatorName;
 
             this.deviceId = new Lazy<string>(() => {
                 try {
@@ -45,7 +43,6 @@ namespace Acr.DeviceInfo {
         public string Manufacturer { get; } = B.Manufacturer;
         public string Model { get; } = B.Model;
         public string OperatingSystem { get; } = $"{B.VERSION.Release} - SDK: {B.VERSION.SdkInt}";
-        public string CellularNetworkCarrier { get; }
         public bool IsFrontCameraAvailable { get; } = Application.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCameraFront);
         public bool IsRearCameraAvailable { get; } = Application.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCamera);
         public bool IsSimulator { get; } = B.Product.Equals("google_sdk");

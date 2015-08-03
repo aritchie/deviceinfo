@@ -24,5 +24,8 @@ namespace Acr.DeviceInfo {
             get { return this.cellular; }
             protected set { this.SetProperty(ref this.cellular, value); }
         }
+
+
+        public string CellularNetworkCarrier { get; protected set; }
     }
 }

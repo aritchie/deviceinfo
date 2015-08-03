@@ -116,7 +116,7 @@
     <Compile Include="AppImpl.cs" />
     <Compile Include="BatteryImpl.cs" />
     <Compile Include="ConnectivityImpl.cs" />
-    <Compile Include="DeviceInfoImpl.cs" />
+    <Compile Include="HardwareImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\Acr.DeviceInfo.Uwp.rd.xml" />
   </ItemGroup>
