@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Samples.MainPage"
+             Title="Device Info">
+    <TableView Intent="Data">
+        <TableRoot>
+            <TableSection Title="Device">
+                <TextCell Text="Device ID" Detail="{Binding DeviceId}" />
+                <TextCell Text="Manufacturer" Detail="{Binding Manufacturer}" />
+                <TextCell Text="Model" Detail="{Binding Model}" />
+                <TextCell Text="Operating System" Detail="{Binding OperatingSystem}" />
+                <TextCell Text="OS Type" Detail="{Binding OS}" />
+                <SwitchCell Label="Simulator" IsEnabled="false" On="{Binding IsSimulator}" />
+                <SwitchCell Label="Tablet" IsEnabled="false" On="{Binding IsTablet}" />
+                <TextCell Text="Locale" Detail="{Binding Locale}" />
+            </TableSection>
+
+            <TableSection Title="Display">
+                <TextCell Text="Height" BindingContext="{Binding ScreenHeight}" />
+                <TextCell Text="Width" BindingContext="{Binding ScreenWidth}" />
+            </TableSection>
+
+            <TableSection Title="Camera">
+                <SwitchCell Text="Front" IsEnabled="false" On="{Binding IsFrontCameraAvailable}" />
+                <SwitchCell Text="Back" IsEnabled="false" On="{Binding IsBackCameraAvailable}" />
+            </TableSection>
+
+            <TableSection Title="Battery">
+                <TextCell Text="Percentage" Detail="{Binding BatteryPercentage}" />
+                <SwitchCell Text="Charging" IsEnabled="false" On="{Binding IsBatteryCharging}" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>
