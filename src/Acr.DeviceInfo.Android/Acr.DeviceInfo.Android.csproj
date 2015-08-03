@@ -12,10 +12,9 @@
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>
-    </AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <DevInstrumentationEnabled>True</DevInstrumentationEnabled>
-    <TargetFrameworkVersion>v2.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,8 +41,16 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Globalization" />
+    <Reference Include="System.Runtime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppImpl.cs" />
+    <Compile Include="AppStateLifecycle.cs" />
+    <Compile Include="BatteryBroadcastReceiver.cs" />
+    <Compile Include="BatteryImpl.cs" />
+    <Compile Include="ConnectivityBroadcastReceiver.cs" />
+    <Compile Include="ConnectivityImpl.cs" />
     <Compile Include="DeviceInfoImpl.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,7 +69,7 @@
   </ItemGroup>
   <Import Project="..\Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems" Label="Shared" Condition="Exists('..\Acr.DeviceInfo.Shared\Acr.DeviceInfo.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

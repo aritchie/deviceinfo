@@ -33,13 +33,18 @@
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;__PLATFORM__</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AppImpl.cs" />
+    <Compile Include="BatteryImpl.cs" />
+    <Compile Include="ConnectivityImpl.cs" />
     <Compile Include="DeviceInfoImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reachability.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>

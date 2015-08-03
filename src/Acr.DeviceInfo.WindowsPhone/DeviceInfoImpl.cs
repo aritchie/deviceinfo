@@ -1,45 +1,55 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows;
-using Windows.ApplicationModel;
 using Microsoft.Devices;
 using Microsoft.Phone.Info;
-using Microsoft.Phone.Shell;
+using Microsoft.Phone.Net.NetworkInformation;
 using Env = System.Environment;
 using DevEnv = Microsoft.Devices.Environment;
 
 
 namespace Acr.DeviceInfo {
 
-    public class DeviceInfoImpl : IDeviceInfo {
-        private readonly Lazy<string> deviceId;
-
+    public class DeviceInfoImpl : AbstractNpc, IDeviceInfo {
+        readonly Lazy<string> deviceId;
 
         public DeviceInfoImpl() {
-            PhoneApplicationService.Current.Activated += (sender, args) => this.IsAppInBackground = false;
-            PhoneApplicationService.Current.RunningInBackground += (sender, args) => this.IsAppInBackground = true;
+
+
 
             this.deviceId = new Lazy<string>(() => {
-                var deviceIdBytes = (byte[])DeviceExtendedProperties.GetValue("DeviceUniqueId");
-                return Convert.ToBase64String(deviceIdBytes);
+                try {
+//var token = HardwareIdentification.GetPackageSpecificToken(null);
+//        var hardwareId = token.Id;
+//        var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+
+//        var bytes = new byte[hardwareId.Length];
+//        dataReader.ReadBytes(bytes);
+
+//        return Convert.ToBase64String(bytes);
+                    var deviceIdBytes = (byte[])DeviceExtendedProperties.GetValue("DeviceUniqueId");
+                    return Convert.ToBase64String(deviceIdBytes);
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Could not get DeviceId - did you enable ID_CAP_IDENTITY_DEVICE?  Error: {0}", ex);
+                    return null;
+                }
             });
+            DeviceNetworkInformation.NetworkAvailabilityChanged += (sender, args) => { };
         }
 
 
-        public string AppVersion { get {  return Package.Current.Id.Version.ToString(); }}
-        public int ScreenHeight { get { return (int)Application.Current.Host.Content.ActualHeight; }}
-        public int ScreenWidth { get { return (int)Application.Current.Host.Content.ActualWidth; }}
-        public string DeviceId { get { return this.deviceId.Value; }}
-        public string Manufacturer { get { return DeviceStatus.DeviceManufacturer; }}
-        public string Model { get { return DeviceStatus.DeviceName; }}
-        public string OperatingSystem { get { return Env.OSVersion.ToString(); }}
-        public bool IsFrontCameraAvailable { get { return PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing); }}
-        public bool IsRearCameraAvailable { get { return PhotoCamera.IsCameraTypeSupported(CameraType.Primary); }}
-        public bool IsSimulator { get { return (DevEnv.DeviceType == DeviceType.Emulator); }}
-        public bool IsTablet { get { return false; }}
-        public bool IsAppInBackground { get; private set; }
 
-        public CultureInfo Locale { get { return CultureInfo.CurrentCulture; }}
-        public OperatingSystemType OS { get { return OperatingSystemType.WindowsPhone; }}
+        public int ScreenHeight { get; } = (int)Application.Current.Host.Content.ActualHeight;
+        public int ScreenWidth { get; } = (int)Application.Current.Host.Content.ActualWidth;
+        public string DeviceId => this.deviceId.Value;
+        public string Manufacturer { get; } =  DeviceStatus.DeviceManufacturer;
+        public string Model { get; } = DeviceStatus.DeviceName;
+        public string OperatingSystem { get; } = Env.OSVersion.ToString();
+        public string CellularNetworkCarrier { get; } = DeviceNetworkInformation.CellularMobileOperator;
+        public bool IsFrontCameraAvailable { get; } = PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing);
+        public bool IsRearCameraAvailable { get; } = PhotoCamera.IsCameraTypeSupported(CameraType.Primary);
+        public bool IsSimulator { get; } = (DevEnv.DeviceType == DeviceType.Emulator);
+        public bool IsTablet { get; } = false;
+        public OperatingSystemType OS { get; } = OperatingSystemType.WindowsPhone;
     }
 }

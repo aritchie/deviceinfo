@@ -40,6 +40,13 @@
     <Compile Include="..\Acr.DeviceInfo.Shared\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AbstractAppImpl.cs" />
+    <Compile Include="AbstractBatteryImpl.cs" />
+    <Compile Include="AbstractConnectivityImpl.cs" />
+    <Compile Include="AbstractNpc.cs" />
+    <Compile Include="IApp.cs" />
+    <Compile Include="IBattery.cs" />
+    <Compile Include="IConnectivity.cs" />
     <Compile Include="IDeviceInfo.cs" />
     <Compile Include="OperatingSystemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
