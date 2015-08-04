@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Content;
 using Android.Content.Res;
 using Android.Runtime;
+using Debug = System.Diagnostics.Debug;
 
 
 namespace Acr.DeviceInfo {
@@ -17,12 +18,16 @@ namespace Acr.DeviceInfo {
             var appstate = new AppStateLifecyle();
             ((Application)Application.Context.ApplicationContext).RegisterActivityLifecycleCallbacks(appstate);
             Application.Context.RegisterComponentCallbacks(appstate);
+            Debug.WriteLine("App lifecycle registered");
         }
 
 
         public void OnActivityResumed(Activity activity) {
-            // TODO: if an activity is resuming, your app has moved into the foreground
-            if (!IsActive) {
+            // if an activity is resuming, your app has moved into the foreground
+            if (IsActive)
+                Debug.WriteLine("Activity resumed - app was already active");
+            else {
+                Debug.WriteLine("Activity resumed - app was not active.  Firing app resume event!");
                 IsActive = true;
                 StatusChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -30,7 +35,9 @@ namespace Acr.DeviceInfo {
 
 
         public void OnTrimMemory([GeneratedEnum] TrimMemory level) {
+            Debug.WriteLine("Android trimming memory");
             if (level == TrimMemory.UiHidden) {
+                Debug.WriteLine("Android trimming UI - set app to background and fire event");
                 IsActive = false;
                 StatusChanged?.Invoke(this, EventArgs.Empty);
             }

@@ -31,6 +31,7 @@
             </TableSection>
 
             <TableSection x:Name="AppSection" Title="App Info">
+                <SwitchCell x:Name="FromBg" Text="Returned from Background" IsEnabled="false" />
                 <TextCell Text="Version" Detail="{Binding Version}" />
                 <TextCell Text="Locale" Detail="{Binding Locale}" />
             </TableSection>

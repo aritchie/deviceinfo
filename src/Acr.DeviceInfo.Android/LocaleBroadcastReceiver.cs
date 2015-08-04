@@ -21,13 +21,13 @@ namespace Acr.DeviceInfo {
 
         public override void OnReceive(Context context, Intent intent) {
             SetLocale();
-            Changed?.Invoke(this, EventArgs.Empty);
         }
 
 
         static void SetLocale() {
             var value = Locale.Default.ToString().Replace("_", "-");
             Current = new CultureInfo(value);
+            Changed?.Invoke(null, EventArgs.Empty);
         }
     }
 }
