@@ -38,13 +38,9 @@ Get tons of device information
         <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
         <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
 
-        <!-- wp8 silverlight -->
-        <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.dll" target="lib\wp8\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\wp8\Acr.DeviceInfo.Interface.dll" />
-
-        <!-- wp81 -->
-        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.dll" target="lib\wpa81\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.Windows\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\wpa81\Acr.DeviceInfo.Interface.dll" />
+        <!-- wp81 silverlight -->
+        <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.dll" target="lib\wp81\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\wp81\Acr.DeviceInfo.Interface.dll" />
 
         <!-- win10 -->
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.dll" target="lib\uap10.0\Acr.DeviceInfo.dll" />

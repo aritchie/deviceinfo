@@ -34,8 +34,8 @@ Update to 3.0
         <file src="TouchDeviceInfoPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\DeviceInfoPluginBootstrap.cs.pp" />
 
         <!--winphone-->
-        <file src="..\src\Acr.MvvmCross.Plugins.DeviceInfo\bin\Release\Acr.MvvmCross.Plugins.DeviceInfo.dll" target="lib\wp8\Acr.MvvmCross.Plugins.DeviceInfo.dll" />
-        <file src="..\src\Acr.MvvmCross.Plugins.DeviceInfo.WinPhone\bin\Release\Acr.MvvmCross.Plugins.DeviceInfo.WindowsPhone.dll" target="lib\wp8\Acr.MvvmCross.Plugins.DeviceInfo.WindowsPhone.dll" />
+        <file src="..\src\Acr.MvvmCross.Plugins.DeviceInfo\bin\Release\Acr.MvvmCross.Plugins.DeviceInfo.dll" target="lib\wp81\Acr.MvvmCross.Plugins.DeviceInfo.dll" />
+        <file src="..\src\Acr.MvvmCross.Plugins.DeviceInfo.WinPhone\bin\Release\Acr.MvvmCross.Plugins.DeviceInfo.WindowsPhone.dll" target="lib\wp81\Acr.MvvmCross.Plugins.DeviceInfo.WindowsPhone.dll" />
         <file src="DeviceInfoPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\DeviceInfoPluginBootstrap.cs.pp" />
     </files>
 </package>
