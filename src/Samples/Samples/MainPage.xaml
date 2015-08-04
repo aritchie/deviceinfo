@@ -22,7 +22,7 @@
 
             <TableSection x:Name="CameraSection" Title="Camera">
                 <SwitchCell Text="Front" IsEnabled="false" On="{Binding IsFrontCameraAvailable}" />
-                <SwitchCell Text="Back" IsEnabled="false" On="{Binding IsBackCameraAvailable}" />
+                <SwitchCell Text="Rear" IsEnabled="false" On="{Binding IsRearCameraAvailable}" />
             </TableSection>
 
             <TableSection x:Name="BatterySection" Title="Battery">

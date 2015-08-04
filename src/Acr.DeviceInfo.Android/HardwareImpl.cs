@@ -1,4 +1,5 @@
 ﻿using System;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -23,16 +24,13 @@ namespace Acr.DeviceInfo {
             this.IsTablet = (tel?.PhoneType == PhoneType.None);
 
             this.deviceId = new Lazy<string>(() => {
-                try {
-                    if (tel?.DeviceId == null)
-                        return Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
-
-                    return tel.DeviceId;
-                }
-                catch (Exception ex) {
-                    Console.WriteLine("Could not read DeviceId - Did you grant READ_PHONE_STATE permissions in your android manifest? " + ex);
+                if (!Utils.CheckPermission(Manifest.Permission.ReadPhoneState))
                     return null;
-                }
+
+                if (tel?.DeviceId == null)
+                    return Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
+
+                return tel.DeviceId;
             });
         }
 

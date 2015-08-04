@@ -1,7 +1,7 @@
 using System;
+using Android;
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
 using Android.Net;
 
 
@@ -20,13 +20,12 @@ namespace Acr.DeviceInfo {
 
             //var flag = !intent.GetBooleanExtra(ConnectivityManager.ExtraNoConnectivity, false);
             SetState();
-            StatusChanged?.Invoke(this, null);
         }
 
 
         static void SetState() {
             var mgr = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-            if (mgr.ActiveNetworkInfo.IsConnected)
+            if (mgr.ActiveNetworkInfo == null || !mgr.ActiveNetworkInfo.IsConnected)
                 ReachableStatus = ConnectionStatus.NotReachable;
 
             else {
@@ -46,15 +45,17 @@ namespace Acr.DeviceInfo {
                         break;
                 }
             }
+            StatusChanged?.Invoke(null, EventArgs.Empty);
         }
 
 
         public static void Register() {
-            var result = Application.Context.CheckCallingOrSelfPermission("android.permission.BATTERY_STATS");
-            if (result != Permission.Granted) {
-                Console.WriteLine("android.permission.ACCESS_NETWORK_STATE was not granted in your manifest");
+            //if (!Utils.CheckPermission(Manifest.Permission.Internet))
+            //    return;
+
+            if (!Utils.CheckPermission(Manifest.Permission.AccessNetworkState))
                 return;
-            }
+
             Application.Context.RegisterReceiver(new ConnectivityBroadcastReceiver(), new IntentFilter(ConnectivityManager.ConnectivityAction));
             SetState();
         }
