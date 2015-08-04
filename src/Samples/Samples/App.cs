@@ -7,7 +7,7 @@ namespace Samples {
     public class App : Application {
 
         public App() {
-            this.MainPage = new MainPage();
+            this.MainPage = new NavigationPage(new MainPage());
         }
     }
 }

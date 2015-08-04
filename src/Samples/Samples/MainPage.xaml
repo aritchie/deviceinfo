@@ -11,14 +11,13 @@
                 <TextCell Text="Model" Detail="{Binding Model}" />
                 <TextCell Text="Operating System" Detail="{Binding OperatingSystem}" />
                 <TextCell Text="OS Type" Detail="{Binding OS}" />
-                <SwitchCell Label="Simulator" IsEnabled="false" On="{Binding IsSimulator}" />
-                <SwitchCell Label="Tablet" IsEnabled="false" On="{Binding IsTablet}" />
-                <TextCell Text="Locale" Detail="{Binding Locale}" />
+                <SwitchCell Text="Simulator" IsEnabled="false" On="{Binding IsSimulator}" />
+                <SwitchCell Text="Tablet" IsEnabled="false" On="{Binding IsTablet}" />
             </TableSection>
 
             <TableSection x:Name="DisplaySection" Title="Display">
-                <TextCell Text="Height" BindingContext="{Binding ScreenHeight}" />
-                <TextCell Text="Width" BindingContext="{Binding ScreenWidth}" />
+                <TextCell Text="Height" Detail="{Binding ScreenHeight}" />
+                <TextCell Text="Width" Detail="{Binding ScreenWidth}" />
             </TableSection>
 
             <TableSection x:Name="CameraSection" Title="Camera">
@@ -27,8 +26,8 @@
             </TableSection>
 
             <TableSection x:Name="BatterySection" Title="Battery">
-                <TextCell Text="Percentage" Detail="{Binding BatteryPercentage}" />
-                <SwitchCell Text="Charging" IsEnabled="false" On="{Binding IsBatteryCharging}" />
+                <TextCell Text="Percentage" Detail="{Binding Percentage}" />
+                <SwitchCell Text="Charging" IsEnabled="false" On="{Binding IsCharging}" />
             </TableSection>
 
             <TableSection x:Name="AppSection" Title="App Info">
@@ -39,6 +38,8 @@
             <TableSection x:Name="ConnectSection" Title="Network">
                 <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
                 <SwitchCell Text="Internet Available?" IsEnabled="false" On="{Binding IsInternetAvailable}" />
+                <SwitchCell Text="WiFi" IsEnabled="false" On="{Binding IsWifi}" />
+                <SwitchCell Text="Cell Data" IsEnabled="false" On="{Binding IsCellular}" />
             </TableSection>
         </TableRoot>
     </TableView>
