@@ -7,8 +7,7 @@ namespace Acr.DeviceInfo {
     public interface IConnectivity : INotifyPropertyChanged {
 
         bool IsInternetAvailable { get; }
-        bool IsWifi { get; }
-        bool IsCellular { get; }
+        ConnectionStatus InternetReachability { get; }
         string CellularNetworkCarrier { get; }
     }
 }

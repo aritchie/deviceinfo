@@ -17,9 +17,21 @@ namespace Acr.DeviceInfo {
 
         void SetConnectivityState() {
             var internet = Reachability.InternetConnectionStatus();
-            this.IsInternetAvailable = (internet != NetworkStatus.NotReachable);
-            this.IsWifi = (internet == NetworkStatus.ReachableViaWiFiNetwork);
-            this.IsCellular = (internet == NetworkStatus.ReachableViaCarrierDataNetwork);
+
+            switch (internet) {
+
+                case NetworkStatus.NotReachable:
+                    this.InternetReachability = ConnectionStatus.NotReachable;
+                    break;
+
+                case NetworkStatus.ReachableViaCarrierDataNetwork:
+                    this.InternetReachability = ConnectionStatus.ReachableViaCellular;
+                    break;
+
+                case NetworkStatus.ReachableViaWiFiNetwork:
+                    this.InternetReachability = ConnectionStatus.ReachableViaWifi;
+                    break;
+            }
         }
     }
 }

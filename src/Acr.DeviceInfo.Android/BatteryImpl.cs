@@ -6,11 +6,8 @@ namespace Acr.DeviceInfo {
     public class BatteryImpl : AbstractBatteryImpl {
 
         public BatteryImpl() {
-            if (!BatteryBroadcastReceiver.Register())
-                return;
-
             BatteryBroadcastReceiver.StatusChanged += (sender, args) => this.SetState();
-            this.SetState();
+            BatteryBroadcastReceiver.Register();
         }
 
 

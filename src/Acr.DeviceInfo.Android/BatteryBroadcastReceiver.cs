@@ -30,18 +30,16 @@ namespace Acr.DeviceInfo {
         }
 
 
-        public static bool Register() {
+        public static void Register() {
             var result = Application.Context.CheckCallingOrSelfPermission("android.permission.BATTERY_STATS");
             if (result != Permission.Granted) {
                 Console.WriteLine("android.permission.BATTERY_STATS was not granted in your manifest");
-                return false;
+                return;
             }
             Application.Context.RegisterReceiver(new BatteryBroadcastReceiver(), new IntentFilter(Intent.ActionBatteryChanged));
             using (var filter = new IntentFilter(Intent.ActionBatteryChanged))
                 using (var intent = Application.Context.RegisterReceiver(null, filter))
                     ProcessIntent(intent);
-
-            return true;
         }
     }
 }

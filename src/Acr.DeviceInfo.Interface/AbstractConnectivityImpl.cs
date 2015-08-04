@@ -8,21 +8,17 @@ namespace Acr.DeviceInfo {
         bool internetAvail;
         public bool IsInternetAvailable {
             get { return this.internetAvail; }
-            protected set { this.SetProperty(ref this.internetAvail, value); }
+            private set { this.SetProperty(ref this.internetAvail, value); }
         }
 
 
-        bool wifi;
-        public bool IsWifi {
-            get { return this.wifi; }
-            protected set { this.SetProperty(ref this.wifi, value); }
-        }
-
-
-        bool cellular;
-        public bool IsCellular {
-            get { return this.cellular; }
-            protected set { this.SetProperty(ref this.cellular, value); }
+        ConnectionStatus reach;
+        public ConnectionStatus InternetReachability {
+            get { return this.reach; }
+            protected set {
+                if (this.SetProperty(ref this.reach, value))
+                    this.IsInternetAvailable = (value != ConnectionStatus.NotReachable);
+            }
         }
 
 

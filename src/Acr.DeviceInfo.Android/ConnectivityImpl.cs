@@ -12,13 +12,8 @@ namespace Acr.DeviceInfo {
             var tel = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
             this.CellularNetworkCarrier = tel?.NetworkOperatorName;
 
+            ConnectivityBroadcastReceiver.StatusChanged = (sender, args) => this.InternetReachability = ConnectivityBroadcastReceiver.ReachableStatus;
             ConnectivityBroadcastReceiver.Register();
-            ConnectivityBroadcastReceiver.StatusChanged = (sender, args) => {
-                this.IsInternetAvailable = ConnectivityBroadcastReceiver.IsInternetAvailable;
-                this.IsWifi = ConnectivityBroadcastReceiver.IsInternetWifi;
-                this.IsCellular = ConnectivityBroadcastReceiver.IsInternetCellular;
-            };
-            // TODO: force run?
         }
     }
 }

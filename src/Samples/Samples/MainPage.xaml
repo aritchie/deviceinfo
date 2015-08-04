@@ -35,11 +35,10 @@
                 <TextCell Text="Locale" Detail="{Binding Locale}" />
             </TableSection>
 
-            <TableSection x:Name="ConnectSection" Title="Network">
+            <TableSection x:Name="ConnectSection" Title="Connectivity">
                 <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
                 <SwitchCell Text="Internet Available?" IsEnabled="false" On="{Binding IsInternetAvailable}" />
-                <SwitchCell Text="WiFi" IsEnabled="false" On="{Binding IsWifi}" />
-                <SwitchCell Text="Cell Data" IsEnabled="false" On="{Binding IsCellular}" />
+                <TextCell Text="Reachable Via" Detail="{Binding InternetReachability}" />
             </TableSection>
         </TableRoot>
     </TableView>
