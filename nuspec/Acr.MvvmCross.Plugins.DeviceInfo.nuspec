@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.MvvmCross.Plugins.DeviceInfo</id>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
         <title>MvvmCross Device Information</title>
         <description>Device information platform plugin for MvvmCross (iOS, Android, and WP8)</description>
         <authors>Allan Ritchie</authors>
@@ -16,7 +16,8 @@
             <dependency id="Acr.DeviceInfo" version="[3.0.0, 4.0)" />
         </dependencies>
         <releaseNotes>
-Update to 3.0
+Fix the deviceinfo bindings
+Battery 
         </releaseNotes>
     </metadata>
     <files>

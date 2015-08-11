@@ -92,6 +92,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Acr.DeviceInfo.Interface\Acr.DeviceInfo.Interface.csproj">
+      <Project>{48d0e994-7454-44ed-952b-9e9fafa5101f}</Project>
+      <Name>Acr.DeviceInfo.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Acr.DeviceInfo\Acr.DeviceInfo.csproj">
+      <Project>{0ae46db6-f7c4-40e2-a8df-1e22d9eb2bb5}</Project>
+      <Name>Acr.DeviceInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

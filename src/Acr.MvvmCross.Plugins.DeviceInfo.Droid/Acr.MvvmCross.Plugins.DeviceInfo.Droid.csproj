@@ -34,10 +34,6 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Acr.DeviceInfo.2.1.1\lib\MonoAndroid10\Acr.DeviceInfo.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.1\lib\MonoAndroid\Cirrious.CrossCore.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +77,14 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Acr.DeviceInfo.Android\Acr.DeviceInfo.Android.csproj">
+      <Project>{81f160c8-e15b-4d75-8580-a27757e1c4c9}</Project>
+      <Name>Acr.DeviceInfo.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Acr.DeviceInfo.Interface\Acr.DeviceInfo.Interface.csproj">
+      <Project>{48d0e994-7454-44ed-952b-9e9fafa5101f}</Project>
+      <Name>Acr.DeviceInfo.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Acr.MvvmCross.Plugins.DeviceInfo\Acr.MvvmCross.Plugins.DeviceInfo.csproj">
       <Project>{62822DE8-CEB9-4602-B780-84E9E3D11B88}</Project>
       <Name>Acr.MvvmCross.Plugins.DeviceInfo</Name>
