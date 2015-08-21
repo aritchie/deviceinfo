@@ -34,4 +34,7 @@ If you want to request the Device ID (DeviceInfo.Instance.DeviceId), you must in
 
 Make sure to install the nuget package in your platform and PCL projects.  To use, simply start calling
 
-    Acr.DeviceInfo.DeviceInfo.Instance.<property> 
+    Acr.DeviceInfo.DeviceInfo.Hardware.<property> 
+    Acr.DeviceInfo.DeviceInfo.App.<property>
+    Acr.DeviceInfo.DeviceInfo.Battery.<property>
+    Acr.DeviceInfo.DeviceInfo.Connectivity.<property>
