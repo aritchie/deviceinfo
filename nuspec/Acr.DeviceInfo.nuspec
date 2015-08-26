@@ -16,6 +16,9 @@ Get tons of device information
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+3.1
+[feature] Charging state is now minotored
+
 3.0
 [feature] Application state monitoring - detect when your app is going to the fore/back ground!
 [feature] Battery status (IsBatteryCharging and BatteryPercentage)

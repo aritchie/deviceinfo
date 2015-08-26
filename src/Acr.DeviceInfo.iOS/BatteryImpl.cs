@@ -9,6 +9,7 @@ namespace Acr.DeviceInfo {
         public BatteryImpl() {
             UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
             UIDevice.Notifications.ObserveBatteryLevelDidChange((sender, args) => this.SetBatteryState());
+            UIDevice.Notifications.ObserveBatteryStateDidChange((sender, args) => this.SetBatteryState());
             this.SetBatteryState(); // set initial state
         }
 
