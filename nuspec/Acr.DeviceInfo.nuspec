@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>3.0.0</version>
+        <version>3.1.0</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -18,6 +18,7 @@ Get tons of device information
         <releaseNotes>
 3.1
 [feature] Charging state is now minotored
+[fix] UWP registration
 
 3.0
 [feature] Application state monitoring - detect when your app is going to the fore/back ground!
@@ -48,7 +49,7 @@ Get tons of device information
         <!-- win10 -->
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.dll" target="lib\uap10.0\Acr.DeviceInfo.dll" />
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\uap10.0\Acr.DeviceInfo.Interface.dll" />
-        <file src="..\src\Acr.DeviceInfo.Uwp\Properties\Acr.DeviceInfo.Uwp.rd.xml" target="lib\uap10.0\Acr.DeviceInfo.Uwp.rd.xml" />
+        <file src="..\src\Acr.DeviceInfo.Uwp\Properties\Acr.DeviceInfo.rd.xml" target="lib\uap10.0\Acr.DeviceInfo.rd.xml" />
 
     </files>
 </package>

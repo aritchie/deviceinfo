@@ -229,3 +229,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/src/.vs/config/applicationhost.config
+/src/Acr.DeviceInfo.Uwp/project.lock.json
+/src/Samples.Uwp/project.lock.json
