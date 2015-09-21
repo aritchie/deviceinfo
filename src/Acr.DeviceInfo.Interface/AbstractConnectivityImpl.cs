@@ -3,7 +3,10 @@
 
 namespace Acr.DeviceInfo {
 
-    public class AbstractConnectivityImpl : AbstractNpc, IConnectivity {
+    public abstract class AbstractConnectivityImpl : AbstractNpc, IConnectivity {
+
+        protected abstract string GetIpAddress();
+
 
         bool internetAvail;
         public bool IsInternetAvailable {
@@ -12,12 +15,22 @@ namespace Acr.DeviceInfo {
         }
 
 
+        string ipAddress;
+        public string IpAddress {
+            get { return this.ipAddress; }
+            protected set { this.SetProperty(ref this.ipAddress, value); }
+        }
+
+
         ConnectionStatus reach;
         public ConnectionStatus InternetReachability {
             get { return this.reach; }
             protected set {
-                if (this.SetProperty(ref this.reach, value))
-                    this.IsInternetAvailable = (value != ConnectionStatus.NotReachable);
+                if (!this.SetProperty(ref this.reach, value))
+                    return;
+
+                this.IsInternetAvailable = (value != ConnectionStatus.NotReachable);
+                this.IpAddress = this.IsInternetAvailable ? this.GetIpAddress() : String.Empty;
             }
         }
 

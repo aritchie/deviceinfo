@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using Android.App;
 using Android.Content;
 using Android.Telephony;
@@ -14,6 +17,15 @@ namespace Acr.DeviceInfo {
 
             ConnectivityBroadcastReceiver.StatusChanged = (sender, args) => this.InternetReachability = ConnectivityBroadcastReceiver.ReachableStatus;
             ConnectivityBroadcastReceiver.Register();
+        }
+
+
+        protected override string GetIpAddress() {
+            return Dns
+                .GetHostEntry(Dns.GetHostName())
+                .AddressList
+                .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
+                .ToString();
         }
     }
 }

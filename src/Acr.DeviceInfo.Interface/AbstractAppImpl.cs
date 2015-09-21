@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Acr.DeviceInfo {
 
-    public class AbstractAppImpl : AbstractNpc, IApp {
+    public abstract class AbstractAppImpl : AbstractNpc, IApp {
 
         bool background;
         public bool IsBackgrounded {

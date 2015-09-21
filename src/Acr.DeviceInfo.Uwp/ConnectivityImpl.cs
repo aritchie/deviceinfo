@@ -8,7 +8,7 @@ namespace Acr.DeviceInfo {
     public class ConnectivityImpl : AbstractConnectivityImpl {
 
         public ConnectivityImpl() {
-            this.CellularNetworkCarrier = "TODO";
+            this.CellularNetworkCarrier = String.Empty;
             NetworkInformation.NetworkStatusChanged += args => this.SetState();
             this.SetState();
         }
@@ -47,6 +47,15 @@ namespace Acr.DeviceInfo {
                 //        break;
                 //}
             }
+        }
+
+
+        protected override string GetIpAddress() {
+            return Dns
+                .GetHostEntry(Dns.GetHostName())
+                .AddressList
+                .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
+                .ToString();
         }
     }
 }

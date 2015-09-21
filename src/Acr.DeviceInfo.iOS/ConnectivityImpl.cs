@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using CoreTelephony;
 
 
@@ -32,6 +35,15 @@ namespace Acr.DeviceInfo {
                     this.InternetReachability = ConnectionStatus.ReachableViaWifi;
                     break;
             }
+        }
+
+
+        protected override string GetIpAddress() {
+            return Dns
+                .GetHostEntry(Dns.GetHostName())
+                .AddressList
+                .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
+                .ToString();
         }
     }
 }

@@ -37,6 +37,7 @@
             </TableSection>
 
             <TableSection x:Name="ConnectSection" Title="Connectivity">
+                <TextCell Text="IP Address" Detail="{Binding IpAddress}" />
                 <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
                 <SwitchCell Text="Internet Available?" IsEnabled="false" On="{Binding IsInternetAvailable}" />
                 <TextCell Text="Reachable Via" Detail="{Binding InternetReachability}" />

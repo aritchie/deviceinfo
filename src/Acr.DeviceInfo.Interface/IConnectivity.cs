@@ -9,5 +9,6 @@ namespace Acr.DeviceInfo {
         bool IsInternetAvailable { get; }
         ConnectionStatus InternetReachability { get; }
         string CellularNetworkCarrier { get; }
+        string IpAddress { get; }
     }
 }

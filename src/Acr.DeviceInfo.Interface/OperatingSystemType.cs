@@ -8,6 +8,7 @@ namespace Acr.DeviceInfo {
         iOS = 1,
         Android = 2,
         WindowsPhone = 3,
-        Windows = 4
+        WindowUniversal = 4,
+        NetCore = 5
     }
 }

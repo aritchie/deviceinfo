@@ -50,6 +50,6 @@ namespace Acr.DeviceInfo {
         public bool IsRearCameraAvailable { get; private set; }
         public bool IsSimulator { get; } = (Package.Current.Id.Architecture == ProcessorArchitecture.Unknown);
         public bool IsTablet { get; } = false;
-        public OperatingSystemType OS { get; } = OperatingSystemType.Windows; // TODO: winphone
+        public OperatingSystemType OS { get; } = OperatingSystemType.WindowUniversal;
     }
 }

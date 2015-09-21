@@ -17,7 +17,9 @@ Get tons of device information
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
 3.1
-[feature] Charging state is now minotored
+[feature] Charging state is now monitored
+[feature] Get current IP address
+[feature] .net 4.5 implementation
 [fix] UWP registration
 
 3.0
@@ -45,6 +47,10 @@ Get tons of device information
         <!-- wp81 silverlight -->
         <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.dll" target="lib\wp81\Acr.DeviceInfo.dll" />
         <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\wp81\Acr.DeviceInfo.Interface.dll" />
+
+        <!-- net45 -->
+        <file src="..\src\Acr.DeviceInfo.NetCore\bin\Release\Acr.DeviceInfo.dll" target="lib\net45\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.NetCore\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\net45\Acr.DeviceInfo.Interface.dll" />
 
         <!-- win10 -->
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.dll" target="lib\uap10.0\Acr.DeviceInfo.dll" />
