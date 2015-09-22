@@ -1,11 +1,30 @@
 ﻿using System;
+using System.Linq;
+using System.Management;
+using System.Windows.Forms;
 
 
 namespace Acr.DeviceInfo {
 
     public class HardwareImpl : IHardware {
-        public int ScreenHeight { get; }
-        public int ScreenWidth { get; }
+
+        public HardwareImpl() {
+
+            var mos = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+            var obj = mos.Get().Cast<ManagementObject>().FirstOrDefault();
+
+            this.Manufacturer = obj["Manufacturer"].ToString();
+            this.Model = obj["model"].ToString();
+            this.OperatingSystem = $"{obj["Caption"]} - {obj["Version"]}";
+
+            mos = new ManagementObjectSearcher("SELECT ProcessorId FROM Win32_Processor");
+            obj = mos.Get().Cast<ManagementObject>().FirstOrDefault();
+            this.DeviceId = obj["ProcessorId"].ToString();
+        }
+
+
+        public int ScreenHeight { get; } = SystemInformation.VirtualScreen.Height;
+        public int ScreenWidth { get; } = SystemInformation.VirtualScreen.Width;
         public string DeviceId { get; }
         public string Manufacturer { get; }
         public string Model { get; }
