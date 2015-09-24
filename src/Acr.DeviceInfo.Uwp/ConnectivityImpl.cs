@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.NetworkInformation;
 using Windows.Networking.Connectivity;
 
@@ -51,11 +52,10 @@ namespace Acr.DeviceInfo {
 
 
         protected override string GetIpAddress() {
-            return Dns
-                .GetHostEntry(Dns.GetHostName())
-                .AddressList
-                .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
-                .ToString();
+            return NetworkInformation
+                .GetHostNames()
+                .Last()
+                .DisplayName;
         }
     }
 }

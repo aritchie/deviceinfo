@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.Networking.Connectivity;
 using Microsoft.Phone.Net.NetworkInformation;
 
@@ -47,6 +48,13 @@ namespace Acr.DeviceInfo {
                 //        break;
                 //}
             }
+        }
+
+        protected override string GetIpAddress() {
+            return NetworkInformation
+                .GetHostNames()
+                .Last()
+                .DisplayName;
         }
     }
 }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>3.1.0</version>
+        <version>3.1.1</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -16,6 +16,10 @@ Get tons of device information
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+3.1.1
+[fix] netcore should be .net 4.5, not 4.5.2
+[fix] ip address implementations for wp and uwp
+
 3.1
 [feature] Charging state is now monitored
 [feature] Get current IP address
