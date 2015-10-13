@@ -22,19 +22,38 @@ namespace Acr.DeviceInfo {
         }
 
 
+        // taken from https://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/ with modifications
         void SetLocale() {
-            var netLocale = NSLocale.AutoUpdatingCurrentLocale.LocaleIdentifier.Replace("_", "-");
-            CultureInfo value;
             try {
-                value = new CultureInfo(netLocale);
+                var netLang = "en";
+                var prefLang = "en";
+                if (NSLocale.PreferredLanguages.Any()) {
+                    var pref = NSLocale.PreferredLanguages
+                        .First()
+                        .Substring(0, 2)
+                        .ToLower();
+
+                    if (prefLang == "pt")
+                        pref = pref == "pt" ? "pt-BR" : "pt-PT";
+
+                    netLang = pref.Replace("_", "0");
+                    Console.WriteLine($"Preferred Language: {netLang}");
+                }
+                CultureInfo value;
+                try {
+                    Console.WriteLine($"Setting locale to {netLang}");
+                    value = new CultureInfo(netLang);
+                }
+                catch {
+                    Console.WriteLine($"Failed setting locale - moving to preferred langugage {prefLang}");
+                    value = new CultureInfo(prefLang);
+                }
+                this.Locale = value;
             }
-            catch {
-                var pl = NSLocale.PreferredLanguages.FirstOrDefault();
-                value = pl == null
-                    ? CultureInfo.CurrentUICulture
-                    : new CultureInfo(pl);
+            catch (Exception ex) {
+                this.Locale = CultureInfo.CurrentUICulture;
+                Console.WriteLine($"Invalid culture code - {ex}");
             }
-            this.Locale = value;
         }
     }
 }

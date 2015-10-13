@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>3.2.0</version>
+        <version>3.2.1</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -16,6 +16,9 @@ Get tons of device information
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+3.2.1
+[fix] Deal with region/language issues with iOS
+
 3.2.0
 [feature] battery information for UWP apps
 
