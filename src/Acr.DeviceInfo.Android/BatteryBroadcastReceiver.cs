@@ -22,10 +22,9 @@ namespace Acr.DeviceInfo {
 
         static void ProcessIntent(Intent intent) {
             switch (intent.Action) {
+
                 case Intent.ActionPowerConnected:
-
-                    break;
-
+                case Intent.ActionPowerDisconnected:
                 case Intent.ActionBatteryChanged:
                     var level = intent.GetIntExtra(BatteryManager.ExtraLevel, -1);
                     var scale = intent.GetIntExtra(BatteryManager.ExtraScale, -1);

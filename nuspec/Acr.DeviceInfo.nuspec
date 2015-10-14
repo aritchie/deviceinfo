@@ -17,7 +17,8 @@ Get tons of device information
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
 3.2.1
-[fix] Deal with region/language issues with iOS
+[fix][ios] Deal with region/language issues
+[fix][droid] power status detection
 
 3.2.0
 [feature] battery information for UWP apps

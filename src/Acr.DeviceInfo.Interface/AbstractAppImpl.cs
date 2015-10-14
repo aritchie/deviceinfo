@@ -16,9 +16,14 @@ namespace Acr.DeviceInfo {
         CultureInfo locale;
         public CultureInfo Locale {
             get { return this.locale; }
-            protected set { this.SetProperty(ref this.locale, value); }
+            protected set {
+                if (this.SetProperty(ref this.locale, value))
+                    this.RaisePropertyChanged("LocaleString");
+            }
         }
 
+
+        public string LocaleString => this.locale.ToString();
 
         public string Version { get; protected set; }
     }

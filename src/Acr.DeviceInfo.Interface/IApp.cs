@@ -10,5 +10,6 @@ namespace Acr.DeviceInfo {
         string Version { get; }
         bool IsBackgrounded { get; }
         CultureInfo Locale { get; }
+        string LocaleString { get; }
     }
 }
