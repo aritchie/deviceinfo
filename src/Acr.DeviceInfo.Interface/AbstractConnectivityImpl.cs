@@ -30,11 +30,15 @@ namespace Acr.DeviceInfo {
                     return;
 
                 this.IsInternetAvailable = (value != ConnectionStatus.NotReachable);
-                try {
-                    this.IpAddress = this.IsInternetAvailable ? this.GetIpAddress() : String.Empty;
-                }
-                catch {
+                if (!this.IsInternetAvailable)
                     this.IpAddress = String.Empty;
+                else {
+                    try {
+                        this.IpAddress = this.IsInternetAvailable ? this.GetIpAddress() : String.Empty;
+                    }
+                    catch {
+                        this.IpAddress = String.Empty;
+                    }
                 }
             }
         }
