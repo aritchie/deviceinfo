@@ -70,7 +70,6 @@ Get tons of device information
         <!-- win10 -->
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.dll" target="lib\uap10.0\Acr.DeviceInfo.dll" />
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\uap10.0\Acr.DeviceInfo.Interface.dll" />
-        <file src="..\src\Acr.DeviceInfo.Uwp\Properties\Acr.DeviceInfo.rd.xml" target="lib\uap10.0\Acr.DeviceInfo.rd.xml" />
 
     </files>
 </package>

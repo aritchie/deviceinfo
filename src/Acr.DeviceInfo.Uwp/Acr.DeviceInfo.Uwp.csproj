@@ -118,7 +118,7 @@
     <Compile Include="ConnectivityImpl.cs" />
     <Compile Include="HardwareImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Properties\Acr.DeviceInfo.rd.xml" />
+    <EmbeddedResource Include="Properties\Acr.DeviceInfo.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Acr.DeviceInfo.Interface\Acr.DeviceInfo.Interface.csproj">
