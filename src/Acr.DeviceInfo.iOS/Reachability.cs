@@ -4,12 +4,12 @@ using SystemConfiguration;
 
 using CoreFoundation;
 
-namespace Reachability {
     public enum NetworkStatus {
         NotReachable,
         ReachableViaCarrierDataNetwork,
         ReachableViaWiFiNetwork
     }
+
 
     public static class Reachability {
         public static string HostName = "www.google.com";
@@ -129,5 +129,4 @@ namespace Reachability {
 
             return NetworkStatus.NotReachable;
         }
-    }
 }

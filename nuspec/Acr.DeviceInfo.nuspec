@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -16,6 +16,10 @@ Get tons of device information
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
+3.2.3
+[fix][uwp] registration issues
+[update][ios] reachability has been updated from xamarin sample
+
 3.2.2
 [fix] catch invalid ip address requests
 
