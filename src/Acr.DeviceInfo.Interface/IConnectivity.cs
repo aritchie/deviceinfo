@@ -10,5 +10,6 @@ namespace Acr.DeviceInfo {
         ConnectionStatus InternetReachability { get; }
         string CellularNetworkCarrier { get; }
         string IpAddress { get; }
+        string WifiSsid { get; }
     }
 }

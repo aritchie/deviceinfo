@@ -6,6 +6,8 @@ namespace Acr.DeviceInfo {
     public abstract class AbstractConnectivityImpl : AbstractNpc, IConnectivity {
 
         protected abstract string GetIpAddress();
+        protected abstract string GetNetworkCarrier();
+        protected abstract string GetWifiSsid();
 
 
         bool internetAvail;
@@ -22,6 +24,24 @@ namespace Acr.DeviceInfo {
         }
 
 
+        string networkCarrier;
+
+        public string CellularNetworkCarrier
+        {
+            get { return this.networkCarrier; }
+            protected set { this.SetProperty(ref this.networkCarrier, value); }
+        }
+
+
+        string wifiSsid;
+
+        public string WifiSsid
+        {
+            get { return this.wifiSsid; }
+            protected set { this.SetProperty(ref this.wifiSsid, value); }
+        }
+
+
         ConnectionStatus reach;
         public ConnectionStatus InternetReachability {
             get { return this.reach; }
@@ -30,20 +50,10 @@ namespace Acr.DeviceInfo {
                     return;
 
                 this.IsInternetAvailable = (value != ConnectionStatus.NotReachable);
-                if (!this.IsInternetAvailable)
-                    this.IpAddress = String.Empty;
-                else {
-                    try {
-                        this.IpAddress = this.IsInternetAvailable ? this.GetIpAddress() : String.Empty;
-                    }
-                    catch {
-                        this.IpAddress = String.Empty;
-                    }
-                }
+                this.WifiSsid = this.GetWifiSsid();
+                this.CellularNetworkCarrier = this.GetNetworkCarrier();
+                this.IpAddress = this.GetIpAddress();
             }
         }
-
-
-        public string CellularNetworkCarrier { get; protected set; }
     }
 }

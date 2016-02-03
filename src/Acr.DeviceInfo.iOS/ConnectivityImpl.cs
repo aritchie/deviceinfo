@@ -2,7 +2,9 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using SystemConfiguration;
 using CoreTelephony;
+using Foundation;
 
 
 namespace Acr.DeviceInfo {
@@ -10,9 +12,6 @@ namespace Acr.DeviceInfo {
     public class ConnectivityImpl : AbstractConnectivityImpl {
 
         public ConnectivityImpl() {
-            using (var info = new CTTelephonyNetworkInfo())
-                this.CellularNetworkCarrier = info.SubscriberCellularProvider?.CarrierName;
-
             Reachability.ReachabilityChanged += (sender, args) => this.SetConnectivityState();
             this.SetConnectivityState();
         }
@@ -44,6 +43,25 @@ namespace Acr.DeviceInfo {
                 .AddressList
                 .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
                 .ToString();
+        }
+
+
+        protected override string GetNetworkCarrier()
+        {
+            using (var info = new CTTelephonyNetworkInfo())
+                return info.SubscriberCellularProvider?.CarrierName;
+        }
+
+
+        protected override string GetWifiSsid()
+        {
+            NSDictionary values;
+            var status = CaptiveNetwork.TryCopyCurrentNetworkInfo("en0", out values);
+            if (status == StatusCode.NoKey)
+                return null;
+
+            var ssid = values[CaptiveNetwork.NetworkInfoKeySSID];
+            return ssid.ToString();
         }
     }
 }

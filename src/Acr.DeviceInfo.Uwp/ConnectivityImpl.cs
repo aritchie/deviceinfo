@@ -9,9 +9,26 @@ namespace Acr.DeviceInfo {
     public class ConnectivityImpl : AbstractConnectivityImpl {
 
         public ConnectivityImpl() {
-            this.CellularNetworkCarrier = String.Empty;
             NetworkInformation.NetworkStatusChanged += args => this.SetState();
             this.SetState();
+        }
+
+
+        protected override string GetNetworkCarrier()
+        {
+            return null;
+        }
+
+
+        protected override string GetWifiSsid()
+        {
+            //var wlan = new WlanClient();
+//foreach (WlanClient.WlanInterface wlanInterface in wlan.Interfaces)
+//        {
+//            Wlan.Dot11Ssid ssid = wlanInterface.CurrentConnection.wlanAssociationAttributes.dot11Ssid;
+//            connectedSsids.Add(new String(Encoding.ASCII.GetChars(ssid.SSID,0, (int)ssid.SSIDLength)));
+//        }
+            return null;
         }
 
 

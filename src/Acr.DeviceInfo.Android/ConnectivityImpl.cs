@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using Android.App;
 using Android.Content;
+using Android.Net.Wifi;
 using Android.Telephony;
 
 
@@ -12,9 +13,6 @@ namespace Acr.DeviceInfo {
     public class ConnectivityImpl : AbstractConnectivityImpl {
 
         public ConnectivityImpl() {
-            var tel = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
-            this.CellularNetworkCarrier = tel?.NetworkOperatorName;
-
             ConnectivityBroadcastReceiver.StatusChanged = (sender, args) => this.InternetReachability = ConnectivityBroadcastReceiver.ReachableStatus;
             ConnectivityBroadcastReceiver.Register();
         }
@@ -26,6 +24,23 @@ namespace Acr.DeviceInfo {
                 .AddressList
                 .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
                 .ToString();
+        }
+
+
+        protected override string GetNetworkCarrier()
+        {
+            var tel = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
+            var opName = tel?.NetworkOperatorName;
+            return opName;
+        }
+
+
+        protected override string GetWifiSsid()
+        {
+            //<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+            var wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+            var ssid = wifiManager.ConnectionInfo?.SSID;
+            return ssid;
         }
     }
 }
