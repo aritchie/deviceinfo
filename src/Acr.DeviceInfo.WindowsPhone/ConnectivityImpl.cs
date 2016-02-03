@@ -11,7 +11,6 @@ namespace Acr.DeviceInfo {
         public ConnectivityImpl() {
             NetworkInformation.NetworkStatusChanged += sender => this.SetState();
             this.SetState();
-            this.CellularNetworkCarrier = DeviceNetworkInformation.CellularMobileOperator;
         }
 
 
@@ -53,8 +52,24 @@ namespace Acr.DeviceInfo {
         protected override string GetIpAddress() {
             return NetworkInformation
                 .GetHostNames()
-                .Last()
+                .LastOrDefault()?
                 .DisplayName;
+        }
+
+
+        protected override string GetNetworkCarrier()
+        {
+            return DeviceNetworkInformation.CellularMobileOperator;
+        }
+
+
+        protected override string GetWifiSsid()
+        {
+            var profile = NetworkInformation.GetInternetConnectionProfile();
+            if (!profile.IsWlanConnectionProfile)
+                return null;
+
+            return profile.WlanConnectionProfileDetails.GetConnectedSsid();
         }
     }
 }

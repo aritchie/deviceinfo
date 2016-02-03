@@ -29,5 +29,17 @@ namespace Acr.DeviceInfo {
                 .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
                 .ToString();
         }
+
+
+        protected override string GetNetworkCarrier()
+        {
+            return null;
+        }
+
+
+        protected override string GetWifiSsid()
+        {
+            return null;
+        }
     }
 }

@@ -14,24 +14,6 @@ namespace Acr.DeviceInfo {
         }
 
 
-        protected override string GetNetworkCarrier()
-        {
-            return null;
-        }
-
-
-        protected override string GetWifiSsid()
-        {
-            //var wlan = new WlanClient();
-//foreach (WlanClient.WlanInterface wlanInterface in wlan.Interfaces)
-//        {
-//            Wlan.Dot11Ssid ssid = wlanInterface.CurrentConnection.wlanAssociationAttributes.dot11Ssid;
-//            connectedSsids.Add(new String(Encoding.ASCII.GetChars(ssid.SSID,0, (int)ssid.SSIDLength)));
-//        }
-            return null;
-        }
-
-
         void SetState() {
             var avail = NetworkInterface.GetIsNetworkAvailable();
 
@@ -73,6 +55,22 @@ namespace Acr.DeviceInfo {
                 .GetHostNames()
                 .Last()
                 .DisplayName;
+        }
+
+
+        protected override string GetNetworkCarrier()
+        {
+            return null;
+        }
+
+
+        protected override string GetWifiSsid()
+        {
+            var profile = NetworkInformation.GetInternetConnectionProfile();
+            if (!profile.IsWlanConnectionProfile)
+                return null;
+
+            return profile.WlanConnectionProfileDetails.GetConnectedSsid();
         }
     }
 }
