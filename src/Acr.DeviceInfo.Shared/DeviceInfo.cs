@@ -1,69 +1,84 @@
 ﻿using System;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public static class DeviceInfo {
+    public static class DeviceInfo
+    {
 
-        readonly static Lazy<IApp> appInit = new Lazy<IApp>(() => {
-#if __PLATFORM__
+        readonly static Lazy<IApp> appInit = new Lazy<IApp>(() =>
+        {
+#if PCL
+            throw new Exception(ERROR);
+#else
             return new AppImpl();
-#else
-            throw new Exception("Platform implementation not found.  Have you added a nuget reference to your platform project?");
 #endif
         }, false);
 
 
-        readonly static Lazy<IBattery> batteryInit = new Lazy<IBattery>(() => {
-#if __PLATFORM__
+        readonly static Lazy<IBattery> batteryInit = new Lazy<IBattery>(() =>
+        {
+#if PCL
+            throw new Exception(ERROR);
+#else
             return new BatteryImpl();
-#else
-            throw new Exception("Platform implementation not found.  Have you added a nuget reference to your platform project?");
 #endif
         }, false);
 
 
-        readonly static Lazy<IConnectivity> connectInit = new Lazy<IConnectivity>(() => {
-#if __PLATFORM__
+        readonly static Lazy<IConnectivity> connectInit = new Lazy<IConnectivity>(() =>
+        {
+#if PCL
+            throw new Exception(ERROR);
+#else
             return new ConnectivityImpl();
-#else
-            throw new Exception("Platform implementation not found.  Have you added a nuget reference to your platform project?");
 #endif
         }, false);
 
 
-        readonly static Lazy<IHardware> hwInit = new Lazy<IHardware>(() => {
-#if __PLATFORM__
+        readonly static Lazy<IHardware> hwInit = new Lazy<IHardware>(() =>
+        {
+#if PCL
+            throw new Exception(ERROR);
+#else
             return new HardwareImpl();
-#else
-            throw new Exception("Platform implementation not found.  Have you added a nuget reference to your platform project?");
 #endif
         }, false);
+
+
+#if PCL
+        const string ERROR = "[deviceinfo] Platform implementation not found.  Have you added a nuget reference to your platform project?";
+#endif
 
 
         static IApp appInstance;
-        public static IApp App {
+        public static IApp App
+        {
             get { return appInstance ?? appInit.Value; }
             set { appInstance = value; }
         }
 
 
         static IBattery batteryInstance;
-        public static IBattery Battery {
+        public static IBattery Battery
+        {
             get { return batteryInstance ?? batteryInit.Value; }
             set { batteryInstance = value; }
         }
 
 
         static IConnectivity connectInstance;
-        public static IConnectivity Connectivity {
+        public static IConnectivity Connectivity
+        {
             get { return connectInstance ?? connectInit.Value; }
             set { connectInstance = value; }
         }
 
 
         static IHardware hwInstance;
-        public static IHardware Hardware {
+        public static IHardware Hardware
+        {
             get { return hwInstance ?? hwInit.Value; }
             set { hwInstance = value; }
         }

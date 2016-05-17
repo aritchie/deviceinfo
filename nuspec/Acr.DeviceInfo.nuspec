@@ -18,6 +18,7 @@ Get tons of device information
         <releaseNotes>
 3.3.0
 [feature] add wifi ssid property
+[fix][ios] use CFBundleShortVersionString instead of CFBundleVersion
 
 3.2.3
 [fix][uwp] registration issues

@@ -10,7 +10,7 @@ namespace Acr.DeviceInfo {
     public class AppImpl : AbstractAppImpl {
 
         public AppImpl() {
-            this.Version = NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
+            this.Version = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
 
             //UIApplication.Notifications.ObserveWillEnterForeground((sender, args) => {});
             UIApplication.Notifications.ObserveDidBecomeActive((sender, args) => this.IsBackgrounded = false);
