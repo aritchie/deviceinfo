@@ -1,15 +1,18 @@
 ﻿using System;
-using System.ComponentModel;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public interface IConnectivity : INotifyPropertyChanged {
+    public interface IConnectivity
+    {
 
         bool IsInternetAvailable { get; }
         ConnectionStatus InternetReachability { get; }
         string CellularNetworkCarrier { get; }
         string IpAddress { get; }
         string WifiSsid { get; }
+
+        event EventHandler StateChanged;
     }
 }

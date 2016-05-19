@@ -1,21 +1,12 @@
 ﻿using System;
 
 
-namespace Acr.DeviceInfo {
-
-    public abstract class AbstractBatteryImpl : AbstractNpc, IBattery {
-
-        int percentage;
-        public int Percentage {
-            get { return this.percentage; }
-            protected set { this.SetProperty(ref this.percentage, value); }
-        }
-
-
-        bool charging;
-        public bool IsCharging {
-            get { return this.charging; }
-            protected set { this.SetProperty(ref this.charging, value); }
-        }
+namespace Acr.DeviceInfo
+{
+    public abstract class AbstractBatteryImpl : IBattery
+    {
+        public int Percentage { get; protected set; }
+        public bool IsCharging { get; protected set; }
+        public event EventHandler StateChanged;
     }
 }

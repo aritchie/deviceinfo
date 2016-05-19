@@ -1,12 +1,14 @@
 ﻿using System;
-using System.ComponentModel;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public interface IBattery : INotifyPropertyChanged {
-
+    public interface IBattery
+    {
         int Percentage { get; }
         bool IsCharging { get; }
+
+        event EventHandler StateChanged;
     }
 }

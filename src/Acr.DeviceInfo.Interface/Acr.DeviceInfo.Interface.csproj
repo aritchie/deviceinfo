@@ -43,7 +43,6 @@
     <Compile Include="AbstractAppImpl.cs" />
     <Compile Include="AbstractBatteryImpl.cs" />
     <Compile Include="AbstractConnectivityImpl.cs" />
-    <Compile Include="AbstractNpc.cs" />
     <Compile Include="ConnectionStatus.cs" />
     <Compile Include="IApp.cs" />
     <Compile Include="IBattery.cs" />

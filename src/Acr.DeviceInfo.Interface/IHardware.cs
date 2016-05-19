@@ -1,10 +1,10 @@
 ﻿using System;
 
 
-namespace Acr.DeviceInfo {
-
-    public interface IHardware {
-
+namespace Acr.DeviceInfo
+{
+    public interface IHardware
+    {
         int ScreenHeight { get; }
         int ScreenWidth { get; }
 
