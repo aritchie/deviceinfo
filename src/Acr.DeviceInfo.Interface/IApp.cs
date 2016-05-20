@@ -13,6 +13,6 @@ namespace Acr.DeviceInfo
 
         event EventHandler LocaleChanged;
         event EventHandler Resuming;
-        event EventHandler Backgrounding;
+        event EventHandler EnteringSleep;
     }
 }

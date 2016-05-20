@@ -5,11 +5,14 @@ using Foundation;
 using UIKit;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public class AppImpl : AbstractAppImpl {
+    public class AppImpl : AbstractAppImpl
+    {
 
-        public AppImpl() {
+        public AppImpl()
+        {
             this.Version = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
 
             //UIApplication.Notifications.ObserveWillEnterForeground((sender, args) => {});
@@ -22,12 +25,17 @@ namespace Acr.DeviceInfo {
         }
 
 
+
+
         // taken from https://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/ with modifications
-        void SetLocale() {
-            try {
+        void SetLocale()
+        {
+            try
+            {
                 var netLang = "en";
                 var prefLang = "en";
-                if (NSLocale.PreferredLanguages.Any()) {
+                if (NSLocale.PreferredLanguages.Any())
+                {
                     var pref = NSLocale.PreferredLanguages
                         .First()
                         .Substring(0, 2)
@@ -40,17 +48,20 @@ namespace Acr.DeviceInfo {
                     Console.WriteLine($"Preferred Language: {netLang}");
                 }
                 CultureInfo value;
-                try {
+                try
+                {
                     Console.WriteLine($"Setting locale to {netLang}");
                     value = new CultureInfo(netLang);
                 }
-                catch {
+                catch
+                {
                     Console.WriteLine($"Failed setting locale - moving to preferred langugage {prefLang}");
                     value = new CultureInfo(prefLang);
                 }
                 this.Locale = value;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 this.Locale = CultureInfo.CurrentUICulture;
                 Console.WriteLine($"Invalid culture code - {ex}");
             }

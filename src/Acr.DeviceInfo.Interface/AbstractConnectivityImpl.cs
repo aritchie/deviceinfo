@@ -10,10 +10,9 @@ namespace Acr.DeviceInfo
         public string CellularNetworkCarrier { get; protected set; }
         public string IpAddress { get; protected set; }
         public string WifiSsid { get; protected set; }
+        public event EventHandler StateChanged;
 
         protected abstract void StartMonitoringConnection();
         protected abstract void StopMonitoringConnection();
-
-        public event EventHandler StateChanged;
     }
 }

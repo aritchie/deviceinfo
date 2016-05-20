@@ -2,18 +2,15 @@ using System;
 using App = Android.App.Application;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public class AppImpl : AbstractAppImpl {
+    public class AppImpl : AbstractAppImpl
+    {
 
 
-        public AppImpl() {
-            AppStateLifecyle.StatusChanged = (sender, args) => this.IsBackgrounded = !AppStateLifecyle.IsActive;
-            AppStateLifecyle.Register();
-
-            LocaleBroadcastReceiver.Changed += (sender, args) => this.Locale = LocaleBroadcastReceiver.Current;
-            LocaleBroadcastReceiver.Register();
-
+        public AppImpl()
+        {
             this.Version = App
                 .Context
                 .ApplicationContext
@@ -31,5 +28,32 @@ namespace Acr.DeviceInfo {
         //        return !result;
         //    }
         //}
+
+        protected override void StartMonitoringLocaleUpdates()
+        {
+            LocaleBroadcastReceiver.Changed += (sender, args) => this.Locale = LocaleBroadcastReceiver.Current;
+            LocaleBroadcastReceiver.Register();
+        }
+
+
+        protected override void StopMonitoringLocaleUpdates()
+        {
+            //LocaleBroadcastReceiver.Changed -= (sender, args) => this.Locale = LocaleBroadcastReceiver.Current;
+            //LocaleBroadcastReceiver.UnRegister();
+        }
+
+
+        protected override void StartMonitoringAppState()
+        {
+            AppStateLifecyle.StatusChanged += (sender, args) => this.IsBackgrounded = !AppStateLifecyle.IsActive;
+            AppStateLifecyle.Register();
+        }
+
+
+        protected override void StopMonitoringAppState()
+        {
+            //AppStateLifecyle.StatusChanged -= (sender, args) => this.IsBackgrounded = !AppStateLifecyle.IsActive;
+            //AppStateLifecyle.UnRegister();
+        }
     }
 }
