@@ -8,16 +8,23 @@ using UIKit;
 namespace Acr.DeviceInfo
 {
 
-    public class AppImpl : AbstractAppImpl
+    public class AppImpl : IApp
     {
 
         public AppImpl()
         {
             this.Version = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
 
-            //UIApplication.Notifications.ObserveWillEnterForeground((sender, args) => {});
-            UIApplication.Notifications.ObserveDidBecomeActive((sender, args) => this.IsBackgrounded = false);
-            UIApplication.Notifications.ObserveDidEnterBackground((sender, args) => this.IsBackgrounded = true);
+            UIApplication.Notifications.ObserveDidBecomeActive((sender, args) =>
+            {
+                this.IsBackgrounded = false;
+                this.Resuming?.Invoke(this, EventArgs.Empty);
+            });
+            UIApplication.Notifications.ObserveDidEnterBackground((sender, args) =>
+            {
+                this.IsBackgrounded = true;
+                this.EnteringSleep?.Invoke(this, EventArgs.Empty);
+            });
             this.IsBackgrounded = (UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active);
 
             NSLocale.Notifications.ObserveCurrentLocaleDidChange((sender, args) => this.SetLocale());
@@ -25,6 +32,12 @@ namespace Acr.DeviceInfo
         }
 
 
+        public string Version { get; }
+        public bool IsBackgrounded { get; private set; }
+        public CultureInfo Locale { get; private set; }
+        public event EventHandler LocaleChanged;
+        public event EventHandler Resuming;
+        public event EventHandler EnteringSleep;
 
 
         // taken from https://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/ with modifications

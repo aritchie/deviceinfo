@@ -7,20 +7,25 @@ using CoreTelephony;
 using Foundation;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public class ConnectivityImpl : AbstractConnectivityImpl {
+    public class ConnectivityImpl : AbstractConnectivityImpl
+    {
 
-        public ConnectivityImpl() {
+        public ConnectivityImpl()
+        {
             Reachability.ReachabilityChanged += (sender, args) => this.SetConnectivityState();
             this.SetConnectivityState();
         }
 
 
-        void SetConnectivityState() {
+        void SetConnectivityState()
+        {
             var internet = Reachability.InternetConnectionStatus();
 
-            switch (internet) {
+            switch (internet)
+            {
 
                 case NetworkStatus.NotReachable:
                     this.InternetReachability = ConnectionStatus.NotReachable;
@@ -37,7 +42,8 @@ namespace Acr.DeviceInfo {
         }
 
 
-        protected override string GetIpAddress() {
+        protected override string GetIpAddress()
+        {
             return Dns
                 .GetHostEntry(Dns.GetHostName())
                 .AddressList

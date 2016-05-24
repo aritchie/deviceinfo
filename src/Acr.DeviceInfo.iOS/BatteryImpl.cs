@@ -2,21 +2,38 @@ using System;
 using UIKit;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public class BatteryImpl : AbstractBatteryImpl {
-
-        public BatteryImpl() {
-            UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
-            UIDevice.Notifications.ObserveBatteryLevelDidChange((sender, args) => this.SetBatteryState());
-            UIDevice.Notifications.ObserveBatteryStateDidChange((sender, args) => this.SetBatteryState());
-            this.SetBatteryState(); // set initial state
+    public class BatteryImpl : IBattery
+    {
+        public BatteryImpl()
+        {
+            UIDevice.Notifications.ObserveBatteryLevelDidChange((sender, args) => this.stateChanged?.Invoke(this, EventArgs.Empty));
+            UIDevice.Notifications.ObserveBatteryStateDidChange((sender, args) => this.stateChanged?.Invoke(this, EventArgs.Empty));
         }
 
 
-        void SetBatteryState() {
-            this.Percentage = (int)(UIDevice.CurrentDevice.BatteryLevel * 100F);
-            this.IsCharging = (UIDevice.CurrentDevice.BatteryState == UIDeviceBatteryState.Charging);
+        public int Percentage => (int)(UIDevice.CurrentDevice.BatteryLevel * 100F);
+        public bool IsCharging => UIDevice.CurrentDevice.BatteryState == UIDeviceBatteryState.Charging;
+
+
+        EventHandler stateChanged;
+        public event EventHandler StateChanged
+        {
+            add
+            {
+                if (this.stateChanged == null)
+                    UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
+
+                this.stateChanged += value;
+            }
+            remove
+            {
+                this.stateChanged -= value;
+                if (this.stateChanged == null)
+                    UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
+            }
         }
     }
 }
