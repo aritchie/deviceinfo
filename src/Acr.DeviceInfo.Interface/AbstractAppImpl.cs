@@ -11,9 +11,64 @@ namespace Acr.DeviceInfo
         public string Version { get; protected set; }
 
 
-        public event EventHandler LocaleChanged;
-        public event EventHandler Resuming;
-        public event EventHandler EnteringSleep;
+        EventHandler localeHandler;
+        public event EventHandler LocaleChanged
+        {
+            add
+            {
+                if (this.localeHandler == null)
+                    this.StartMonitoringLocaleUpdates();
+
+                this.localeHandler += value;
+            }
+            remove
+            {
+                this.localeHandler -= value;
+
+                if (this.localeHandler == null)
+                    this.StopMonitoringLocaleUpdates();
+            }
+        }
+
+
+        EventHandler resumeHandler;
+        public event EventHandler Resuming
+        {
+            add
+            {
+                if (this.resumeHandler == null && this.sleepHandler == null)
+                    this.StartMonitoringAppState();
+
+                this.resumeHandler += value;
+            }
+            remove
+            {
+                this.resumeHandler -= value;
+
+                if (this.resumeHandler == null && this.sleepHandler == null)
+                    this.StopMonitoringAppState();
+            }
+        }
+
+
+        EventHandler sleepHandler;
+        public event EventHandler EnteringSleep
+        {
+            add
+            {
+                if (this.resumeHandler == null && this.sleepHandler == null)
+                    this.StartMonitoringAppState();
+
+                this.sleepHandler += value;
+            }
+            remove
+            {
+                this.sleepHandler -= value;
+
+                if (this.resumeHandler == null && this.sleepHandler == null)
+                    this.StopMonitoringAppState();
+            }
+        }
 
 
         protected abstract void StartMonitoringLocaleUpdates();
@@ -25,19 +80,19 @@ namespace Acr.DeviceInfo
 
         protected virtual void OnLocaleChanged()
         {
-            this.LocaleChanged?.Invoke(this, EventArgs.Empty);
+            this.localeHandler?.Invoke(this, EventArgs.Empty);
         }
 
 
         protected virtual void OnResuming()
         {
-            this.Resuming?.Invoke(this, EventArgs.Empty);
+            this.resumeHandler?.Invoke(this, EventArgs.Empty);
         }
 
 
         protected virtual void OnEnteringSleep()
         {
-            this.EnteringSleep?.Invoke(this, EventArgs.Empty);
+            this.sleepHandler?.Invoke(this, EventArgs.Empty);
         }
     }
 }

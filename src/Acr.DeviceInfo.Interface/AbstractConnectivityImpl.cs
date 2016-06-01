@@ -10,7 +10,27 @@ namespace Acr.DeviceInfo
         public string CellularNetworkCarrier { get; protected set; }
         public string IpAddress { get; protected set; }
         public string WifiSsid { get; protected set; }
-        public event EventHandler StateChanged;
+
+
+        EventHandler stateHandler;
+        public event EventHandler StateChanged
+        {
+            add
+            {
+                if (this.stateHandler == null)
+                    this.StartMonitoringConnection();
+
+                this.stateHandler += value;
+            }
+            remove
+            {
+                this.stateHandler -= value;
+
+                if (this.stateHandler == null)
+                    this.StopMonitoringConnection();
+            }
+        }
+
 
         protected abstract void StartMonitoringConnection();
         protected abstract void StopMonitoringConnection();
