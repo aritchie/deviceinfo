@@ -7,12 +7,12 @@ namespace Acr.DeviceInfo
 
     public interface IApp
     {
+        CultureInfo CurrentCulture { get; }
         string Version { get; }
+        bool IsForegrounded { get; }
         bool IsBackgrounded { get; }
-        CultureInfo Locale { get; }
 
+        event EventHandler AppStateChanged;
         event EventHandler LocaleChanged;
-        event EventHandler Resuming;
-        event EventHandler EnteringSleep;
     }
 }

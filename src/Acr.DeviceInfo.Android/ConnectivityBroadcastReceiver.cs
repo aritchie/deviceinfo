@@ -5,16 +5,19 @@ using Android.Content;
 using Android.Net;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
     [BroadcastReceiver(Enabled = true)]
-    public class ConnectivityBroadcastReceiver : BroadcastReceiver {
+    public class ConnectivityBroadcastReceiver : BroadcastReceiver
+    {
 
         public static ConnectionStatus ReachableStatus { get; private set; }
         public static EventHandler StatusChanged;
 
 
-        public override void OnReceive(Context context, Intent intent) {
+        public override void OnReceive(Context context, Intent intent)
+        {
             if (intent.Action != ConnectivityManager.ConnectivityAction)
                 return;
 
@@ -23,13 +26,16 @@ namespace Acr.DeviceInfo {
         }
 
 
-        static void SetState() {
+        static void SetState()
+        {
             var mgr = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
             if (mgr.ActiveNetworkInfo == null || !mgr.ActiveNetworkInfo.IsConnected)
                 ReachableStatus = ConnectionStatus.NotReachable;
 
-            else {
-                switch (mgr.ActiveNetworkInfo.Type) {
+            else
+            {
+                switch (mgr.ActiveNetworkInfo.Type)
+                {
 
                     case ConnectivityType.Wimax:
                     case ConnectivityType.Wifi:
@@ -49,7 +55,8 @@ namespace Acr.DeviceInfo {
         }
 
 
-        public static void Register() {
+        public static void Register()
+        {
             //if (!Utils.CheckPermission(Manifest.Permission.Internet))
             //    return;
 

@@ -6,9 +6,10 @@ namespace Acr.DeviceInfo
 {
     public abstract class AbstractAppImpl : IApp
     {
-        public CultureInfo Locale { get; protected set; }
-        public bool IsBackgrounded { get; protected set; }
-        public string Version { get; protected set; }
+        public abstract CultureInfo CurrentCulture { get; }
+        public abstract string Version { get; }
+        public abstract bool IsForegrounded { get; }
+        public bool IsBackgrounded => !this.IsForegrounded;
 
 
         EventHandler localeHandler;
@@ -17,8 +18,9 @@ namespace Acr.DeviceInfo
             add
             {
                 if (this.localeHandler == null)
+                {
                     this.StartMonitoringLocaleUpdates();
-
+                }
                 this.localeHandler += value;
             }
             remove
@@ -31,41 +33,21 @@ namespace Acr.DeviceInfo
         }
 
 
-        EventHandler resumeHandler;
-        public event EventHandler Resuming
+        EventHandler appStateChanged;
+        public event EventHandler AppStateChanged
         {
             add
             {
-                if (this.resumeHandler == null && this.sleepHandler == null)
+                if (this.appStateChanged == null)
                     this.StartMonitoringAppState();
 
-                this.resumeHandler += value;
+                this.appStateChanged += value;
             }
             remove
             {
-                this.resumeHandler -= value;
+                this.appStateChanged -= value;
 
-                if (this.resumeHandler == null && this.sleepHandler == null)
-                    this.StopMonitoringAppState();
-            }
-        }
-
-
-        EventHandler sleepHandler;
-        public event EventHandler EnteringSleep
-        {
-            add
-            {
-                if (this.resumeHandler == null && this.sleepHandler == null)
-                    this.StartMonitoringAppState();
-
-                this.sleepHandler += value;
-            }
-            remove
-            {
-                this.sleepHandler -= value;
-
-                if (this.resumeHandler == null && this.sleepHandler == null)
+                if (this.appStateChanged == null)
                     this.StopMonitoringAppState();
             }
         }
@@ -73,6 +55,7 @@ namespace Acr.DeviceInfo
 
         protected abstract void StartMonitoringLocaleUpdates();
         protected abstract void StopMonitoringLocaleUpdates();
+
 
         protected abstract void StartMonitoringAppState();
         protected abstract void StopMonitoringAppState();
@@ -84,15 +67,9 @@ namespace Acr.DeviceInfo
         }
 
 
-        protected virtual void OnResuming()
+        protected virtual void OnAppStateChanged()
         {
-            this.resumeHandler?.Invoke(this, EventArgs.Empty);
-        }
-
-
-        protected virtual void OnEnteringSleep()
-        {
-            this.sleepHandler?.Invoke(this, EventArgs.Empty);
+            this.appStateChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

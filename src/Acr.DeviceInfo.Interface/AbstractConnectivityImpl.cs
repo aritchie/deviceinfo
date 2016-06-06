@@ -5,11 +5,11 @@ namespace Acr.DeviceInfo
 {
     public abstract class AbstractConnectivityImpl : IConnectivity
     {
-        public bool IsInternetAvailable { get; protected set; }
-        public ConnectionStatus InternetReachability { get; protected set; }
-        public string CellularNetworkCarrier { get; protected set; }
-        public string IpAddress { get; protected set; }
-        public string WifiSsid { get; protected set; }
+        public abstract bool IsInternetAvailable { get; }
+        public abstract ConnectionStatus InternetReachability { get; }
+        public abstract string CellularNetworkCarrier { get; }
+        public abstract string IpAddress { get; }
+        public abstract string WifiSsid { get; }
 
 
         EventHandler stateHandler;
@@ -34,5 +34,11 @@ namespace Acr.DeviceInfo
 
         protected abstract void StartMonitoringConnection();
         protected abstract void StopMonitoringConnection();
+
+
+        protected virtual void OnStateChanged()
+        {
+            this.stateHandler?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

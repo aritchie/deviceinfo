@@ -8,37 +8,55 @@ using UIKit;
 namespace Acr.DeviceInfo
 {
 
-    public class AppImpl : IApp
+    public class AppImpl : AbstractAppImpl
     {
+        NSObject resumeCallback;
+        NSObject backgroundCallback;
+        NSObject localeCallback;
+        CultureInfo cultureInfo;
+
 
         public AppImpl()
         {
             this.Version = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
-
-            UIApplication.Notifications.ObserveDidBecomeActive((sender, args) =>
-            {
-                this.IsBackgrounded = false;
-                this.Resuming?.Invoke(this, EventArgs.Empty);
-            });
-            UIApplication.Notifications.ObserveDidEnterBackground((sender, args) =>
-            {
-                this.IsBackgrounded = true;
-                this.EnteringSleep?.Invoke(this, EventArgs.Empty);
-            });
-            this.IsBackgrounded = (UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active);
-
-            NSLocale.Notifications.ObserveCurrentLocaleDidChange((sender, args) => this.SetLocale());
             this.SetLocale(); // initial state
         }
 
 
-        public string Version { get; }
-        public bool IsBackgrounded { get; private set; }
-        public CultureInfo Locale { get; private set; }
-        public event EventHandler LocaleChanged;
-        public event EventHandler Resuming;
-        public event EventHandler EnteringSleep;
+        public override CultureInfo Locale => this.cultureInfo;
+        public override bool IsForegrounded => UIApplication.SharedApplication.ApplicationState == UIApplicationState.Active;
 
+        protected override void StartMonitoringAppState()
+        {
+            this.resumeCallback = UIApplication.Notifications.ObserveDidBecomeActive((sender, args) => this.OnAppStateChanged());
+            this.backgroundCallback = UIApplication.Notifications.ObserveDidEnterBackground((sender, args) => this.OnAppStateChanged());
+        }
+
+
+        protected override void StopMonitoringAppState()
+        {
+            this.resumeCallback?.Dispose();
+            this.resumeCallback = null;
+            this.backgroundCallback?.Dispose();
+            this.backgroundCallback = null;
+        }
+
+
+        protected override void StartMonitoringLocaleUpdates()
+        {
+            this.localeCallback = NSLocale.Notifications.ObserveCurrentLocaleDidChange((sender, args) =>
+            {
+                this.SetLocale();
+                this.OnLocaleChanged();
+            });
+        }
+
+
+        protected override void StopMonitoringLocaleUpdates()
+        {
+            this.localeCallback?.Dispose();
+            this.localeCallback = null;
+        }
 
         // taken from https://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/ with modifications
         void SetLocale()
@@ -71,11 +89,11 @@ namespace Acr.DeviceInfo
                     Console.WriteLine($"Failed setting locale - moving to preferred langugage {prefLang}");
                     value = new CultureInfo(prefLang);
                 }
-                this.Locale = value;
+                this.cultureInfo = value;
             }
             catch (Exception ex)
             {
-                this.Locale = CultureInfo.CurrentUICulture;
+                this.cultureInfo = CultureInfo.CurrentUICulture;
                 Console.WriteLine($"Invalid culture code - {ex}");
             }
         }

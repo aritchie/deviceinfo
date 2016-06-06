@@ -1,39 +1,36 @@
 using System;
+using Foundation;
 using UIKit;
 
 
 namespace Acr.DeviceInfo
 {
 
-    public class BatteryImpl : IBattery
+    public class BatteryImpl : AbstractBatteryImpl
     {
-        public BatteryImpl()
-        {
-            UIDevice.Notifications.ObserveBatteryLevelDidChange((sender, args) => this.stateChanged?.Invoke(this, EventArgs.Empty));
-            UIDevice.Notifications.ObserveBatteryStateDidChange((sender, args) => this.stateChanged?.Invoke(this, EventArgs.Empty));
-        }
+        NSObject stateCallback;
+        NSObject levelCallback;
 
 
         public int Percentage => (int)(UIDevice.CurrentDevice.BatteryLevel * 100F);
         public bool IsCharging => UIDevice.CurrentDevice.BatteryState == UIDeviceBatteryState.Charging;
 
 
-        EventHandler stateChanged;
-        public event EventHandler StateChanged
+        protected override void StartMonitoringState(Action<int, bool> callback)
         {
-            add
-            {
-                if (this.stateChanged == null)
-                    UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
+            this.stateCallback = UIDevice.Notifications.ObserveBatteryLevelDidChange((sender, args) => { });
+            this.levelCallback = UIDevice.Notifications.ObserveBatteryStateDidChange((sender, args) => { });
+            UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
+        }
 
-                this.stateChanged += value;
-            }
-            remove
-            {
-                this.stateChanged -= value;
-                if (this.stateChanged == null)
-                    UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
-            }
+
+        protected override void StopMonitoringState()
+        {
+            this.stateCallback?.Dispose();
+            this.stateCallback = null;
+            this.levelCallback?.Dispose();
+            this.levelCallback = null;
+            UIDevice.CurrentDevice.BatteryMonitoringEnabled = false;
         }
     }
 }
