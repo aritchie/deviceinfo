@@ -1,9 +1,10 @@
 ﻿using System;
 
 
-namespace Acr.DeviceInfo {
-
-    public enum OperatingSystemType {
+namespace Acr.DeviceInfo
+{
+    public enum OperatingSystemType
+    {
         Unknown = 0,
         iOS = 1,
         Android = 2,

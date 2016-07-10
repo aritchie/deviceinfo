@@ -2,66 +2,79 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reactive.Linq;
 using SystemConfiguration;
 using CoreTelephony;
 using Foundation;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
+    public class ConnectivityImpl : IConnectivity
+    {
 
-    public class ConnectivityImpl : AbstractConnectivityImpl {
+        //void SetConnectivityState() {
+        //    var internet = Reachability.InternetConnectionStatus();
 
-        public ConnectivityImpl() {
-            Reachability.ReachabilityChanged += (sender, args) => this.SetConnectivityState();
-            this.SetConnectivityState();
-        }
+        //    switch (internet) {
 
+        //        case NetworkStatus.NotReachable:
+        //            this.InternetReachability = ConnectionStatus.NotReachable;
+        //            break;
 
-        void SetConnectivityState() {
-            var internet = Reachability.InternetConnectionStatus();
+        //        case NetworkStatus.ReachableViaCarrierDataNetwork:
+        //            this.InternetReachability = ConnectionStatus.ReachableViaCellular;
+        //            break;
 
-            switch (internet) {
-
-                case NetworkStatus.NotReachable:
-                    this.InternetReachability = ConnectionStatus.NotReachable;
-                    break;
-
-                case NetworkStatus.ReachableViaCarrierDataNetwork:
-                    this.InternetReachability = ConnectionStatus.ReachableViaCellular;
-                    break;
-
-                case NetworkStatus.ReachableViaWiFiNetwork:
-                    this.InternetReachability = ConnectionStatus.ReachableViaWifi;
-                    break;
-            }
-        }
+        //        case NetworkStatus.ReachableViaWiFiNetwork:
+        //            this.InternetReachability = ConnectionStatus.ReachableViaWifi;
+        //            break;
+        //    }
+        //}
 
 
-        protected override string GetIpAddress() {
-            return Dns
-                .GetHostEntry(Dns.GetHostName())
-                .AddressList
-                .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
-                .ToString();
-        }
+        //protected override string GetNetworkCarrier()
+        //{
+        //    using (var info = new CTTelephonyNetworkInfo())
+        //        return info.SubscriberCellularProvider?.CarrierName;
+        //}
 
 
-        protected override string GetNetworkCarrier()
+        //protected override string GetWifiSsid()
+        //{
+        //    NSDictionary values;
+        //    var status = CaptiveNetwork.TryCopyCurrentNetworkInfo("en0", out values);
+        //    if (status == StatusCode.NoKey)
+        //        return null;
+
+        //    var ssid = values[CaptiveNetwork.NetworkInfoKeySSID];
+        //    return ssid.ToString();
+        //}
+        public bool IsInternetAvailable { get; }
+        public ConnectionStatus InternetReachability { get; }
+        public string CellularNetworkCarrier { get; }
+
+
+        public string IpAddress => Dns
+            .GetHostEntry(Dns.GetHostName())
+            .AddressList
+            .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
+            .ToString();
+
+
+        public string WifiSsid { get; }
+
+
+        public IObservable<ConnectionStatus> WhenStatusChanged()
         {
-            using (var info = new CTTelephonyNetworkInfo())
-                return info.SubscriberCellularProvider?.CarrierName;
-        }
-
-
-        protected override string GetWifiSsid()
-        {
-            NSDictionary values;
-            var status = CaptiveNetwork.TryCopyCurrentNetworkInfo("en0", out values);
-            if (status == StatusCode.NoKey)
-                return null;
-
-            var ssid = values[CaptiveNetwork.NetworkInfoKeySSID];
-            return ssid.ToString();
+            return Observable.Create<ConnectionStatus>(ob =>
+            {
+                var handler = new EventHandler((sender, args) =>
+                    ob.OnNext(this.InternetReachability)
+                );
+                Reachability.ReachabilityChanged += handler;
+                return () => Reachability.ReachabilityChanged -= handler;
+            });
         }
     }
 }

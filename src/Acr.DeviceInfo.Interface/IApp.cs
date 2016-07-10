@@ -9,10 +9,10 @@ namespace Acr.DeviceInfo
     {
         string Version { get; }
         bool IsBackgrounded { get; }
-        CultureInfo Locale { get; }
+        CultureInfo CurrentCulture { get; }
 
-        event EventHandler LocaleChanged;
-        event EventHandler Resuming;
-        event EventHandler EnteringSleep;
+        IObservable<CultureInfo> WhenCultureChanged();
+        IObservable<object> WhenEnteringForeground();
+        IObservable<object> WhenEnteringBackground();
     }
 }

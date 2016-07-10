@@ -1,12 +1,13 @@
 ﻿using System;
 
 
-namespace Acr.DeviceInfo {
-
-    public enum ConnectionStatus {
-        NotReachable,
-        ReachableViaCellular,
-        ReachableViaWifi,
-        ReachableViaOther
+namespace Acr.DeviceInfo
+{
+    public enum ConnectionStatus
+    {
+        Offline,
+        Cellular,
+        Wifi,
+        Other
     }
 }

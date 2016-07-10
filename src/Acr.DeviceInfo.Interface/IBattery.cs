@@ -7,8 +7,9 @@ namespace Acr.DeviceInfo
     public interface IBattery
     {
         int Percentage { get; }
-        bool IsCharging { get; }
+        PowerStatus Status { get; }
 
-        event EventHandler StateChanged;
+        IObservable<int> WhenBatteryPercentageChanged();
+        IObservable<PowerStatus> WhenPowerStatusChanged();
     }
 }

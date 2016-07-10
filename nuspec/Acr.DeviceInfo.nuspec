@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>3.3.0</version>
+        <version>4.0.0</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -16,42 +16,11 @@ Get tons of device information
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <releaseNotes>
-3.3.0
+4.0
+[feature] observables everywhere
 [feature] add wifi ssid property
 [fix][ios] use CFBundleShortVersionString instead of CFBundleVersion
-
-3.2.3
-[fix][uwp] registration issues
-[update][ios] reachability has been updated from xamarin sample
-
-3.2.2
-[fix] catch invalid ip address requests
-
-3.2.1
-[fix][ios] Deal with region/language issues
-[fix][droid] power status detection
-
-3.2.0
-[feature] battery information for UWP apps
-[feature] IP address in connectivity
-
-3.1.1
-[fix] netcore should be .net 4.5, not 4.5.2
-[fix] ip address implementations for wp and uwp
-
-3.1
-[feature] Charging state is now monitored
-[feature] Get current IP address
-[feature] .net 4.5 implementation
-[fix] UWP registration
-
-3.0
-[feature] Application state monitoring - detect when your app is going to the fore/back ground!
-[feature] Battery status (IsBatteryCharging and BatteryPercentage)
-[feature] Connectivity package removed and brought into this one!
-[feature] All monitors implement INPC (useful for no-connectivity toast displays)
-[feature] Universal Windows Support!
-[feature] Network operator details
+[breaking] no more wp8... sorry, I just don't use it!
         </releaseNotes>
     </metadata>
     <files>
@@ -64,18 +33,14 @@ Get tons of device information
         <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.Interface.dll" />
 
         <!-- ios -->
-        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
-
-        <!-- wp81 silverlight -->
-        <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.dll" target="lib\wp81\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.WindowsPhone\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\wp81\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.iOS\bin\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.iOS\bina\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
 
         <!-- net45 -->
         <file src="..\src\Acr.DeviceInfo.NetCore\bin\Release\Acr.DeviceInfo.dll" target="lib\net45\Acr.DeviceInfo.dll" />
         <file src="..\src\Acr.DeviceInfo.NetCore\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\net45\Acr.DeviceInfo.Interface.dll" />
 
-        <!-- win10 -->
+        <!-- uwp -->
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.dll" target="lib\uap10.0\Acr.DeviceInfo.dll" />
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\uap10.0\Acr.DeviceInfo.Interface.dll" />
 

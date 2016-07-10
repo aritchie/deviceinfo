@@ -1,19 +1,33 @@
 using System;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public class BatteryImpl : AbstractBatteryImpl {
+    public class BatteryImpl : AbstractBatteryImpl
+    {
 
-        public BatteryImpl() {
+        public BatteryImpl()
+        {
             BatteryBroadcastReceiver.StatusChanged += (sender, args) => this.SetState();
             BatteryBroadcastReceiver.Register();
         }
 
 
-        void SetState() {
+        void SetState()
+        {
             this.Percentage = BatteryBroadcastReceiver.Percentage;
             this.IsCharging = BatteryBroadcastReceiver.IsCharging;
+        }
+
+        protected override void StartMonitoringState()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void StopMonitoringState()
+        {
+            throw new NotImplementedException();
         }
     }
 }
