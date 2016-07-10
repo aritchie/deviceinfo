@@ -9,13 +9,16 @@ using Android.Provider;
 using B = Android.OS.Build;
 
 
-namespace Acr.DeviceInfo {
+namespace Acr.DeviceInfo
+{
 
-    public class HardwareImpl : IHardware {
+    public class HardwareImpl : IHardware
+    {
         readonly Lazy<string> deviceId;
 
 
-        public HardwareImpl() {
+        public HardwareImpl()
+        {
             var d = Resources.System.DisplayMetrics;
             this.ScreenHeight = (int)(d.HeightPixels / d.Density);
             this.ScreenWidth = (int)(d.WidthPixels / d.Density);
@@ -23,7 +26,8 @@ namespace Acr.DeviceInfo {
             var tel = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
             this.IsTablet = (tel?.PhoneType == PhoneType.None);
 
-            this.deviceId = new Lazy<string>(() => {
+            this.deviceId = new Lazy<string>(() =>
+            {
                 if (!Utils.CheckPermission(Manifest.Permission.ReadPhoneState))
                     return null;
 
