@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Reactive.Linq;
 using Acr.DeviceInfo.Internals;
 using Android.App;
@@ -74,17 +73,11 @@ namespace Acr.DeviceInfo
             .VersionName;
 
 
-        public bool IsBackgrounded
-        {
-            get
-            {
-
-                var mgr = (ActivityManager) Application.Context.GetSystemService(Context.ActivityService);
-                var tasks = mgr.GetRunningTasks(Int16.MaxValue);
-                var result = tasks.Any(x => x.TopActivity.PackageName.Equals(App.Context.PackageName));
-                return !result;
-            }
-        }
+        public bool IsBackgrounded => !this.appState.IsActive;
+        //var mgr = (ActivityManager) Application.Context.GetSystemService(Context.ActivityService);
+        //var tasks = mgr.GetRunningTasks(Int16.MaxValue);
+        //var result = tasks.Any(x => x.TopActivity.PackageName.Equals(App.Context.PackageName));
+        //return !result;
 
 
         protected virtual CultureInfo GetCurrentCulture()
