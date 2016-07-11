@@ -232,3 +232,5 @@ $RECYCLE.BIN/
 /src/.vs/config/applicationhost.config
 /src/Acr.DeviceInfo.Uwp/project.lock.json
 /src/Samples.Uwp/project.lock.json
+
+src/Acr.DeviceInfo.userprefs
