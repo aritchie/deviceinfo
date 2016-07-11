@@ -16,6 +16,7 @@ namespace Acr.DeviceInfo
         readonly EasClientDeviceInformation deviceInfo = new EasClientDeviceInformation();
 
 
+        // TODO: camera detection
         async Task DetectCameras()
         {
             var list = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
