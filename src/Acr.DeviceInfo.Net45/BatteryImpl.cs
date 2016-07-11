@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Windows.Forms;
 
 
@@ -33,12 +34,13 @@ namespace Acr.DeviceInfo
 
         public IObservable<int> WhenBatteryPercentageChanged()
         {
-            throw new NotImplementedException();
+            return Observable.Empty<int>();
         }
+
 
         public IObservable<PowerStatus> WhenPowerStatusChanged()
         {
-            throw new NotImplementedException();
+            return Observable.Empty<PowerStatus>();
         }
     }
 }
