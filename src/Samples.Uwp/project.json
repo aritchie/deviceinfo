@@ -3,6 +3,7 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "reactiveui": "6.5.0",
     "Rx-Main": "2.2.5",
+    "Splat": "1.6.2",
     "Xamarin.Forms": "2.3.0.107"
   },
   "frameworks": {
