@@ -3,9 +3,9 @@
 
 namespace Acr.DeviceInfo
 {
-    public enum ConnectionStatus
+    public enum NetworkReachability
     {
-        Offline,
+        NotReachable,
         Cellular,
         Wifi,
         Other

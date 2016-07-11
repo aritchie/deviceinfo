@@ -10,10 +10,48 @@ namespace Acr.DeviceInfo
 {
     public class AppImpl : IApp
     {
-        public AppImpl()
+        public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
+        public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
+        public CultureInfo CurrentCulture => this.GetSystemCultureInfo();
+
+
+        public IObservable<CultureInfo> WhenCultureChanged()
         {
-            this.CurrentCulture = this.GetSystemCultureInfo();
-            this.WhenCultureChanged().Subscribe(x => this.CurrentCulture = x);
+            return Observable.Create<CultureInfo>(ob =>
+                NSLocale
+                    .Notifications
+                    .ObserveCurrentLocaleDidChange((sender, args) =>
+                    {
+                        var culture = this.GetSystemCultureInfo();
+                        ob.OnNext(culture);
+                    })
+            );
+        }
+
+
+        public IObservable<object> WhenEnteringForeground()
+        {
+            return Observable.Create<object>(ob =>
+            {
+                var token = UIApplication
+                    .Notifications
+                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(null));
+
+                return () => token.Dispose();
+            });
+        }
+
+
+        public IObservable<object> WhenEnteringBackground()
+        {
+            return Observable.Create<object>(ob =>
+            {
+                var token = UIApplication
+                    .Notifications
+                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(null));
+
+                return () => token.Dispose();
+            });
         }
 
 
@@ -54,49 +92,6 @@ namespace Acr.DeviceInfo
             {
                 return CultureInfo.CurrentUICulture;
             }
-        }
-        public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
-        public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
-        public CultureInfo CurrentCulture { get; private set; }
-
-
-        public IObservable<CultureInfo> WhenCultureChanged()
-        {
-            return Observable.Create<CultureInfo>(ob =>
-                NSLocale
-                    .Notifications
-                    .ObserveCurrentLocaleDidChange((sender, args) =>
-                    {
-                        var culture = this.GetSystemCultureInfo();
-                        ob.OnNext(culture);
-                    })
-            );
-        }
-
-
-        public IObservable<object> WhenEnteringForeground()
-        {
-            return Observable.Create<object>(ob =>
-            {
-                var token = UIApplication
-                    .Notifications
-                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(null));
-
-                return () => token.Dispose();
-            });
-        }
-
-
-        public IObservable<object> WhenEnteringBackground()
-        {
-            return Observable.Create<object>(ob =>
-            {
-                var token = UIApplication
-                    .Notifications
-                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(null));
-
-                return () => token.Dispose();
-            });
         }
     }
 }

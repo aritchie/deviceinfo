@@ -11,7 +11,7 @@ namespace Acr.DeviceInfo
     public class ConnectivityImpl : IConnectivity
     {
         public bool IsInternetAvailable => false; // NetworkInterface.GetIsNetworkAvailable()
-        public ConnectionStatus InternetReachability => ConnectionStatus.Other;
+        public NetworkReachability InternetReachability => NetworkReachability.Other;
         public string CellularNetworkCarrier => null;
 
         public string IpAddress => Dns
@@ -23,9 +23,9 @@ namespace Acr.DeviceInfo
         public string WifiSsid => null;
 
 
-        public IObservable<ConnectionStatus> WhenStatusChanged()
+        public IObservable<NetworkReachability> WhenStatusChanged()
         {
-            return Observable.Empty<ConnectionStatus>();
+            return Observable.Empty<NetworkReachability>();
         }
     }
 }

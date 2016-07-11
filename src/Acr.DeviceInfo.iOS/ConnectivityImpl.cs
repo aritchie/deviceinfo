@@ -12,47 +12,37 @@ namespace Acr.DeviceInfo
 {
     public class ConnectivityImpl : IConnectivity
     {
+        public NetworkReachability InternetReachability
+        {
+            get
+            {
+                var internet = Reachability.InternetConnectionStatus();
 
-        //void SetConnectivityState() {
-        //    var internet = Reachability.InternetConnectionStatus();
+                switch (internet)
+                {
+                    case NetworkStatus.NotReachable:
+                        return NetworkReachability.NotReachable;
 
-        //    switch (internet) {
+                    case NetworkStatus.ReachableViaCarrierDataNetwork:
+                        return NetworkReachability.Cellular;
 
-        //        case NetworkStatus.NotReachable:
-        //            this.InternetReachability = ConnectionStatus.NotReachable;
-        //            break;
+                    case NetworkStatus.ReachableViaWiFiNetwork:
+                        return NetworkReachability.Wifi;
 
-        //        case NetworkStatus.ReachableViaCarrierDataNetwork:
-        //            this.InternetReachability = ConnectionStatus.ReachableViaCellular;
-        //            break;
+                    default:
+                        return NetworkReachability.Other;
+                }
+            }
+        }
 
-        //        case NetworkStatus.ReachableViaWiFiNetwork:
-        //            this.InternetReachability = ConnectionStatus.ReachableViaWifi;
-        //            break;
-        //    }
-        //}
-
-
-        //protected override string GetNetworkCarrier()
-        //{
-        //    using (var info = new CTTelephonyNetworkInfo())
-        //        return info.SubscriberCellularProvider?.CarrierName;
-        //}
-
-
-        //protected override string GetWifiSsid()
-        //{
-        //    NSDictionary values;
-        //    var status = CaptiveNetwork.TryCopyCurrentNetworkInfo("en0", out values);
-        //    if (status == StatusCode.NoKey)
-        //        return null;
-
-        //    var ssid = values[CaptiveNetwork.NetworkInfoKeySSID];
-        //    return ssid.ToString();
-        //}
-        public bool IsInternetAvailable { get; }
-        public ConnectionStatus InternetReachability { get; }
-        public string CellularNetworkCarrier { get; }
+        public string CellularNetworkCarrier
+        {
+            get
+            {
+                using (var info = new CTTelephonyNetworkInfo())
+                    return info.SubscriberCellularProvider?.CarrierName;
+            }
+        }
 
 
         public string IpAddress => Dns
@@ -62,12 +52,24 @@ namespace Acr.DeviceInfo
             .ToString();
 
 
-        public string WifiSsid { get; }
-
-
-        public IObservable<ConnectionStatus> WhenStatusChanged()
+        public string WifiSsid
         {
-            return Observable.Create<ConnectionStatus>(ob =>
+            get
+            {
+                NSDictionary values;
+                var status = CaptiveNetwork.TryCopyCurrentNetworkInfo("en0", out values);
+                if (status == StatusCode.NoKey)
+                    return null;
+
+                var ssid = values[CaptiveNetwork.NetworkInfoKeySSID];
+                return ssid.ToString();
+            }
+        }
+
+
+        public IObservable<NetworkReachability> WhenStatusChanged()
+        {
+            return Observable.Create<NetworkReachability>(ob =>
             {
                 var handler = new EventHandler((sender, args) =>
                     ob.OnNext(this.InternetReachability)

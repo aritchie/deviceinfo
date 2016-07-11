@@ -75,11 +75,11 @@ namespace Acr.DeviceInfo
         //}
 
         public bool IsInternetAvailable { get; }
-        public ConnectionStatus InternetReachability { get; }
+        public NetworkReachability InternetReachability { get; }
         public string CellularNetworkCarrier { get; }
         public string IpAddress { get; }
         public string WifiSsid { get; }
-        public IObservable<ConnectionStatus> WhenStatusChanged()
+        public IObservable<NetworkReachability> WhenStatusChanged()
         {
             throw new NotImplementedException();
         }

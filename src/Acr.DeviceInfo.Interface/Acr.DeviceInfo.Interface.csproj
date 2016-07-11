@@ -41,7 +41,7 @@
       <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="PowerStatus.cs" />
-    <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="NetworkReachability.cs" />
     <Compile Include="IApp.cs" />
     <Compile Include="IBattery.cs" />
     <Compile Include="IConnectivity.cs" />

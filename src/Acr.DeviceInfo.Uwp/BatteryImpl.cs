@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reactive.Linq;
 using Windows.Devices.Power;
+using Windows.Foundation;
 using Windows.System.Power;
 
 
@@ -7,30 +9,65 @@ namespace Acr.DeviceInfo
 {
     public class BatteryImpl : IBattery
     {
-        //public BatteryImpl() {
-        //    this.UpdateStats();
-        //    Battery.AggregateBattery.ReportUpdated += (sender, args) => this.UpdateStats();
-        //}
+        public int Percentage
+        {
+            get
+            {
+                var report = Battery.AggregateBattery.GetReport();
+                if (report.RemainingCapacityInMilliwattHours == null ||
+                    report.FullChargeCapacityInMilliwattHours == null)
+                    return -1;
+
+                return report.RemainingCapacityInMilliwattHours.Value / report.FullChargeCapacityInMilliwattHours.Value;
+            }
+        }
 
 
-        //void UpdateStats() {
-        //    var stats = Battery.AggregateBattery.GetReport();
-        //    this.IsCharging = stats.Status != BatteryStatus.Discharging;
+        public PowerStatus Status
+        {
+            get
+            {
+                var report = Battery.AggregateBattery.GetReport();
+                switch (report.Status)
+                {
+                    case BatteryStatus.Charging:
+                        return PowerStatus.Charging;
 
-        //    if (stats.RemainingCapacityInMilliwattHours != null && stats.FullChargeCapacityInMilliwattHours != null)
-        //        this.Percentage = stats.RemainingCapacityInMilliwattHours.Value / stats.FullChargeCapacityInMilliwattHours.Value;
-        //}
+                    case BatteryStatus.Discharging:
+                        return PowerStatus.Discharging;
 
-        public int Percentage { get; }
-        public PowerStatus Status { get; }
+                    case BatteryStatus.Idle:
+                        return PowerStatus.Charged;
+
+                    case BatteryStatus.NotPresent:
+                        return PowerStatus.NoBattery;
+
+                    default:
+                        return PowerStatus.Unknown;
+                }
+            }
+        }
+
+
         public IObservable<int> WhenBatteryPercentageChanged()
         {
-            throw new NotImplementedException();
+            return Observable.Create<int>(ob =>
+            {
+                var handler = new TypedEventHandler<Battery, object>((sender, args) => ob.OnNext(this.Percentage));
+                Battery.AggregateBattery.ReportUpdated += handler;
+                return () => Battery.AggregateBattery.ReportUpdated -= handler;
+            });
         }
+
 
         public IObservable<PowerStatus> WhenPowerStatusChanged()
         {
-            throw new NotImplementedException();
+            return Observable.Create<PowerStatus>(ob =>
+            {
+                var handler = new TypedEventHandler<Battery, object>((sender, args) => ob.OnNext(this.Status));
+                Battery.AggregateBattery.ReportUpdated += handler;
+                return () => Battery.AggregateBattery.ReportUpdated -= handler;
+            });
         }
     }
 }

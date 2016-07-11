@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Reactive.Linq;
 using Windows.ApplicationModel;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 
 
@@ -10,58 +10,44 @@ namespace Acr.DeviceInfo
 
     public class AppImpl : IApp
     {
-
-        //public AppImpl()
-        //{
-        //    var ver = Package.Current.Id.Version;
-        //    this.Version = $"{ver.Major}.{ver.Minor}.{ver.Build}.{ver.Revision}";
-
-        //    this.Locale = CultureInfo.CurrentCulture;
-        //}
+        public string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
+        public bool IsBackgrounded => !Window.Current.Visible;
+        public CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
 
 
-        //protected override void StartMonitoringLocaleUpdates()
-        //{
-        //}
-
-
-        //protected override void StopMonitoringLocaleUpdates()
-        //{
-        //}
-
-
-        //protected override void StartMonitoringAppState()
-        //{
-        //    Window.Current.VisibilityChanged += this.OnVisibilityChanged;
-        //}
-
-
-        //protected override void StopMonitoringAppState()
-        //{
-        //    Window.Current.VisibilityChanged -= this.OnVisibilityChanged;
-        //}
-
-
-        //void OnVisibilityChanged(object sender, VisibilityChangedEventArgs args)
-        //{
-
-        //}
-        public string Version { get; }
-        public bool IsBackgrounded { get; }
-        public CultureInfo CurrentCulture { get; }
         public IObservable<CultureInfo> WhenCultureChanged()
         {
-            throw new NotImplementedException();
+            return Observable.Empty<CultureInfo>();
         }
+
 
         public IObservable<object> WhenEnteringForeground()
         {
-            throw new NotImplementedException();
+            return Observable.Create<object>(ob =>
+            {
+                var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
+                {
+                    if (args.Visible)
+                        ob.OnNext(null);
+                });
+                Window.Current.VisibilityChanged += handler;
+                return () => Window.Current.VisibilityChanged -= handler;
+            });
         }
+
 
         public IObservable<object> WhenEnteringBackground()
         {
-            throw new NotImplementedException();
+            return Observable.Create<object>(ob =>
+            {
+                var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
+                {
+                    if (!args.Visible)
+                        ob.OnNext(null);
+                });
+                Window.Current.VisibilityChanged += handler;
+                return () => Window.Current.VisibilityChanged -= handler;
+            });
         }
     }
 }
