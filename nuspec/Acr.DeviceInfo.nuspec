@@ -35,8 +35,8 @@ Get tons of device information
         <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.Interface.dll" />
 
         <!-- ios -->
-        <file src="..\src\Acr.DeviceInfo.iOS\bin\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.iOS\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
 
         <!-- net45 -->
         <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.dll" target="lib\net45\Acr.DeviceInfo.dll" />

@@ -1,10 +1,6 @@
-//#tool XamarinComponent
-//#addin Cake.Xamarin
-#addin Cake.FileHelpers
-#tool nunit.consolerunner
 #tool gitlink
 
-var target = Argument("target", "publish");
+var target = Argument("target", "package");
 var version = Argument("version", "1.0.0");
 
 Setup(x =>
@@ -19,33 +15,36 @@ Setup(x =>
 Task("build")
 	.Does(() =>
 {
-	NuGetRestore("./Acr.DeviceInfo.sln");
-	DotNetBuild("./Acr.DeviceInfo.sln", x => x
+	NuGetRestore("./src/lib.sln");
+	DotNetBuild("./src/lib.sln", x => x
         .SetConfiguration("Release")
         .SetVerbosity(Verbosity.Minimal)
         .WithTarget("build")
+        .WithProperty("Platform", "Any CPU")
         .WithProperty("TreatWarningsAsErrors", "false")
     );
 });
 
 
-Task("nuget")
+Task("package")
 	.IsDependentOn("build")
 	.Does(() =>
 {
-    NuGetPack(new FilePath("./nuspec/Acr.DeviceInfo.nuspec"), new NuGetPackSettings());
-	MoveFiles("./*.nupkg", "./output");
-});
-
-Task("publish")
-    .IsDependentOn("nuget")
-    .Does(() =>
-{
+    /*
     GitLink("./", new GitLinkSettings
     {
          RepositoryUrl = "https://github.com/aritchie/deviceinfo",
          Branch = "master"
     });
+    */
+    NuGetPack(new FilePath("./nuspec/Acr.DeviceInfo.nuspec"), new NuGetPackSettings());
+	MoveFiles("./*.nupkg", "./output");
+});
+
+Task("publish")
+    .IsDependentOn("package")
+    .Does(() =>
+{
     NuGetPush("./output/*.nupkg", new NuGetPushSettings
     {
         Source = "http://www.nuget.org/api/v2/package",
