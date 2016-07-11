@@ -25,13 +25,13 @@ namespace Acr.DeviceInfo
         }
 
 
-        public IObservable<object> WhenResuming()
+        public IObservable<object> WhenEnteringForeground()
         {
             return Observable.Empty<object>();
         }
 
 
-        public IObservable<object> WhenEnteringSleep()
+        public IObservable<object> WhenEnteringBackground()
         {
             return Observable.Empty<object>();
         }

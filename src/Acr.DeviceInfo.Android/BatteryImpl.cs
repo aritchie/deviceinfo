@@ -1,33 +1,56 @@
 using System;
+using System.Reactive.Linq;
+using Acr.DeviceInfo.Internals;
+using Android.Content;
+using Android.OS;
 
 
 namespace Acr.DeviceInfo
 {
 
-    public class BatteryImpl : AbstractBatteryImpl
+    public class BatteryImpl : IBattery
     {
+        public int Percentage => this.WhenBatteryPercentageChanged().FirstOrDefault();
+        public PowerStatus Status => this.WhenPowerStatusChanged().FirstOrDefault();
 
-        public BatteryImpl()
+
+        public IObservable<int> WhenBatteryPercentageChanged()
         {
-            BatteryBroadcastReceiver.StatusChanged += (sender, args) => this.SetState();
-            BatteryBroadcastReceiver.Register();
+            return AndroidObservables
+                .WhenIntentReceived(Intent.ActionBatteryChanged)
+                .Select(intent =>
+                {
+                    var level = intent.GetIntExtra(BatteryManager.ExtraLevel, -1);
+                    var scale = intent.GetIntExtra(BatteryManager.ExtraScale, -1);
+                    var value = (int)Math.Floor(level * 100D / scale);
+                    return value;
+                });
         }
 
 
-        void SetState()
+        public IObservable<PowerStatus> WhenPowerStatusChanged()
         {
-            this.Percentage = BatteryBroadcastReceiver.Percentage;
-            this.IsCharging = BatteryBroadcastReceiver.IsCharging;
-        }
+            return AndroidObservables
+                .WhenIntentReceived(Intent.ActionPowerConnected, Intent.ActionPowerDisconnected)
+                .Select(intent =>
+                {
+                    var status = (BatteryStatus)intent.GetIntExtra(BatteryManager.ExtraStatus, -1);
+                    switch (status)
+                    {
+                        case BatteryStatus.Discharging:
+                        case BatteryStatus.NotCharging:
+                            return PowerStatus.Discharging;
 
-        protected override void StartMonitoringState()
-        {
-            throw new NotImplementedException();
-        }
+                        case BatteryStatus.Charging:
+                            return PowerStatus.Charging;
 
-        protected override void StopMonitoringState()
-        {
-            throw new NotImplementedException();
+                        case BatteryStatus.Full:
+                            return PowerStatus.Charged;
+
+                        default:
+                            return PowerStatus.Unknown;
+                    }
+                });
         }
     }
 }

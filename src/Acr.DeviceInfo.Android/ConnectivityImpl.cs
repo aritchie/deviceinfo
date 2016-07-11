@@ -2,8 +2,11 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reactive.Linq;
+using Acr.DeviceInfo.Internals;
 using Android.App;
 using Android.Content;
+using Android.Net;
 using Android.Net.Wifi;
 using Android.Telephony;
 
@@ -11,7 +14,7 @@ using Android.Telephony;
 namespace Acr.DeviceInfo
 {
 
-    public class ConnectivityImpl : AbstractConnectivityImpl
+    public class ConnectivityImpl : IConnectivity
     {
 
         //public ConnectivityImpl()
@@ -46,19 +49,42 @@ namespace Acr.DeviceInfo
         //    var ssid = wifiManager.ConnectionInfo?.SSID;
         //    return ssid;
         //}
-        public override bool IsInternetAvailable { get; }
-        public override ConnectionStatus InternetReachability { get; }
-        public override string CellularNetworkCarrier { get; }
-        public override string IpAddress { get; }
-        public override string WifiSsid { get; }
-        protected override void StartMonitoringConnection()
+        public bool IsInternetAvailable { get; }
+        public ConnectionStatus InternetReachability { get; }
+        public string CellularNetworkCarrier { get; }
+        public string IpAddress { get; }
+        public string WifiSsid { get; }
+        public IObservable<ConnectionStatus> WhenStatusChanged()
         {
-            throw new NotImplementedException();
-        }
+            return AndroidObservables
+                .WhenIntentReceived(ConnectivityManager.ConnectivityAction)
+                .Select(intent =>
+                {
+                    return ConnectionStatus.Offline;
+                    //var mgr = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+                    //if (mgr.ActiveNetworkInfo == null || !mgr.ActiveNetworkInfo.IsConnected)
+                    //    ReachableStatus = ConnectionStatus.NotReachable;
 
-        protected override void StopMonitoringConnection()
-        {
-            throw new NotImplementedException();
+                    //else
+                    //{
+                    //    switch (mgr.ActiveNetworkInfo.Type)
+                    //    {
+
+                    //        case ConnectivityType.Wimax:
+                    //        case ConnectivityType.Wifi:
+                    //            ReachableStatus = ConnectionStatus.ReachableViaWifi;
+                    //            break;
+
+                    //        case ConnectivityType.Mobile:
+                    //            ReachableStatus = ConnectionStatus.ReachableViaCellular;
+                    //            break;
+
+                    //        default:
+                    //            ReachableStatus = ConnectionStatus.ReachableViaOther;
+                    //            break;
+                    //    }
+                    //}
+                });
         }
     }
 }

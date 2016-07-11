@@ -9,12 +9,14 @@ namespace Acr.DeviceInfo.Internals
     public static class AndroidObservables
     {
 
-        public static IObservable<Intent> WhenIntentReceived(string intentAction)
+        public static IObservable<Intent> WhenIntentReceived(params string[] intentActions)
         {
             return Observable.Create<Intent>(ob =>
             {
                 var filter = new IntentFilter();
-                filter.AddAction(intentAction);
+                foreach (var action in intentActions)
+                    filter.AddAction(action);
+
                 var receiver = new ObservableBroadcastReceiver
                 {
                     OnEvent = ob.OnNext

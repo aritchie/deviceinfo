@@ -1,11 +1,14 @@
 ﻿using System;
-using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Content.Res;
+using Android.Graphics;
+using Android.OS;
 using Android.Telephony;
 using Android.Provider;
+using Android.Util;
+using Android.Views;
+using Java.Lang;
 using B = Android.OS.Build;
 
 
@@ -14,41 +17,52 @@ namespace Acr.DeviceInfo
 
     public class HardwareImpl : IHardware
     {
-        readonly Lazy<string> deviceId;
+        readonly TelephonyManager telManager;
 
 
         public HardwareImpl()
         {
-            var d = Resources.System.DisplayMetrics;
-            this.ScreenHeight = (int)(d.HeightPixels / d.Density);
-            this.ScreenWidth = (int)(d.WidthPixels / d.Density);
+            var windowManager = (IWindowManager)Application.Context.GetSystemService(Context.WindowService);
 
-            var tel = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
-            this.IsTablet = (tel?.PhoneType == PhoneType.None);
-
-            this.deviceId = new Lazy<string>(() =>
+            if (B.VERSION.SdkInt >= BuildVersionCodes.Honeycomb)
             {
-                if (!Utils.CheckPermission(Manifest.Permission.ReadPhoneState))
-                    return null;
+                var size = new Point();
+                try
+                {
+                    windowManager.DefaultDisplay.GetRealSize(size);
+                    this.ScreenHeight = size.Y;
+                    this.ScreenWidth = size.X;
+                }
+                catch (NoSuchMethodError)
+                {
+                    this.ScreenHeight = windowManager.DefaultDisplay.Height;
+                    this.ScreenWidth = windowManager.DefaultDisplay.Width;
+                }
+            }
+            else
+            {
+                var metrics = new DisplayMetrics();
+                windowManager.DefaultDisplay.GetMetrics(metrics);
+                this.ScreenHeight = metrics.HeightPixels;
+                this.ScreenWidth = metrics.WidthPixels;
+            }
 
-                if (tel?.DeviceId == null)
-                    return Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
-
-                return tel.DeviceId;
-            });
+            this.telManager = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
         }
 
 
         public int ScreenHeight { get; }
         public int ScreenWidth { get; }
-        public string DeviceId => this.deviceId.Value;
+
+        public string DeviceId => this.telManager?.DeviceId ?? Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
         public string Manufacturer { get; } = B.Manufacturer;
         public string Model { get; } = B.Model;
         public string OperatingSystem { get; } = $"{B.VERSION.Release} - SDK: {B.VERSION.SdkInt}";
         public bool IsFrontCameraAvailable { get; } = Application.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCameraFront);
         public bool IsRearCameraAvailable { get; } = Application.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCamera);
         public bool IsSimulator { get; } = B.Product.Equals("google_sdk");
-        public bool IsTablet { get; }
+        public bool IsTablet => this.telManager?.PhoneType == PhoneType.None; // best I can do
         public OperatingSystemType OS { get; } = OperatingSystemType.Android;
+
     }
 }

@@ -18,8 +18,8 @@ namespace Acr.DeviceInfo
 
         public static void Register()
         {
-            ((Application)Application.Context.ApplicationContext).RegisterActivityLifecycleCallbacks(appstate);
-            Application.Context.RegisterComponentCallbacks(Instance);
+            //((Application)Application.Context.ApplicationContext).RegisterActivityLifecycleCallbacks(appstate);
+            //Application.Context.RegisterComponentCallbacks(Instance);
         }
 
 

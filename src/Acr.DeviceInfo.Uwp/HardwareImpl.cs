@@ -9,28 +9,20 @@ using Windows.Media.Capture;
 using Windows.UI.ViewManagement;
 
 
-namespace Acr.DeviceInfo {
-
-    public class HardwareImpl : IHardware {
-
-        public HardwareImpl() {
-            var deviceInfo = new EasClientDeviceInformation();
-            this.DeviceId = deviceInfo.Id.ToString();
-            this.Manufacturer = deviceInfo.SystemManufacturer;
-            this.Model = deviceInfo.SystemSku;
-            this.OperatingSystem = deviceInfo.OperatingSystem;
-            //PhoneCallManager.RequestStoreAccess();
-            this.DetectCameras().Wait();
-
-            // TODO: this will change
-            this.IsTablet = (UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch);
-        }
+namespace Acr.DeviceInfo
+{
+    public class HardwareImpl : IHardware
+    {
+        readonly EasClientDeviceInformation deviceInfo = new EasClientDeviceInformation();
 
 
-        async Task DetectCameras() {
+        async Task DetectCameras()
+        {
             var list = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-            foreach (var device in list) {
-                if (MediaCapture.IsVideoProfileSupported(device.Id)) {
+            foreach (var device in list)
+            {
+                if (MediaCapture.IsVideoProfileSupported(device.Id))
+                {
                     if (device.EnclosureLocation.Panel == Panel.Front)
                         this.IsFrontCameraAvailable = true;
                     else if (device.EnclosureLocation.Panel == Panel.Back)
@@ -40,16 +32,16 @@ namespace Acr.DeviceInfo {
         }
 
 
-        public int ScreenHeight { get; } = (int)Window.Current.Bounds.Height;
-        public int ScreenWidth { get; } = (int)Window.Current.Bounds.Width;
-        public string DeviceId { get; }
-        public string Manufacturer { get; }
-        public string Model { get; }
-        public string OperatingSystem { get; }
+        public int ScreenHeight => (int)Window.Current.Bounds.Height;
+        public int ScreenWidth => (int)Window.Current.Bounds.Width;
+        public string DeviceId => this.deviceInfo.Id.ToString();
+        public string Manufacturer => this.deviceInfo.SystemManufacturer;
+        public string Model => this.deviceInfo.SystemSku;
+        public string OperatingSystem => this.deviceInfo.OperatingSystem;
         public bool IsFrontCameraAvailable { get; private set; }
         public bool IsRearCameraAvailable { get; private set; }
         public bool IsSimulator { get; } = (Package.Current.Id.Architecture == ProcessorArchitecture.Unknown);
-        public bool IsTablet { get; } = false;
+        public bool IsTablet => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch;
         public OperatingSystemType OS { get; } = OperatingSystemType.WindowUniversal;
     }
 }

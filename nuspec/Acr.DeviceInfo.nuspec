@@ -19,7 +19,9 @@ Get tons of device information
 4.0
 [feature] observables everywhere
 [feature] add wifi ssid property
+[feature] battery status improved
 [fix][ios] use CFBundleShortVersionString instead of CFBundleVersion
+[fix][android] always get evaluated versions of properties to prevent sticky values
 [breaking] no more wp8... sorry, I just don't use it!
         </releaseNotes>
     </metadata>
@@ -34,11 +36,11 @@ Get tons of device information
 
         <!-- ios -->
         <file src="..\src\Acr.DeviceInfo.iOS\bin\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.iOS\bina\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.iOS\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
 
         <!-- net45 -->
-        <file src="..\src\Acr.DeviceInfo.NetCore\bin\Release\Acr.DeviceInfo.dll" target="lib\net45\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.NetCore\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\net45\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.dll" target="lib\net45\Acr.DeviceInfo.dll" />
+        <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\net45\Acr.DeviceInfo.Interface.dll" />
 
         <!-- uwp -->
         <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.dll" target="lib\uap10.0\Acr.DeviceInfo.dll" />
