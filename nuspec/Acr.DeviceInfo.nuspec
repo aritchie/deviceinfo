@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>4.0.0</version>
+        <version>4.0.0-beta1</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
