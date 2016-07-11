@@ -46,9 +46,11 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1</string>
 	<key>CFBundleDisplayName</key>
 	<string>Device Information</string>
+	<key>CFBundleName</key>
+	<string>Device Information</string>
+	<key>CFBundleShortVersionString</key>
+	<string>4.0.0</string>
 </dict>
 </plist>

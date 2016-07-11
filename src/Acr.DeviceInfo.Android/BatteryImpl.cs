@@ -10,8 +10,26 @@ namespace Acr.DeviceInfo
 
     public class BatteryImpl : IBattery
     {
-        public int Percentage => this.WhenBatteryPercentageChanged().FirstOrDefault();
-        public PowerStatus Status => this.WhenPowerStatusChanged().FirstOrDefault();
+        readonly IDisposable chargeOb;
+        readonly IDisposable statOb;
+
+
+        public BatteryImpl() 
+        {
+            this.chargeOb = this
+                .WhenPowerStatusChanged()
+                .Subscribe(x => this.Status = x);
+
+            this.chargeOb = this
+                .WhenBatteryPercentageChanged()
+                .Subscribe(x => this.Percentage = x);
+            //this.WhenBatteryPercentageChanged().FirstOrDefault();
+            //this.WhenPowerStatusChanged().FirstOrDefault();
+        }
+
+
+        public int Percentage { get; private set; }
+        public PowerStatus Status { get; private set; }
 
 
         public IObservable<int> WhenBatteryPercentageChanged()
@@ -31,7 +49,8 @@ namespace Acr.DeviceInfo
         public IObservable<PowerStatus> WhenPowerStatusChanged()
         {
             return AndroidObservables
-                .WhenIntentReceived(Intent.ActionPowerConnected, Intent.ActionPowerDisconnected)
+                .WhenIntentReceived(Intent.ActionBatteryChanged)
+                //.WhenIntentReceived(Intent.ActionPowerConnected, Intent.ActionPowerDisconnected)
                 .Select(intent =>
                 {
                     var status = (BatteryStatus)intent.GetIntExtra(BatteryManager.ExtraStatus, -1);

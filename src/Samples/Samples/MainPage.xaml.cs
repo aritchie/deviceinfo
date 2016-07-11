@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Acr.DeviceInfo;
 using Xamarin.Forms;
 
@@ -7,7 +6,7 @@ using Xamarin.Forms;
 namespace Samples
 {
 
-    public partial class MainPage : ContentPage
+    public partial class MainPage : TabbedPage
     {
         readonly MainViewModel viewModel;
 
@@ -16,6 +15,7 @@ namespace Samples
         {
             InitializeComponent();
             this.viewModel = new MainViewModel(DeviceInfo.App, DeviceInfo.Battery, DeviceInfo.Connectivity, DeviceInfo.Hardware);
+            this.BindingContext = this.viewModel;
         }
 
 

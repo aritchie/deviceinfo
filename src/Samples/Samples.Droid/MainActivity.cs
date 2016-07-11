@@ -8,7 +8,10 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Samples.Droid
 {
-    [Activity(Label = "Samples", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Device Info", 
+              Icon = "@drawable/icon", 
+              MainLauncher = true, 
+              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)

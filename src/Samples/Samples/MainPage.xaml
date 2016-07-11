@@ -1,50 +1,110 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Samples.MainPage"
              Title="Device Info">
+	
+    <TabbedPage.Children>
+        <NavigationPage Title="Main Data">
+            <x:Arguments>
+			    <ContentPage>
+			        <TableView Intent="Data">
+			            <TableRoot>
+			                <TableSection BindingContext="{Binding Hardware}" Title="Device">
+			                    <TextCell Text="Device ID" Detail="{Binding DeviceId}" />
+			                    <TextCell Text="Manufacturer" Detail="{Binding Manufacturer}" />
+			                    <TextCell Text="Model" Detail="{Binding Model}" />
+			                    <TextCell Text="Operating System" Detail="{Binding OperatingSystem}" />
+			                    <TextCell Text="OS Type" Detail="{Binding OS}" />
+			                    <SwitchCell Text="Simulator" IsEnabled="false" On="{Binding IsSimulator}" />
+			                    <SwitchCell Text="Tablet" IsEnabled="false" On="{Binding IsTablet}" />
+			                    <TextCell Text="Display Height" Detail="{Binding ScreenHeight}" />
+			                    <TextCell Text="Display Width" Detail="{Binding ScreenWidth}" />					
 
-    <ContentPage.Content>
-        <TableView Intent="Data">
-            <TableRoot>
-                <TableSection x:Name="InfoSection" Title="Device">
-                    <TextCell Text="Device ID" Detail="{Binding DeviceId}" />
-                    <TextCell Text="Manufacturer" Detail="{Binding Manufacturer}" />
-                    <TextCell Text="Model" Detail="{Binding Model}" />
-                    <TextCell Text="Operating System" Detail="{Binding OperatingSystem}" />
-                    <TextCell Text="OS Type" Detail="{Binding OS}" />
-                    <SwitchCell Text="Simulator" IsEnabled="false" On="{Binding IsSimulator}" />
-                    <SwitchCell Text="Tablet" IsEnabled="false" On="{Binding IsTablet}" />
-                </TableSection>
+								<SwitchCell Text="Front Camera" IsEnabled="false" On="{Binding IsFrontCameraAvailable}" />
+			                    <SwitchCell Text="Rear Camera" IsEnabled="false" On="{Binding IsRearCameraAvailable}" />
+			                </TableSection>
 
-                <TableSection x:Name="DisplaySection" Title="Display">
-                    <TextCell Text="Height" Detail="{Binding ScreenHeight}" />
-                    <TextCell Text="Width" Detail="{Binding ScreenWidth}" />
-                </TableSection>
+			                <TableSection BindingContext="{Binding Battery}" Title="Battery">
+			                    <TextCell Text="Charge Remaining" Detail="{Binding Percentage}" />
+			                    <TextCell Text="Status" Detail="{Binding Status}" />
+			                </TableSection>
 
-                <TableSection x:Name="CameraSection" Title="Camera">
-                    <SwitchCell Text="Front" IsEnabled="false" On="{Binding IsFrontCameraAvailable}" />
-                    <SwitchCell Text="Rear" IsEnabled="false" On="{Binding IsRearCameraAvailable}" />
-                </TableSection>
+			                <TableSection BindingContext="{Binding App}" Title="App Info">
+			                    <TextCell Text="Version" Detail="{Binding Version}" />
+			                    <TextCell Text="Locale" Detail="{Binding CurrentCulture}" />
+			                </TableSection>
 
-                <TableSection x:Name="BatterySection" Title="Battery">
-                    <TextCell Text="Percentage" Detail="{Binding Percentage}" />
-                    <SwitchCell Text="Charging" IsEnabled="false" On="{Binding IsCharging}" />
-                </TableSection>
+			                <TableSection BindingContext="{Binding Connectivity}" Title="Connectivity">
+			                    <TextCell Text="IP Address" Detail="{Binding IpAddress}" />
+			                    <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
+			                    <TextCell Text="Internet Reachable Via" Detail="{Binding InternetReachability}" />
+			                </TableSection>
+			            </TableRoot>
+			        </TableView>
+				</ContentPage>
+            </x:Arguments>
+        </NavigationPage>
+		
+        <NavigationPage Title="App Events">
+            <x:Arguments>
+				<ContentPage>
+					<ContentPage.ToolbarItems>
+						<ToolbarItem Text="Clear" Command="{Binding ClearApp}" />
+					</ContentPage.ToolbarItems>
 
-                <TableSection x:Name="AppSection" Title="App Info">
-                    <SwitchCell x:Name="FromBg" Text="Returned from Background" IsEnabled="false" />
-                    <TextCell Text="Version" Detail="{Binding Version}" />
-                    <TextCell Text="Locale" Detail="{Binding LocaleString}" />
-                </TableSection>
+					<ContentPage.Content>
+						<ListView ItemsSource="{Binding AppEvents}">
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<TextCell Text="{Binding Text}" Detail="{Binding Detail}" />
+								</DataTemplate>
+							</ListView.ItemTemplate>
+						</ListView>
+					</ContentPage.Content>
+				</ContentPage>
+			</x:Arguments>
+		</NavigationPage>
 
-                <TableSection x:Name="ConnectSection" Title="Connectivity">
-                    <TextCell Text="IP Address" Detail="{Binding IpAddress}" />
-                    <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
-                    <SwitchCell Text="Internet Available?" IsEnabled="false" On="{Binding IsInternetAvailable}" />
-                    <TextCell Text="Reachable Via" Detail="{Binding InternetReachability}" />
-                </TableSection>
-            </TableRoot>
-        </TableView>
-    </ContentPage.Content>
-</ContentPage>
+	    <NavigationPage Title="Battery Events">
+            <x:Arguments>
+				<ContentPage>
+					<ContentPage.ToolbarItems>
+						<ToolbarItem Text="Clear" Command="{Binding ClearBattery}" />
+					</ContentPage.ToolbarItems>
+
+					<ContentPage.Content>	
+						<ListView ItemsSource="{Binding BatteryEvents}">
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<TextCell Text="{Binding Text}" Detail="{Binding Detail}" />
+								</DataTemplate>
+							</ListView.ItemTemplate>
+						</ListView>
+					</ContentPage.Content>
+				</ContentPage>
+			</x:Arguments>
+		</NavigationPage>
+		
+        <NavigationPage Title="Connectivity Events">
+            <x:Arguments>
+				<ContentPage>
+					<ContentPage.ToolbarItems>
+						<ToolbarItem Text="Clear" Command="{Binding ClearConnectivity}" />
+					</ContentPage.ToolbarItems>
+
+					<ContentPage.Content>
+						<ListView ItemsSource="{Binding ConnectivityEvents}">
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<TextCell Text="{Binding Text}" Detail="{Binding Detail}" />
+								</DataTemplate>
+							</ListView.ItemTemplate>
+						</ListView>
+					</ContentPage.Content>	
+				</ContentPage>
+			</x:Arguments>
+		</NavigationPage>
+			
+	</TabbedPage.Children>
+</TabbedPage>

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Reactive.Linq;
 using Acr.DeviceInfo.Internals;
@@ -19,7 +20,12 @@ namespace Acr.DeviceInfo
         public AppImpl()
         {
             this.appState = new AppStateLifecyle();
-            ((Application)Application.Context.ApplicationContext).RegisterActivityLifecycleCallbacks(this.appState);
+            var app = Application.Context.ApplicationContext as Application;
+            if (app == null)
+                throw new ApplicationException("Invalid application context");
+            
+            app.RegisterActivityLifecycleCallbacks(this.appState);
+            app.RegisterComponentCallbacks(this.appState);
         }
 
 
@@ -40,8 +46,11 @@ namespace Acr.DeviceInfo
             {
                 var handler = new EventHandler((sender, args) =>
                 {
-                    if (this.appState.IsActive)
+                    if (this.appState.IsActive) 
+                    {
+                        Debug.WriteLine("Firing WhenEnteringForeground Observable");    
                         ob.OnNext(null);
+                    }
                 });
                 this.appState.StatusChanged += handler;
 
@@ -56,9 +65,15 @@ namespace Acr.DeviceInfo
             {
                 var handler = new EventHandler((sender, args) =>
                 {
-                    if (!this.appState.IsActive)
+                    Debug.WriteLine("Firing 1 WhenEnteringBackground Observable");  
+
+                    if (!this.appState.IsActive) 
+                    {
+                        Debug.WriteLine("Firing WhenEnteringBackground Observable");     
                         ob.OnNext(null);
+                    }
                 });
+                this.appState.StatusChanged += handler;
 
                 return () => this.appState.StatusChanged -= handler;
             });

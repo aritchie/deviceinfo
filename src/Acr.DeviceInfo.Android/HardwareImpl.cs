@@ -8,6 +8,7 @@ using Android.Telephony;
 using Android.Provider;
 using Android.Util;
 using Android.Views;
+using Android.Runtime;
 using Java.Lang;
 using B = Android.OS.Build;
 
@@ -22,8 +23,11 @@ namespace Acr.DeviceInfo
 
         public HardwareImpl()
         {
-            var windowManager = (IWindowManager)Application.Context.GetSystemService(Context.WindowService);
-
+            var windowManager = (IWindowManager)Application
+                .Context
+                .GetSystemService(Context.WindowService)
+                .JavaCast<IWindowManager>();
+      
             if (B.VERSION.SdkInt >= BuildVersionCodes.Honeycomb)
             {
                 var size = new Point();

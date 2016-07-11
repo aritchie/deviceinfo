@@ -41,6 +41,7 @@
     </Compile>
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EventViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Acr.DeviceInfo.Interface\Acr.DeviceInfo.Interface.csproj">
