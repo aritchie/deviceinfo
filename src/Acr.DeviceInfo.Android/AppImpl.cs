@@ -7,13 +7,23 @@ using Android.App;
 using Android.Content;
 using Java.Util;
 using App = Android.App.Application;
-
+using Observable = System.Reactive.Linq.Observable;
 
 namespace Acr.DeviceInfo
 {
 
     public class AppImpl : IApp
     {
+        readonly AppStateLifecyle appState;
+
+
+        public AppImpl()
+        {
+            this.appState = new AppStateLifecyle();
+            ((Application)Application.Context.ApplicationContext).RegisterActivityLifecycleCallbacks(this.appState);
+        }
+
+
         public CultureInfo CurrentCulture => this.GetCurrentCulture();
 
 
@@ -27,13 +37,32 @@ namespace Acr.DeviceInfo
 
         public IObservable<object> WhenEnteringForeground()
         {
-            throw new NotImplementedException();
+            return Observable.Create<object>(ob =>
+            {
+                var handler = new EventHandler((sender, args) =>
+                {
+                    if (this.appState.IsActive)
+                        ob.OnNext(null);
+                });
+                this.appState.StatusChanged += handler;
+
+                return () => this.appState.StatusChanged -= handler;
+            });
         }
 
 
         public IObservable<object> WhenEnteringBackground()
         {
-            throw new NotImplementedException();
+            return Observable.Create<object>(ob =>
+            {
+                var handler = new EventHandler((sender, args) =>
+                {
+                    if (!this.appState.IsActive)
+                        ob.OnNext(null);
+                });
+
+                return () => this.appState.StatusChanged -= handler;
+            });
         }
 
 

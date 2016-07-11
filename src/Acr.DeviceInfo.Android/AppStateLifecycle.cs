@@ -12,33 +12,20 @@ namespace Acr.DeviceInfo
 
     public class AppStateLifecyle : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IComponentCallbacks2
     {
-        public static EventHandler StatusChanged;
-        public static bool IsActive { get; private set; } = true;
-        public static AppStateLifecyle Instance { get; } = new AppStateLifecyle();
-
-        public static void Register()
-        {
-            //((Application)Application.Context.ApplicationContext).RegisterActivityLifecycleCallbacks(appstate);
-            //Application.Context.RegisterComponentCallbacks(Instance);
-        }
-
-
-        public static void UnRegister()
-        {
-            Application.Context.UnregisterComponentCallbacks(Instance);
-        }
+        public EventHandler StatusChanged;
+        public bool IsActive { get; private set; } = true;
 
 
         public void OnActivityResumed(Activity activity)
         {
             // if an activity is resuming, your app has moved into the foreground
-            if (IsActive)
+            if (this.IsActive)
                 Debug.WriteLine("Activity resumed - app was already active");
             else
             {
                 Debug.WriteLine("Activity resumed - app was not active.  Firing app resume event!");
-                IsActive = true;
-                StatusChanged?.Invoke(this, EventArgs.Empty);
+                this.IsActive = true;
+                this.StatusChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -49,8 +36,8 @@ namespace Acr.DeviceInfo
             if (level == TrimMemory.UiHidden)
             {
                 Debug.WriteLine("Android trimming UI - set app to background and fire event");
-                IsActive = false;
-                StatusChanged?.Invoke(this, EventArgs.Empty);
+                this.IsActive = false;
+                this.StatusChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
