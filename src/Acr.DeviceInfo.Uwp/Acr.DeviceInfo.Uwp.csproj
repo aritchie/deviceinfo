@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="AppImpl.cs" />
     <Compile Include="BatteryImpl.cs" />
+    <Compile Include="CameraInfo.cs" />
     <Compile Include="ConnectivityImpl.cs" />
     <Compile Include="HardwareImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

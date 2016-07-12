@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Enumeration;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.Media.Capture;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 
 
@@ -14,23 +17,19 @@ namespace Acr.DeviceInfo
     public class HardwareImpl : IHardware
     {
         readonly EasClientDeviceInformation deviceInfo = new EasClientDeviceInformation();
-
-
-        // TODO: camera detection
-        async Task DetectCameras()
+        readonly Lazy<CameraInfo> cameraLazy = new Lazy<CameraInfo>(() =>
         {
-            var list = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-            foreach (var device in list)
-            {
-                if (MediaCapture.IsVideoProfileSupported(device.Id))
-                {
-                    if (device.EnclosureLocation.Panel == Panel.Front)
-                        this.IsFrontCameraAvailable = true;
-                    else if (device.EnclosureLocation.Panel == Panel.Back)
-                        this.IsRearCameraAvailable = true;
-                }
-            }
-        }
+            var info = new CameraInfo();
+            // TODO: I have no idea how to stop this from deadlocking
+            //CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Low, async () =>
+            //{
+            //    var list = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
+
+            //    info.HasFront = list.Any(x => x.EnclosureLocation.Panel == Panel.Front);
+            //    info.HasRear = list.Any(x => x.EnclosureLocation.Panel == Panel.Back);
+            //}).AsTask().Wait();
+            return info;
+        });
 
 
         public int ScreenHeight => (int)Window.Current.Bounds.Height;
@@ -39,8 +38,8 @@ namespace Acr.DeviceInfo
         public string Manufacturer => this.deviceInfo.SystemManufacturer;
         public string Model => this.deviceInfo.SystemSku;
         public string OperatingSystem => this.deviceInfo.OperatingSystem;
-        public bool IsFrontCameraAvailable { get; private set; }
-        public bool IsRearCameraAvailable { get; private set; }
+        public bool IsFrontCameraAvailable => this.cameraLazy.Value.HasFront;
+        public bool IsRearCameraAvailable => this.cameraLazy.Value.HasRear;
         public bool IsSimulator { get; } = (Package.Current.Id.Architecture == ProcessorArchitecture.Unknown);
         public bool IsTablet => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch;
         public OperatingSystemType OS { get; } = OperatingSystemType.WindowUniversal;
