@@ -10,7 +10,8 @@ namespace Acr.DeviceInfo
 {
     public class AppImpl : IApp
     {
-        public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
+        public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
+        public string ShortVersion => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
         public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
         public CultureInfo CurrentCulture => this.GetSystemCultureInfo();
 
@@ -32,26 +33,20 @@ namespace Acr.DeviceInfo
         public IObservable<object> WhenEnteringForeground()
         {
             return Observable.Create<object>(ob =>
-            {
-                var token = UIApplication
+                UIApplication
                     .Notifications
-                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(null));
-
-                return () => token.Dispose();
-            });
+                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(null))
+            );
         }
 
 
         public IObservable<object> WhenEnteringBackground()
         {
             return Observable.Create<object>(ob =>
-            {
-                var token = UIApplication
+                UIApplication
                     .Notifications
-                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(null));
-
-                return () => token.Dispose();
-            });
+                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(null))
+            );
         }
 
 

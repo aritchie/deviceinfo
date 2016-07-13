@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Acr.DeviceInfo;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using Xamarin.Forms;
 
 
@@ -22,6 +24,11 @@ namespace Samples
             this.ClearConnectivity = new Command(this.ConnectivityEvents.Clear);
         }
 
+        [Reactive] public bool HasCamera { get; private set; }
+        [Reactive] public bool HasBluetooth { get; private set; }
+        [Reactive] public bool HasBluetoothLE { get; private set; }
+        [Reactive] public bool HasFrontCamera { get; private set; }
+        [Reactive] public bool HasBackCamera { get; private set; }
 
         public IApp App { get; private set; }
         public IBattery Battery { get; private set; }
@@ -42,30 +49,32 @@ namespace Samples
         IDisposable connectivityChange;
 
 
-        public void OnActivate()
+        public async void OnActivate()
         {
             this.batteryPower = this.Battery
                 .WhenPowerStatusChanged()
                 .Subscribe(x => this.OnBatteryEvent($"Status Change: {x}"));
 
-            this.batteryPower = this.Battery
+            this.batteryPercent = this.Battery
                 .WhenBatteryPercentageChanged()
                 .Subscribe(x => this.OnBatteryEvent($"Battery Charge Change: {x}%"));
 
             this.connectivityChange = this.Connectivity
                 .WhenStatusChanged()
-                .Subscribe(x => 
+                .Subscribe(x =>
                 {
-                    this.RaisePropertyChanged("Connectivity");
-                    this.ConnectivityEvents.Insert(0, new EventViewModel 
-                    {
-                        Detail = $"Network Reachability Change: {x}"
-                    });
+                    this.Connectivity = this.Connectivity;
+                    this.RaiseAndSafe("Connectivity", () =>
+                        this.ConnectivityEvents.Insert(0, new EventViewModel
+                        {
+                            Detail = $"Network Reachability Change: {x}"
+                        })
+                    );
                 });
 
-            if (!this.firstStart) 
+            if (!this.firstStart)
                 return;
-            
+
             this.App
                 .WhenEnteringForeground()
                 .Subscribe(x => this.OnAppEvent("Foregrounding App"));
@@ -73,6 +82,12 @@ namespace Samples
             this.App
                 .WhenEnteringBackground()
                 .Subscribe(x => this.OnAppEvent("Backgrounding App"));
+
+            this.HasCamera = await this.Hardware.HasFeature(Feature.Camera);
+            this.HasFrontCamera = await this.Hardware.HasFeature(Feature.CameraFront);
+            this.HasBackCamera = await this.Hardware.HasFeature(Feature.CameraBack);
+            this.HasBluetooth = await this.Hardware.HasFeature(Feature.Bluetooth);
+            this.HasBluetoothLE = await this.Hardware.HasFeature(Feature.BluetoothLE);
         }
 
 
@@ -84,23 +99,39 @@ namespace Samples
         }
 
 
-        void OnAppEvent(string detail) 
+        void RaiseAndSafe(string raise, Action action)
         {
-            this.RaisePropertyChanged("App");
-            this.AppEvents.Insert(0, new EventViewModel 
+            this.RaisePropertyChanged(raise);
+            if (this.Hardware.OS == OperatingSystemType.WindowUniversal)
             {
-                Detail = detail
-            });
+                Device.BeginInvokeOnMainThread(action);
+            }
+            else
+            {
+                action();
+            }
         }
-                           
 
-        void OnBatteryEvent(string detail) 
+
+        void OnAppEvent(string detail)
         {
-            this.RaisePropertyChanged("Battery");
-            this.BatteryEvents.Insert(0, new EventViewModel 
-            {
-                Detail = detail
-            });
+            this.RaiseAndSafe("App", () =>
+                this.AppEvents.Insert(0, new EventViewModel
+                {
+                    Detail = detail
+                })
+            );
+        }
+
+
+        void OnBatteryEvent(string detail)
+        {
+            this.RaiseAndSafe("Battery", () =>
+                this.BatteryEvents.Insert(0, new EventViewModel
+                {
+                    Detail = detail
+                })
+            );
         }
     }
 }

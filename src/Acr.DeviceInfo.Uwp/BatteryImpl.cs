@@ -14,11 +14,14 @@ namespace Acr.DeviceInfo
             get
             {
                 var report = Battery.AggregateBattery.GetReport();
-                if (report.RemainingCapacityInMilliwattHours == null ||
-                    report.FullChargeCapacityInMilliwattHours == null)
+                var remain = report.RemainingCapacityInMilliwattHours;
+                var full = report.FullChargeCapacityInMilliwattHours;
+
+                if (remain == null || full == null)
                     return -1;
 
-                return report.RemainingCapacityInMilliwattHours.Value / report.FullChargeCapacityInMilliwattHours.Value;
+                var value = (int)(remain.Value / (double)full.Value * 100);
+                return value;
             }
         }
 

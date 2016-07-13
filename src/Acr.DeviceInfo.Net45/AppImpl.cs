@@ -15,6 +15,7 @@ namespace Acr.DeviceInfo
                 .Version
                 .ToString();
 
+        public string ShortVersion => this.Version;
         public bool IsBackgrounded { get; } = false;
         public CultureInfo CurrentCulture => CultureInfo.DefaultThreadCurrentCulture;
 

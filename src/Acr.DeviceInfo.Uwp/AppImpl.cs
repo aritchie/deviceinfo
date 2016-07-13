@@ -7,10 +7,10 @@ using Windows.UI.Xaml;
 
 namespace Acr.DeviceInfo
 {
-
     public class AppImpl : IApp
     {
         public string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
+        public string ShortVersion { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}";
         public bool IsBackgrounded => !Window.Current.Visible;
         public CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
 
