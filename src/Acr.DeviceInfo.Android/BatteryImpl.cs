@@ -10,21 +10,17 @@ namespace Acr.DeviceInfo
 
     public class BatteryImpl : IBattery
     {
-        readonly IDisposable chargeOb;
-        readonly IDisposable statOb;
-
-
         public BatteryImpl() 
         {
-            this.chargeOb = this
+            this
                 .WhenPowerStatusChanged()
+                .Take(1)
                 .Subscribe(x => this.Status = x);
 
-            this.chargeOb = this
+            this
                 .WhenBatteryPercentageChanged()
+                .Take(1)
                 .Subscribe(x => this.Percentage = x);
-            //this.WhenBatteryPercentageChanged().FirstOrDefault();
-            //this.WhenPowerStatusChanged().FirstOrDefault();
         }
 
 
