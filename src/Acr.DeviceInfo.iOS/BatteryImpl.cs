@@ -8,7 +8,7 @@ namespace Acr.DeviceInfo
 
     public class BatteryImpl : IBattery
     {
-        public int Percentage => (int)(UIDevice.CurrentDevice.BatteryLevel * 100F);
+        public int Percentage => Math.Abs((int)(UIDevice.CurrentDevice.BatteryLevel * 100F));
 
         public PowerStatus Status
         {

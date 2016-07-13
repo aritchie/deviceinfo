@@ -19,13 +19,10 @@ namespace Acr.DeviceInfo
         public string Manufacturer { get; } = "Apple";
         public string Model { get; } = UIDevice.CurrentDevice.Model;
         public string OperatingSystem { get; } = $"{UIDevice.CurrentDevice.SystemName} {UIDevice.CurrentDevice.SystemVersion}";
-
-        public bool IsFrontCameraAvailable { get; } = UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front);
-        public bool IsRearCameraAvailable { get; } = UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear);
         public bool IsSimulator { get; } = (Runtime.Arch == Arch.SIMULATOR);
         public bool IsTablet { get; } = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad;
-
         public OperatingSystemType OS { get; } = OperatingSystemType.iOS;
+
 
         public Task<bool> HasFeature(Feature feature)
         {
