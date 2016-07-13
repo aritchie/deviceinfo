@@ -8,6 +8,7 @@ namespace Acr.DeviceInfo
     public interface IApp
     {
         string Version { get; }
+        string ShortVersion { get; }
         bool IsBackgrounded { get; }
         CultureInfo CurrentCulture { get; }
 

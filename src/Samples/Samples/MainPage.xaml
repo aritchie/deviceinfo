@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Samples.MainPage"
              Title="Device Info">
-	
+
     <TabbedPage.Children>
         <NavigationPage Title="Main Data">
             <x:Arguments>
@@ -19,11 +19,16 @@
 			                    <SwitchCell Text="Simulator" IsEnabled="false" On="{Binding IsSimulator}" />
 			                    <SwitchCell Text="Tablet" IsEnabled="false" On="{Binding IsTablet}" />
 			                    <TextCell Text="Display Height" Detail="{Binding ScreenHeight}" />
-			                    <TextCell Text="Display Width" Detail="{Binding ScreenWidth}" />					
-
-								<SwitchCell Text="Front Camera" IsEnabled="false" On="{Binding IsFrontCameraAvailable}" />
-			                    <SwitchCell Text="Rear Camera" IsEnabled="false" On="{Binding IsRearCameraAvailable}" />
+			                    <TextCell Text="Display Width" Detail="{Binding ScreenWidth}" />
 			                </TableSection>
+
+                            <TableSection Title="System Features">
+                                <SwitchCell Text="Any Camera" IsEnabled="false" On="{Binding HasCamera}" />
+                                <SwitchCell Text="Front Camera" IsEnabled="false" On="{Binding HasFrontCamera}" />
+                                <SwitchCell Text="Back Camera" IsEnabled="false" On="{Binding HasBackCamera}" />
+                                <SwitchCell Text="Bluetooth" IsEnabled="false" On="{Binding HasBluetooth}" />
+                                <SwitchCell Text="BluetoothLE" IsEnabled="false" On="{Binding HasBluetoothLE}" />
+                            </TableSection>
 
 			                <TableSection BindingContext="{Binding Battery}" Title="Battery">
 			                    <TextCell Text="Charge Remaining" Detail="{Binding Percentage}" />
@@ -32,6 +37,7 @@
 
 			                <TableSection BindingContext="{Binding App}" Title="App Info">
 			                    <TextCell Text="Version" Detail="{Binding Version}" />
+                                <TextCell Text="Short Version" Detail="{Binding ShortVersion}" />
 			                    <TextCell Text="Locale" Detail="{Binding CurrentCulture}" />
 			                </TableSection>
 
@@ -45,7 +51,7 @@
 				</ContentPage>
             </x:Arguments>
         </NavigationPage>
-		
+
         <NavigationPage Title="App Events">
             <x:Arguments>
 				<ContentPage>
@@ -73,7 +79,7 @@
 						<ToolbarItem Text="Clear" Command="{Binding ClearBattery}" />
 					</ContentPage.ToolbarItems>
 
-					<ContentPage.Content>	
+					<ContentPage.Content>
 						<ListView ItemsSource="{Binding BatteryEvents}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
@@ -85,7 +91,7 @@
 				</ContentPage>
 			</x:Arguments>
 		</NavigationPage>
-		
+
         <NavigationPage Title="Connectivity Events">
             <x:Arguments>
 				<ContentPage>
@@ -101,10 +107,10 @@
 								</DataTemplate>
 							</ListView.ItemTemplate>
 						</ListView>
-					</ContentPage.Content>	
+					</ContentPage.Content>
 				</ContentPage>
 			</x:Arguments>
 		</NavigationPage>
-			
+
 	</TabbedPage.Children>
 </TabbedPage>

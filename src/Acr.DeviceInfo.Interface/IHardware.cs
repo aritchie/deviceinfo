@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 
 namespace Acr.DeviceInfo
@@ -12,10 +13,10 @@ namespace Acr.DeviceInfo
         string Manufacturer { get; }
         string Model { get; }
         string OperatingSystem { get; }
-        bool IsFrontCameraAvailable { get; }
-        bool IsRearCameraAvailable { get; }
         bool IsSimulator { get; }
         bool IsTablet { get; }
         OperatingSystemType OS { get; }
+
+        Task<bool> HasFeature(Feature feature);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -27,7 +29,7 @@ namespace Acr.DeviceInfo
                 .Context
                 .GetSystemService(Context.WindowService)
                 .JavaCast<IWindowManager>();
-      
+
             if (B.VERSION.SdkInt >= BuildVersionCodes.Honeycomb)
             {
                 var size = new Point();
@@ -62,11 +64,40 @@ namespace Acr.DeviceInfo
         public string Manufacturer { get; } = B.Manufacturer;
         public string Model { get; } = B.Model;
         public string OperatingSystem { get; } = $"{B.VERSION.Release} - SDK: {B.VERSION.SdkInt}";
-        public bool IsFrontCameraAvailable { get; } = Application.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCameraFront);
-        public bool IsRearCameraAvailable { get; } = Application.Context.ApplicationContext.PackageManager.HasSystemFeature(PackageManager.FeatureCamera);
         public bool IsSimulator { get; } = B.Product.Equals("google_sdk");
         public bool IsTablet => this.telManager?.PhoneType == PhoneType.None; // best I can do
         public OperatingSystemType OS { get; } = OperatingSystemType.Android;
 
+
+        public Task<bool> HasFeature(Feature feature)
+        {
+            return Task.FromResult(this.Has(feature));
+        }
+
+
+        bool Has(Feature feature)
+        {
+            var pkg = Application.Context.ApplicationContext.PackageManager;
+            switch (feature)
+            {
+                case Feature.CameraFront:
+                    return pkg.HasSystemFeature(PackageManager.FeatureCameraFront);
+
+                case Feature.CameraBack:
+                    return pkg.HasSystemFeature(PackageManager.FeatureCamera);
+
+                case Feature.Camera:
+                    return pkg.HasSystemFeature(PackageManager.FeatureCameraAny);
+
+                case Feature.BluetoothLE:
+                    return pkg.HasSystemFeature(PackageManager.FeatureBluetoothLe);
+
+                case Feature.Bluetooth:
+                    return pkg.HasSystemFeature(PackageManager.FeatureBluetooth);
+
+                default:
+                    return false;
+            }
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace Acr.DeviceInfo
             var app = Application.Context.ApplicationContext as Application;
             if (app == null)
                 throw new ApplicationException("Invalid application context");
-            
+
             app.RegisterActivityLifecycleCallbacks(this.appState);
             app.RegisterComponentCallbacks(this.appState);
         }
@@ -46,9 +46,9 @@ namespace Acr.DeviceInfo
             {
                 var handler = new EventHandler((sender, args) =>
                 {
-                    if (this.appState.IsActive) 
+                    if (this.appState.IsActive)
                     {
-                        Debug.WriteLine("Firing WhenEnteringForeground Observable");    
+                        Debug.WriteLine("Firing WhenEnteringForeground Observable");
                         ob.OnNext(null);
                     }
                 });
@@ -65,11 +65,11 @@ namespace Acr.DeviceInfo
             {
                 var handler = new EventHandler((sender, args) =>
                 {
-                    Debug.WriteLine("Firing 1 WhenEnteringBackground Observable");  
+                    Debug.WriteLine("Firing 1 WhenEnteringBackground Observable");
 
-                    if (!this.appState.IsActive) 
+                    if (!this.appState.IsActive)
                     {
-                        Debug.WriteLine("Firing WhenEnteringBackground Observable");     
+                        Debug.WriteLine("Firing WhenEnteringBackground Observable");
                         ob.OnNext(null);
                     }
                 });
@@ -86,6 +86,16 @@ namespace Acr.DeviceInfo
             .PackageManager
             .GetPackageInfo(App.Context.PackageName, 0)
             .VersionName;
+
+
+
+        public string ShortVersion => App
+            .Context
+            .ApplicationContext
+            .PackageManager
+            .GetPackageInfo(App.Context.PackageName, 0)
+            .VersionCode
+            .ToString();
 
 
         public bool IsBackgrounded => !this.appState.IsActive;

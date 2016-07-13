@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>4.0.0-beta1</version>
+        <version>4.0.0</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -20,8 +20,11 @@ Get tons of device information
 [feature] observables everywhere
 [feature] add wifi ssid property
 [feature] battery status improved
-[fix][ios] use CFBundleShortVersionString instead of CFBundleVersion
+[feature] get short and long versions for android and iOS
+[feature] has feature function (this will grow)
 [fix][android] always get evaluated versions of properties to prevent sticky values
+[fix][uwp] deadlock when detecting cameras
+[breaking] front/back cameras can now be detect using HasFeature function
 [breaking] no more wp8... sorry, I just don't use it!
         </releaseNotes>
     </metadata>

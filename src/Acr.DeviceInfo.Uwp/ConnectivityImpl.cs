@@ -39,16 +39,6 @@ namespace Acr.DeviceInfo
                     default:
                         return NetworkReachability.Other;
                 }
-                //switch (NetworkInterface.NetworkInterfaceType) {
-                //    case NetworkInterfaceType.Wireless80211:
-                //        this.InternetReachability = ConnectionStatus.ReachableViaWifi;
-                //        break;
-
-                //    case NetworkInterfaceType.MobileBroadbandCdma:
-                //    case NetworkInterfaceType.MobileBroadbandGsm:
-                //        this.InternetReachability = ConnectionStatus.ReachableViaCellular;
-                //        break;
-                //}
             }
         }
 
