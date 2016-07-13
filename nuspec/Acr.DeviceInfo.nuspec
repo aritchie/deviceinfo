@@ -33,24 +33,19 @@ Get tons of device information
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
         <!-- android -->
-        <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\MonoAndroid10\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.*" target="lib\MonoAndroid10" />
 
         <!-- ios -->
-        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.Interface.dll" target="lib\Xamarin.iOS10\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.*" target="lib\Xamarin.iOS10" />
 
         <!-- net45 -->
-        <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.dll" target="lib\net45\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\net45\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.*" target="lib\net45" />
 
         <!-- uwp -->
-        <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.dll" target="lib\uap10.0\Acr.DeviceInfo.dll" />
-        <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.Interface.dll" target="lib\uap10.0\Acr.DeviceInfo.Interface.dll" />
+        <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.*" target="lib\uap10.0" />
 
     </files>
 </package>
