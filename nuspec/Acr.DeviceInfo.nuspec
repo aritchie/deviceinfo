@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>4.0.0</version>
+        <version>4.0.1</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -15,6 +15,9 @@ Get tons of device information
         <projectUrl>https://github.com/aritchie/deviceinfo</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
+        <dependencies>
+            <dependency id="Rx-Main" version="[2.2.5,)" />
+        </dependencies>
         <releaseNotes>
 4.0
 [feature] observables everywhere
