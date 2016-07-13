@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using CoreBluetooth;
 using CoreFoundation;

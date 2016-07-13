@@ -9,9 +9,9 @@ using Java.Util;
 using App = Android.App.Application;
 using Observable = System.Reactive.Linq.Observable;
 
+
 namespace Acr.DeviceInfo
 {
-
     public class AppImpl : IApp
     {
         readonly AppStateLifecyle appState;

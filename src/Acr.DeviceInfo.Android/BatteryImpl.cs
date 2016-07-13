@@ -7,10 +7,9 @@ using Android.OS;
 
 namespace Acr.DeviceInfo
 {
-
     public class BatteryImpl : IBattery
     {
-        public BatteryImpl() 
+        public BatteryImpl()
         {
             this
                 .WhenPowerStatusChanged()
