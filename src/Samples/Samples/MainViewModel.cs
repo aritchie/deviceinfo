@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.DeviceInfo;
 using ReactiveUI;
@@ -49,45 +50,48 @@ namespace Samples
         IDisposable connectivityChange;
 
 
-        public async void OnActivate()
+        public void OnActivate()
         {
-            this.batteryPower = this.Battery
-                .WhenPowerStatusChanged()
-                .Subscribe(x => this.OnBatteryEvent($"Status Change: {x}"));
+            Task.Run(async () =>
+            {
+                this.batteryPower = this.Battery
+                    .WhenPowerStatusChanged()
+                    .Subscribe(x => this.OnBatteryEvent($"Status Change: {x}"));
 
-            this.batteryPercent = this.Battery
-                .WhenBatteryPercentageChanged()
-                .Subscribe(x => this.OnBatteryEvent($"Battery Charge Change: {x}%"));
+                this.batteryPercent = this.Battery
+                    .WhenBatteryPercentageChanged()
+                    .Subscribe(x => this.OnBatteryEvent($"Battery Charge Change: {x}%"));
 
-            this.connectivityChange = this.Connectivity
-                .WhenStatusChanged()
-                .Subscribe(x =>
-                {
-                    this.Connectivity = this.Connectivity;
-                    this.RaiseAndSafe("Connectivity", () =>
-                        this.ConnectivityEvents.Insert(0, new EventViewModel
-                        {
-                            Detail = $"Network Reachability Change: {x}"
-                        })
-                    );
-                });
+                this.connectivityChange = this.Connectivity
+                    .WhenStatusChanged()
+                    .Subscribe(x =>
+                    {
+                        this.Connectivity = this.Connectivity;
+                        this.RaiseAndSafe("Connectivity", () =>
+                            this.ConnectivityEvents.Insert(0, new EventViewModel
+                            {
+                                Detail = $"Network Reachability Change: {x}"
+                            })
+                            );
+                    });
 
-            if (!this.firstStart)
-                return;
+                if (!this.firstStart)
+                    return;
 
-            this.App
-                .WhenEnteringForeground()
-                .Subscribe(x => this.OnAppEvent("Foregrounding App"));
+                this.App
+                    .WhenEnteringForeground()
+                    .Subscribe(x => this.OnAppEvent("Foregrounding App"));
 
-            this.App
-                .WhenEnteringBackground()
-                .Subscribe(x => this.OnAppEvent("Backgrounding App"));
+                this.App
+                    .WhenEnteringBackground()
+                    .Subscribe(x => this.OnAppEvent("Backgrounding App"));
 
-            this.HasCamera = await this.Hardware.HasFeature(Feature.Camera);
-            this.HasFrontCamera = await this.Hardware.HasFeature(Feature.CameraFront);
-            this.HasBackCamera = await this.Hardware.HasFeature(Feature.CameraBack);
-            this.HasBluetooth = await this.Hardware.HasFeature(Feature.Bluetooth);
-            this.HasBluetoothLE = await this.Hardware.HasFeature(Feature.BluetoothLE);
+                this.HasCamera = await this.Hardware.HasFeature(Feature.Camera);
+                this.HasFrontCamera = await this.Hardware.HasFeature(Feature.CameraFront);
+                this.HasBackCamera = await this.Hardware.HasFeature(Feature.CameraBack);
+                this.HasBluetooth = await this.Hardware.HasFeature(Feature.Bluetooth);
+                this.HasBluetoothLE = await this.Hardware.HasFeature(Feature.BluetoothLE);
+            });
         }
 
 
