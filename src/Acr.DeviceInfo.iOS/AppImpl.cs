@@ -33,21 +33,34 @@ namespace Acr.DeviceInfo
         public IObservable<object> WhenEnteringForeground()
         {
             return Observable.Create<object>(ob =>
-                UIApplication
-                    .Notifications
-                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(null))
-            );
+            {
+                NSObject token = null;
+                UIApplication.SharedApplication.InvokeOnMainThread(() =>
+                    token = UIApplication
+                        .Notifications
+                        .ObserveWillEnterForeground((sender, args) => ob.OnNext(null))
+                );
+
+                return () => token?.Dispose();
+            });
         }
 
 
         public IObservable<object> WhenEnteringBackground()
         {
             return Observable.Create<object>(ob =>
-                UIApplication
-                    .Notifications
-                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(null))
-            );
+            {
+                NSObject token = null;
+                UIApplication.SharedApplication.InvokeOnMainThread(() =>
+                    token = UIApplication
+                        .Notifications
+                        .ObserveDidEnterBackground((sender, args) => ob.OnNext(null))
+                );
+
+                return () => token?.Dispose();
+            });
         }
+
 
 
         // taken from https://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/ with modifications
