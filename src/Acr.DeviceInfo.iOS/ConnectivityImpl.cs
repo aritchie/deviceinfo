@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Reactive.Linq;
 using SystemConfiguration;
@@ -45,12 +46,21 @@ namespace Acr.DeviceInfo
         }
 
 
-        public string IpAddress => Dns
-            .GetHostEntry(Dns.GetHostName())
-            .AddressList
-            .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
-            .ToString();
-
+        public string IpAddress => NetworkInterface
+            .GetAllNetworkInterfaces()
+            .Where(x =>
+                x.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
+                x.NetworkInterfaceType == NetworkInterfaceType.Wireless80211
+            )
+            .SelectMany(x => x.GetIPProperties().UnicastAddresses)
+            .Where(x => x.Address.AddressFamily == AddressFamily.InterNetwork)
+            .Select(x => x.Address.ToString())
+            .FirstOrDefault();
+        //public string IpAddress => Dns
+        //    .GetHostEntry(Dns.GetHostName())
+        //    .AddressList
+        //    .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
+        //    .ToString
 
         public string WifiSsid
         {
