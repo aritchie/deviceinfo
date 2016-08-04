@@ -59,6 +59,7 @@ namespace Acr.DeviceInfo
         public int ScreenHeight { get; }
         public int ScreenWidth { get; }
 
+        //public string DeviceId { get; } = B.Serial;
         public string DeviceId => this.telManager?.DeviceId ?? Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
         public string Manufacturer { get; } = B.Manufacturer;
         public string Model { get; } = B.Model;
