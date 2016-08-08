@@ -7,6 +7,30 @@ namespace Acr.DeviceInfo
 {
     public class BatteryImpl : IBattery
     {
+        readonly IObservable<int> levelOb;
+
+
+        public BatteryImpl() 
+        {
+            this.levelOb = Observable
+                .Create<int>(ob =>
+                {
+                    UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
+                    var not = UIDevice
+                        .Notifications
+                        .ObserveBatteryLevelDidChange((sender, args) => ob.OnNext(this.Percentage));
+
+                    return () => 
+                    {
+                        UIDevice.CurrentDevice.BatteryMonitoringEnabled = false;
+                        not.Dispose();
+                    };
+                 })
+                .Publish()
+                .RefCount();            
+        }
+
+
         public int Percentage => Math.Abs((int)(UIDevice.CurrentDevice.BatteryLevel * 100F));
 
 
@@ -35,11 +59,7 @@ namespace Acr.DeviceInfo
 
         public IObservable<int> WhenBatteryPercentageChanged()
         {
-            return Observable.Create<int>(ob =>
-                UIDevice
-                    .Notifications
-                    .ObserveBatteryLevelDidChange((sender, args) => ob.OnNext(this.Percentage))
-            );
+            return this.levelOb;
         }
 
 
