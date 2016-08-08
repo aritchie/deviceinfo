@@ -48,19 +48,13 @@ namespace Acr.DeviceInfo
 
         public string IpAddress => NetworkInterface
             .GetAllNetworkInterfaces()
-            .Where(x =>
-                x.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
-                x.NetworkInterfaceType == NetworkInterfaceType.Wireless80211
-            )
-            .SelectMany(x => x.GetIPProperties().UnicastAddresses)
-            .Where(x => x.Address.AddressFamily == AddressFamily.InterNetwork)
-            .Select(x => x.Address.ToString())
-            .FirstOrDefault();
-        //public string IpAddress => Dns
-        //    .GetHostEntry(Dns.GetHostName())
-        //    .AddressList
-        //    .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
-        //    .ToString
+            .FirstOrDefault(x => x.Name.Equals("en0", StringComparison.InvariantCultureIgnoreCase))?
+            .GetIPProperties()
+            .UnicastAddresses
+            .FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork)?
+            .Address?
+            .ToString();
+        
 
         public string WifiSsid
         {
@@ -68,11 +62,11 @@ namespace Acr.DeviceInfo
             {
                 NSDictionary values;
                 var status = CaptiveNetwork.TryCopyCurrentNetworkInfo("en0", out values);
-                if (status == StatusCode.NoKey)
+                if (status == StatusCode.NoKey || values == null || !values.ContainsKey(CaptiveNetwork.NetworkInfoKeySSID))
                     return null;
 
                 var ssid = values[CaptiveNetwork.NetworkInfoKeySSID];
-                return ssid.ToString();
+                return ssid?.ToString();
             }
         }
 
