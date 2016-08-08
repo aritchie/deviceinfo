@@ -30,9 +30,9 @@
                                 <SwitchCell Text="BluetoothLE" IsEnabled="false" On="{Binding HasBluetoothLE}" />
                             </TableSection>
 
-			                <TableSection BindingContext="{Binding Battery}" Title="Battery">
-			                    <TextCell Text="Charge Remaining" Detail="{Binding Percentage}" />
-			                    <TextCell Text="Status" Detail="{Binding Status}" />
+			                <TableSection Title="Battery">
+			                    <TextCell Text="Charge Remaining" Detail="{Binding BatteryPercentage}" />
+			                    <TextCell Text="Status" Detail="{Binding BatteryStatus}" />
 			                </TableSection>
 
 			                <TableSection BindingContext="{Binding App}" Title="App Info">
@@ -41,8 +41,9 @@
 			                    <TextCell Text="Locale" Detail="{Binding CurrentCulture}" />
 			                </TableSection>
 
-			                <TableSection BindingContext="{Binding Connectivity}" Title="Connectivity">
+			                <TableSection Title="Connectivity">
 			                    <TextCell Text="IP Address" Detail="{Binding IpAddress}" />
+								<TextCell Text="WiFi SSID" Detail="{Binding WifiSsid}" />
 			                    <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
 			                    <TextCell Text="Internet Reachable Via" Detail="{Binding InternetReachability}" />
 			                </TableSection>

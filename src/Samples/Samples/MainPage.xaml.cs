@@ -24,12 +24,5 @@ namespace Samples
             base.OnAppearing();
             this.viewModel.OnActivate();
         }
-
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            this.viewModel.OnDeactivate();
-        }
     }
 }
