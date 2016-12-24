@@ -67,37 +67,5 @@ namespace Acr.DeviceInfo
         public bool IsSimulator { get; } = B.Product.Equals("google_sdk");
         public bool IsTablet => this.telManager?.PhoneType == PhoneType.None; // best I can do
         public OperatingSystemType OS { get; } = OperatingSystemType.Android;
-
-
-        public Task<bool> HasFeature(Feature feature)
-        {
-            return Task.FromResult(this.Has(feature));
-        }
-
-
-        bool Has(Feature feature)
-        {
-            var pkg = Application.Context.ApplicationContext.PackageManager;
-            switch (feature)
-            {
-                case Feature.CameraFront:
-                    return pkg.HasSystemFeature(PackageManager.FeatureCameraFront);
-
-                case Feature.CameraBack:
-                    return pkg.HasSystemFeature(PackageManager.FeatureCamera);
-
-                case Feature.Camera:
-                    return pkg.HasSystemFeature(PackageManager.FeatureCameraAny);
-
-                case Feature.BluetoothLE:
-                    return pkg.HasSystemFeature(PackageManager.FeatureBluetoothLe);
-
-                case Feature.Bluetooth:
-                    return pkg.HasSystemFeature(PackageManager.FeatureBluetooth);
-
-                default:
-                    return false;
-            }
-        }
     }
 }

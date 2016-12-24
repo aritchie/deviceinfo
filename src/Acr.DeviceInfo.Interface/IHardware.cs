@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 
 
 namespace Acr.DeviceInfo
@@ -16,7 +15,5 @@ namespace Acr.DeviceInfo
         bool IsSimulator { get; }
         bool IsTablet { get; }
         OperatingSystemType OS { get; }
-
-        Task<bool> HasFeature(Feature feature);
     }
 }
