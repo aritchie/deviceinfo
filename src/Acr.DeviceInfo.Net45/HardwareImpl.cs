@@ -34,11 +34,5 @@ namespace Acr.DeviceInfo
         public bool IsSimulator { get; } = false;
         public bool IsTablet { get; } = false;
         public OperatingSystemType OS { get; } = OperatingSystemType.NetCore;
-
-
-        public Task<bool> HasFeature(Feature feature)
-        {
-            return Task.FromResult(false);
-        }
     }
 }

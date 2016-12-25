@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>4.0.2</version>
+        <version>4.1.0</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -19,6 +19,10 @@ Get tons of device information
             <dependency id="Rx-Main" version="[2.2.5,)" />
         </dependencies>
         <releaseNotes>
+4.1.0
+[breaking] remove useless feature checking
+[feature] tvOS support
+
 4.0.2
 [fix][ios] battery monitoring observable now registers properly
 [fix][ios] ip address property won't throw an exception when no connection
@@ -48,6 +52,9 @@ Get tons of device information
 
         <!-- ios -->
         <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.*" target="lib\Xamarin.iOS10" />
+
+        <!-- tvOS -->
+        <file src="..\src\Acr.DeviceInfo.tvOS\bin\Release\Acr.DeviceInfo.*" target="lib\Xamarin.tvOS10" />
 
         <!-- net45 -->
         <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.*" target="lib\net45" />
