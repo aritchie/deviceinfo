@@ -495,62 +495,6 @@
           }
         }
       },
-      "Rx-Core/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        }
-      },
-      "Rx-Interfaces/2.2.5": {
-        "type": "package",
-        "compile": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        }
-      },
-      "Rx-Linq/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "Rx-Main/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5",
-          "Rx-Linq": "2.2.5",
-          "Rx-PlatformServices": "2.2.5"
-        }
-      },
-      "Rx-PlatformServices/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        }
-      },
       "Splat/1.6.2": {
         "type": "package",
         "compile": {
@@ -2567,7 +2511,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       },
       "Plugin.DeviceInfo.Uwp/1.0.0": {
@@ -3289,62 +3234,6 @@
         "type": "package",
         "native": {
           "runtimes/win8-arm/native/clrcompression.dll": {}
-        }
-      },
-      "Rx-Core/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        }
-      },
-      "Rx-Interfaces/2.2.5": {
-        "type": "package",
-        "compile": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        }
-      },
-      "Rx-Linq/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "Rx-Main/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5",
-          "Rx-Linq": "2.2.5",
-          "Rx-PlatformServices": "2.2.5"
-        }
-      },
-      "Rx-PlatformServices/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
         }
       },
       "Splat/1.6.2": {
@@ -5179,7 +5068,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       },
       "Plugin.DeviceInfo.Uwp/1.0.0": {
@@ -5940,62 +5830,6 @@
         },
         "native": {
           "runtimes/win8-arm-aot/native/_._": {}
-        }
-      },
-      "Rx-Core/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        }
-      },
-      "Rx-Interfaces/2.2.5": {
-        "type": "package",
-        "compile": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        }
-      },
-      "Rx-Linq/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "Rx-Main/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5",
-          "Rx-Linq": "2.2.5",
-          "Rx-PlatformServices": "2.2.5"
-        }
-      },
-      "Rx-PlatformServices/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
         }
       },
       "Splat/1.6.2": {
@@ -7830,7 +7664,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       },
       "Plugin.DeviceInfo.Uwp/1.0.0": {
@@ -8561,62 +8396,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "Rx-Core/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        }
-      },
-      "Rx-Interfaces/2.2.5": {
-        "type": "package",
-        "compile": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        }
-      },
-      "Rx-Linq/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "Rx-Main/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5",
-          "Rx-Linq": "2.2.5",
-          "Rx-PlatformServices": "2.2.5"
-        }
-      },
-      "Rx-PlatformServices/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
         }
       },
       "Splat/1.6.2": {
@@ -10451,7 +10230,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       },
       "Plugin.DeviceInfo.Uwp/1.0.0": {
@@ -11223,62 +11003,6 @@
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "Rx-Core/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        }
-      },
-      "Rx-Interfaces/2.2.5": {
-        "type": "package",
-        "compile": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        }
-      },
-      "Rx-Linq/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "Rx-Main/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5",
-          "Rx-Linq": "2.2.5",
-          "Rx-PlatformServices": "2.2.5"
-        }
-      },
-      "Rx-PlatformServices/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        }
-      },
       "Splat/1.6.2": {
         "type": "package",
         "compile": {
@@ -13111,7 +12835,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       },
       "Plugin.DeviceInfo.Uwp/1.0.0": {
@@ -13842,62 +13567,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "Rx-Core/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        }
-      },
-      "Rx-Interfaces/2.2.5": {
-        "type": "package",
-        "compile": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        }
-      },
-      "Rx-Linq/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "Rx-Main/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5",
-          "Rx-Linq": "2.2.5",
-          "Rx-PlatformServices": "2.2.5"
-        }
-      },
-      "Rx-PlatformServices/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
         }
       },
       "Splat/1.6.2": {
@@ -15732,7 +15401,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       },
       "Plugin.DeviceInfo.Uwp/1.0.0": {
@@ -16502,62 +16172,6 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "Rx-Core/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Core.dll": {}
-        }
-      },
-      "Rx-Interfaces/2.2.5": {
-        "type": "package",
-        "compile": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Interfaces.dll": {}
-        }
-      },
-      "Rx-Linq/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "Rx-Main/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5",
-          "Rx-Linq": "2.2.5",
-          "Rx-PlatformServices": "2.2.5"
-        }
-      },
-      "Rx-PlatformServices/2.2.5": {
-        "type": "package",
-        "dependencies": {
-          "Rx-Core": "2.2.5",
-          "Rx-Interfaces": "2.2.5"
-        },
-        "compile": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
-        },
-        "runtime": {
-          "lib/windows8/System.Reactive.PlatformServices.dll": {}
         }
       },
       "Splat/1.6.2": {
@@ -18392,7 +18006,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       },
       "Plugin.DeviceInfo.Uwp/1.0.0": {
@@ -21914,131 +21529,6 @@
         "runtime.win8-arm.runtime.native.system.io.compression.4.3.0.nupkg.sha512",
         "runtime.win8-arm.runtime.native.system.io.compression.nuspec",
         "runtimes/win8-arm/native/clrcompression.dll"
-      ]
-    },
-    "Rx-Core/2.2.5": {
-      "sha512": "DfWVTfW6tvRkkqpnRHKxPIvaRZyDJGADuqrE6J2nwejOQbLRWi0rNUwXkViDWz++25BGDy3iRE5OE6Dv8mJxYQ==",
-      "type": "package",
-      "path": "rx-core/2.2.5",
-      "files": [
-        "lib/net40/System.Reactive.Core.XML",
-        "lib/net40/System.Reactive.Core.dll",
-        "lib/net45/System.Reactive.Core.XML",
-        "lib/net45/System.Reactive.Core.dll",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Core.XML",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Core.dll",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Core.XML",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Core.dll",
-        "lib/portable-win81+wpa81/System.Reactive.Core.XML",
-        "lib/portable-win81+wpa81/System.Reactive.Core.dll",
-        "lib/portable-windows8+net45+wp8/System.Reactive.Core.XML",
-        "lib/portable-windows8+net45+wp8/System.Reactive.Core.dll",
-        "lib/sl5/System.Reactive.Core.XML",
-        "lib/sl5/System.Reactive.Core.dll",
-        "lib/windows8/System.Reactive.Core.XML",
-        "lib/windows8/System.Reactive.Core.dll",
-        "lib/windowsphone71/System.Reactive.Core.XML",
-        "lib/windowsphone71/System.Reactive.Core.dll",
-        "lib/windowsphone8/System.Reactive.Core.XML",
-        "lib/windowsphone8/System.Reactive.Core.dll",
-        "rx-core.2.2.5.nupkg.sha512",
-        "rx-core.nuspec"
-      ]
-    },
-    "Rx-Interfaces/2.2.5": {
-      "sha512": "FKtG2QfMIeUcfB7r3a89VoAiszX3DTvYETkpC6U0FzWpxRK/mcHyzYOsniDfag+NsDG0P1k1c8yNSefXKp3t2A==",
-      "type": "package",
-      "path": "rx-interfaces/2.2.5",
-      "files": [
-        "lib/net40/System.Reactive.Interfaces.XML",
-        "lib/net40/System.Reactive.Interfaces.dll",
-        "lib/net45/System.Reactive.Interfaces.XML",
-        "lib/net45/System.Reactive.Interfaces.dll",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Interfaces.XML",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Interfaces.dll",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Interfaces.XML",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Interfaces.dll",
-        "lib/portable-win81+wpa81/System.Reactive.Interfaces.XML",
-        "lib/portable-win81+wpa81/System.Reactive.Interfaces.dll",
-        "lib/portable-windows8+net45+wp8/System.Reactive.Interfaces.XML",
-        "lib/portable-windows8+net45+wp8/System.Reactive.Interfaces.dll",
-        "lib/sl5/System.Reactive.Interfaces.XML",
-        "lib/sl5/System.Reactive.Interfaces.dll",
-        "lib/windows8/System.Reactive.Interfaces.XML",
-        "lib/windows8/System.Reactive.Interfaces.dll",
-        "lib/windowsphone71/System.Reactive.Interfaces.XML",
-        "lib/windowsphone71/System.Reactive.Interfaces.dll",
-        "lib/windowsphone8/System.Reactive.Interfaces.XML",
-        "lib/windowsphone8/System.Reactive.Interfaces.dll",
-        "rx-interfaces.2.2.5.nupkg.sha512",
-        "rx-interfaces.nuspec"
-      ]
-    },
-    "Rx-Linq/2.2.5": {
-      "sha512": "UTeCIu3cWPExxmTzdiVq7SalqTBhUaomBTaAC9LpYPoAopjlFwA3hjVWXoLkGlDc/44wqJemJuEwFP00KphiFg==",
-      "type": "package",
-      "path": "rx-linq/2.2.5",
-      "files": [
-        "lib/net40/System.Reactive.Linq.XML",
-        "lib/net40/System.Reactive.Linq.dll",
-        "lib/net45/System.Reactive.Linq.XML",
-        "lib/net45/System.Reactive.Linq.dll",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Linq.XML",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Linq.dll",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Linq.XML",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Linq.dll",
-        "lib/portable-win81+wpa81/System.Reactive.Linq.XML",
-        "lib/portable-win81+wpa81/System.Reactive.Linq.dll",
-        "lib/portable-windows8+net45+wp8/System.Reactive.Linq.XML",
-        "lib/portable-windows8+net45+wp8/System.Reactive.Linq.dll",
-        "lib/sl5/System.Reactive.Linq.XML",
-        "lib/sl5/System.Reactive.Linq.dll",
-        "lib/windows8/System.Reactive.Linq.XML",
-        "lib/windows8/System.Reactive.Linq.dll",
-        "lib/windowsphone71/System.Reactive.Linq.XML",
-        "lib/windowsphone71/System.Reactive.Linq.dll",
-        "lib/windowsphone8/System.Reactive.Linq.XML",
-        "lib/windowsphone8/System.Reactive.Linq.dll",
-        "rx-linq.2.2.5.nupkg.sha512",
-        "rx-linq.nuspec"
-      ]
-    },
-    "Rx-Main/2.2.5": {
-      "sha512": "qdQ6qENEiLsp/LRdzZlLlodihWN8VDjwNfWa8c2ELjEHZgTdKzt1V4i61gkHVtFKZXe8Px6KupbMP3pZ+1tusQ==",
-      "type": "package",
-      "path": "rx-main/2.2.5",
-      "files": [
-        "rx-main.2.2.5.nupkg.sha512",
-        "rx-main.nuspec"
-      ]
-    },
-    "Rx-PlatformServices/2.2.5": {
-      "sha512": "pMnNEvJVjT+wuDib+W/bi5hhIYcre7dW5yxvKrJxnR4iKJ1VLA/dY2FTtjDriHGx7OeGn12lQewXlH2oHiWFPA==",
-      "type": "package",
-      "path": "rx-platformservices/2.2.5",
-      "files": [
-        "lib/net40/System.Reactive.PlatformServices.XML",
-        "lib/net40/System.Reactive.PlatformServices.dll",
-        "lib/net45/System.Reactive.PlatformServices.XML",
-        "lib/net45/System.Reactive.PlatformServices.dll",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.PlatformServices.XML",
-        "lib/portable-net40+sl5+win8+wp8/System.Reactive.PlatformServices.dll",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.PlatformServices.XML",
-        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.PlatformServices.dll",
-        "lib/portable-win81+wpa81/System.Reactive.PlatformServices.XML",
-        "lib/portable-win81+wpa81/System.Reactive.PlatformServices.dll",
-        "lib/portable-windows8+net45+wp8/System.Reactive.PlatformServices.XML",
-        "lib/portable-windows8+net45+wp8/System.Reactive.PlatformServices.dll",
-        "lib/sl5/System.Reactive.PlatformServices.XML",
-        "lib/sl5/System.Reactive.PlatformServices.dll",
-        "lib/windows8/System.Reactive.PlatformServices.XML",
-        "lib/windows8/System.Reactive.PlatformServices.dll",
-        "lib/windowsphone71/System.Reactive.PlatformServices.XML",
-        "lib/windowsphone71/System.Reactive.PlatformServices.dll",
-        "lib/windowsphone8/System.Reactive.PlatformServices.XML",
-        "lib/windowsphone8/System.Reactive.PlatformServices.dll",
-        "rx-platformservices.2.2.5.nupkg.sha512",
-        "rx-platformservices.nuspec"
       ]
     },
     "Splat/1.6.2": {
@@ -27449,7 +26939,6 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.1",
-      "Rx-Main >= 2.2.5",
       "Splat >= 1.6.2",
       "Xamarin.Forms >= 2.3.3.193"
     ],
@@ -27468,14 +26957,14 @@
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\dev\\acr\\deviceinfo\\src\\Samples\\Samples\\Samples.csproj": {
-              "projectPath": "C:\\dev\\acr\\deviceinfo\\src\\Samples\\Samples\\Samples.csproj"
-            },
             "C:\\dev\\acr\\deviceinfo\\src\\Plugin.DeviceInfo.Abstractions\\Plugin.DeviceInfo.Abstractions.csproj": {
               "projectPath": "C:\\dev\\acr\\deviceinfo\\src\\Plugin.DeviceInfo.Abstractions\\Plugin.DeviceInfo.Abstractions.csproj"
             },
             "C:\\dev\\acr\\deviceinfo\\src\\Plugin.DeviceInfo.Uwp\\Plugin.DeviceInfo.Uwp.csproj": {
               "projectPath": "C:\\dev\\acr\\deviceinfo\\src\\Plugin.DeviceInfo.Uwp\\Plugin.DeviceInfo.Uwp.csproj"
+            },
+            "C:\\dev\\acr\\deviceinfo\\src\\Samples\\Samples\\Samples.csproj": {
+              "projectPath": "C:\\dev\\acr\\deviceinfo\\src\\Samples\\Samples\\Samples.csproj"
             }
           }
         }
@@ -27483,7 +26972,6 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
-      "Rx-Main": "2.2.5",
       "Splat": "1.6.2",
       "Xamarin.Forms": "2.3.3.193"
     },

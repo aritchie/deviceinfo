@@ -8,8 +8,6 @@ namespace Plugin.DeviceInfo
 
     public class BatteryInfo : IBatteryInfo
     {
-        public int Percentage => Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent);
-
         public PowerStatus Status
         {
             get
@@ -32,15 +30,42 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public IObservable<int> WhenBatteryPercentageChanged()
+        public int Percentage => Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent);
+        public IObservable<int> WhenBatteryPercentageChanged() => Observable.Create<int>(ob =>
         {
-            return Observable.Empty<int>();
-        }
+            var last = this.Percentage;
+            ob.OnNext(last);
+
+            return Observable
+                .Interval(TimeSpan.FromSeconds(30))
+                .Subscribe(x =>
+                {
+                    var now = this.Percentage;
+                    if (now != last)
+                    {
+                        last = now;
+                        ob.OnNext(last);
+                    }
+                });
+        });
 
 
-        public IObservable<PowerStatus> WhenPowerStatusChanged()
+        public IObservable<PowerStatus> WhenPowerStatusChanged() => Observable.Create<PowerStatus>(ob =>
         {
-            return Observable.Empty<PowerStatus>();
-        }
+            var last = this.Status;
+            ob.OnNext(last);
+
+            return Observable
+                .Interval(TimeSpan.FromSeconds(5))
+                .Subscribe(x =>
+                {
+                    var now = this.Status;
+                    if (now != last)
+                    {
+                        last = now;
+                        ob.OnNext(last);
+                    }
+                });
+        });
     }
 }

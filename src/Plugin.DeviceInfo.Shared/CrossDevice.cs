@@ -11,15 +11,15 @@ namespace Plugin.DeviceInfo
 #endif
 
 
-        static IApp app;
-        public static IApp App
+        static IAppInfo app;
+        public static IAppInfo App
         {
             get
             {
 #if PORTABLE
                 throw new Exception(ERROR);
 #else
-                app = app ?? new AppImpl();
+                app = app ?? new AppInfo();
                 return app;
 #endif
             }
@@ -27,15 +27,15 @@ namespace Plugin.DeviceInfo
         }
 
 
-        static IBattery batt;
-        public static IBattery Battery
+        static IBatteryInfo batt;
+        public static IBatteryInfo Battery
         {
             get
             {
 #if PORTABLE
                 throw new Exception(ERROR);
 #else
-                batt = this.batt ?? new BatteryImpl();
+                batt = batt ?? new BatteryInfo();
                 return batt;
 #endif
             }
@@ -43,31 +43,31 @@ namespace Plugin.DeviceInfo
         }
 
 
-        static IConnectivity connectivity;
-        public static IConnectivity Connectivity
+        static INetworkInfo network;
+        public static INetworkInfo Connectivity
         {
             get
             {
 #if PORTABLE
                 throw new Exception(ERROR);
 #else
-                connectivity = connectivity ?? new ConnectivityImpl();
-                return connectivity;
+                network = network ?? new NetworkInfo();
+                return network;
 #endif
             }
-            set { connectivity = value; }
+            set { network = value; }
         }
 
 
-        static IHardware hardware;
-        public static IHardware Hardware
+        static IHardwareInfo hardware;
+        public static IHardwareInfo Hardware
         {
             get
             {
 #if PORTABLE
                 throw new Exception(ERROR);
 #else
-                hardware = hardware ?? new HardwareImpl();
+                hardware = hardware ?? new HardwareInfo();
                 return hardware;
 #endif
             }

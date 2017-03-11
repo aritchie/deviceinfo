@@ -21,6 +21,5 @@ namespace Plugin.DeviceInfo
         public string OperatingSystem => this.deviceInfo.OperatingSystem;
         public bool IsSimulator { get; } = Package.Current.Id.Architecture == ProcessorArchitecture.Unknown;
         public bool IsTablet => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch;
-        public OperatingSystemType OS { get; } = OperatingSystemType.WindowUniversal;
     }
 }

@@ -20,9 +20,11 @@ Get tons of device information
         </dependencies>
         <releaseNotes>
 5.0
+[breaking] new namespace Plugin.DeviceInfo
 [breaking] pcl => netstandard 1.0
 [breaking] remove useless feature checking
 [feature] tvOS support
+[feature] macOS support
 
 4.0.2
 [fix][ios] battery monitoring observable now registers properly
@@ -56,6 +58,9 @@ Get tons of device information
 
         <!-- tvOS -->
         <file src="..\src\Plugin.DeviceInfo.tvOS\bin\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.tvOS10" />
+
+        <!-- macOS -->
+        <file src="..\src\Plugin.DeviceInfo.Mac\bin\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.Mac20" />
 
         <!-- net45 -->
         <file src="..\src\Plugin.DeviceInfo.Net45\bin\Release\Plugin.DeviceInfo.*" target="lib\net45" />

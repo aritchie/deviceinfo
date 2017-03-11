@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Reactive.Linq;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
@@ -7,21 +6,14 @@ using Windows.UI.Xaml;
 
 namespace Plugin.DeviceInfo
 {
-    public class AppInfo : IAppInfo
+    public class AppInfo : AbstractAppInfo
     {
-        public string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
-        public string ShortVersion { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}";
-        public bool IsBackgrounded => !Window.Current.Visible;
-        public CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
+        public override string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
+        public override string ShortVersion { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}";
+        public override bool IsBackgrounded => !Window.Current.Visible;
 
 
-        public IObservable<CultureInfo> WhenCultureChanged()
-        {
-            return Observable.Empty<CultureInfo>();
-        }
-
-
-        public IObservable<object> WhenEnteringForeground()
+        public override IObservable<object> WhenEnteringForeground()
         {
             return Observable.Create<object>(ob =>
             {
@@ -36,7 +28,7 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public IObservable<object> WhenEnteringBackground()
+        public override IObservable<object> WhenEnteringBackground()
         {
             return Observable.Create<object>(ob =>
             {

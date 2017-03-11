@@ -7,9 +7,9 @@ using Plugin.DeviceInfo.Internals;
 
 namespace Plugin.DeviceInfo
 {
-    public class BatteryImpl : IBattery
+    public class BatteryInfo : IBatteryInfo
     {
-        public BatteryImpl()
+        public BatteryInfo()
         {
             this
                 .WhenPowerStatusChanged()
@@ -27,9 +27,8 @@ namespace Plugin.DeviceInfo
         public PowerStatus Status { get; private set; }
 
 
-        public IObservable<int> WhenBatteryPercentageChanged()
-        {
-            return AndroidObservables
+        public IObservable<int> WhenBatteryPercentageChanged() =>
+            AndroidObservables
                 .WhenIntentReceived(Intent.ActionBatteryChanged)
                 .Select(intent =>
                 {
@@ -38,12 +37,10 @@ namespace Plugin.DeviceInfo
                     var value = (int)Math.Floor(level * 100D / scale);
                     return value;
                 });
-        }
 
 
-        public IObservable<PowerStatus> WhenPowerStatusChanged()
-        {
-            return AndroidObservables
+        public IObservable<PowerStatus> WhenPowerStatusChanged() =>
+            AndroidObservables
                 .WhenIntentReceived(Intent.ActionBatteryChanged)
                 //.WhenIntentReceived(Intent.ActionPowerConnected, Intent.ActionPowerDisconnected)
                 .Select(intent =>
@@ -65,6 +62,5 @@ namespace Plugin.DeviceInfo
                             return PowerStatus.Unknown;
                     }
                 });
-        }
     }
 }

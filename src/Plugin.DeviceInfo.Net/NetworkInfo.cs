@@ -21,11 +21,6 @@ namespace Plugin.DeviceInfo
                 .ToString();
 
         public string WifiSsid => null;
-
-
-        public IObservable<NetworkReachability> WhenStatusChanged()
-        {
-            return Observable.Empty<NetworkReachability>();
-        }
+        public IObservable<NetworkReachability> WhenStatusChanged() => Observable.Empty<NetworkReachability>();
     }
 }

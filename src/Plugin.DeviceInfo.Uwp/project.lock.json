@@ -2484,7 +2484,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       }
     },
@@ -5001,7 +5002,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       }
     },
@@ -7557,7 +7559,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       }
     },
@@ -10083,7 +10086,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       }
     },
@@ -12648,7 +12652,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       }
     },
@@ -15174,7 +15179,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       }
     },
@@ -17739,7 +17745,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "3.1.1"
         }
       }
     }

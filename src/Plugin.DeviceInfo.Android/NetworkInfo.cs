@@ -13,14 +13,14 @@ using Plugin.DeviceInfo.Internals;
 
 namespace Plugin.DeviceInfo
 {
-    public class ConnectivityImpl : IConnectivity
+    public class NetworkInfo : INetworkInfo
     {
         readonly WifiManager wifiManager;
         readonly TelephonyManager telManager;
         readonly ConnectivityManager connectivityManager;
 
 
-        public ConnectivityImpl()
+        public NetworkInfo()
         {
             this.wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
             this.telManager = (TelephonyManager)Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService);

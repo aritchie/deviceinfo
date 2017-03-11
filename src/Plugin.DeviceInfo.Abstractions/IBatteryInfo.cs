@@ -3,8 +3,7 @@
 
 namespace Plugin.DeviceInfo
 {
-
-    public interface IBattery
+    public interface IBatteryInfo
     {
         int Percentage { get; }
         PowerStatus Status { get; }

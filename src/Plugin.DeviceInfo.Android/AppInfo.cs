@@ -17,7 +17,7 @@ namespace Plugin.DeviceInfo
         readonly AppStateLifecyle appState;
 
 
-        public AppImpl()
+        public AppInfo()
         {
             this.appState = new AppStateLifecyle();
             var app = Application.Context.ApplicationContext as Application;
@@ -32,12 +32,10 @@ namespace Plugin.DeviceInfo
         public CultureInfo CurrentCulture => this.GetCurrentCulture();
 
 
-        public IObservable<CultureInfo> WhenCultureChanged()
-        {
-            return AndroidObservables
+        public IObservable<CultureInfo> WhenCultureChanged() =>
+            AndroidObservables
                 .WhenIntentReceived(Intent.ActionLocaleChanged)
                 .Select(x => this.GetCurrentCulture());
-        }
 
 
         public IObservable<object> WhenEnteringForeground()
@@ -86,7 +84,6 @@ namespace Plugin.DeviceInfo
             .PackageManager
             .GetPackageInfo(App.Context.PackageName, 0)
             .VersionName;
-
 
 
         public string ShortVersion => App

@@ -16,12 +16,15 @@ using CoreFoundation;
 
         public static bool IsReachableWithoutRequiringConnection(NetworkReachabilityFlags flags) {
             // Is it reachable with the current network configuration?
-            bool isReachable = (flags & NetworkReachabilityFlags.Reachable) != 0;
+            var isReachable = (flags & NetworkReachabilityFlags.Reachable) != 0;
 
             // Do we need a connection to reach it?
-            bool noConnectionRequired = (flags & NetworkReachabilityFlags.ConnectionRequired) == 0
+#if MAC
+            var noConnectionRequired = (flags & NetworkReachabilityFlags.ConnectionRequired) == 0;
+#else
+            var noConnectionRequired = (flags & NetworkReachabilityFlags.ConnectionRequired) == 0
                 || (flags & NetworkReachabilityFlags.IsWWAN) != 0;
-
+#endif
             return isReachable && noConnectionRequired;
         }
 
@@ -46,11 +49,7 @@ using CoreFoundation;
         //
         public static event EventHandler ReachabilityChanged;
 
-        static void OnChange(NetworkReachabilityFlags flags) {
-            var h = ReachabilityChanged;
-            if (h != null)
-                h(null, EventArgs.Empty);
-        }
+        static void OnChange(NetworkReachabilityFlags flags) => ReachabilityChanged?.Invoke(null, EventArgs.Empty);
 
         //
         // Returns true if it is possible to reach the AdHoc WiFi network
@@ -105,19 +104,27 @@ using CoreFoundation;
             if (!IsReachableWithoutRequiringConnection(flags))
                 return NetworkStatus.NotReachable;
 
+#if MAC
+             return NetworkStatus.ReachableViaWiFiNetwork;
+#else
             return (flags & NetworkReachabilityFlags.IsWWAN) != 0 ?
                 NetworkStatus.ReachableViaCarrierDataNetwork : NetworkStatus.ReachableViaWiFiNetwork;
-        }
+#endif
+    }
 
         public static NetworkStatus InternetConnectionStatus() {
             NetworkReachabilityFlags flags;
-            bool defaultNetworkAvailable = IsNetworkAvailable(out flags);
+            var defaultNetworkAvailable = IsNetworkAvailable(out flags);
+
             if (defaultNetworkAvailable && ((flags & NetworkReachabilityFlags.IsDirect) != 0))
                 return NetworkStatus.NotReachable;
-            else if ((flags & NetworkReachabilityFlags.IsWWAN) != 0)
+#if !MAC
+            if ((flags & NetworkReachabilityFlags.IsWWAN) != 0)
                 return NetworkStatus.ReachableViaCarrierDataNetwork;
-            else if (flags == 0)
+#endif
+            if (flags == 0)
                 return NetworkStatus.NotReachable;
+
             return NetworkStatus.ReachableViaWiFiNetwork;
         }
 

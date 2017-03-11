@@ -3,33 +3,22 @@ using System.Globalization;
 using System.Linq;
 using System.Reactive.Linq;
 using Foundation;
+#if !MAC
 using UIKit;
-
+#endif
 
 namespace Plugin.DeviceInfo
 {
-    public class AppInfo : IApp
+    public class AppInfo : IAppInfo
     {
         public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
         public string ShortVersion => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
+#if MAC
+        public bool IsBackgrounded { get; } = false;
+        public IObservable<object> WhenEnteringBackground() => Observable.Empty<object>();
+        public IObservable<object> WhenEnteringForeground() => Observable.Empty<object>();
+#else
         public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
-        public CultureInfo CurrentCulture => this.GetSystemCultureInfo();
-
-
-        public IObservable<CultureInfo> WhenCultureChanged()
-        {
-            return Observable.Create<CultureInfo>(ob =>
-                NSLocale
-                    .Notifications
-                    .ObserveCurrentLocaleDidChange((sender, args) =>
-                    {
-                        var culture = this.GetSystemCultureInfo();
-                        ob.OnNext(culture);
-                    })
-            );
-        }
-
-
         public IObservable<object> WhenEnteringForeground()
         {
             return Observable.Create<object>(ob =>
@@ -60,7 +49,23 @@ namespace Plugin.DeviceInfo
                 return () => token?.Dispose();
             });
         }
+#endif
 
+        public CultureInfo CurrentCulture => this.GetSystemCultureInfo();
+
+
+        public IObservable<CultureInfo> WhenCultureChanged()
+        {
+            return Observable.Create<CultureInfo>(ob =>
+                NSLocale
+                    .Notifications
+                    .ObserveCurrentLocaleDidChange((sender, args) =>
+                    {
+                        var culture = this.GetSystemCultureInfo();
+                        ob.OnNext(culture);
+                    })
+            );
+        }
 
 
         // taken from https://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/ with modifications

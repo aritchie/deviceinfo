@@ -9,10 +9,10 @@ namespace Plugin.DeviceInfo
     {
         string Version { get; }
         string ShortVersion { get; }
-        bool IsBackgrounded { get; }
         CultureInfo CurrentCulture { get; }
-
         IObservable<CultureInfo> WhenCultureChanged();
+
+        bool IsBackgrounded { get; }
         IObservable<object> WhenEnteringForeground();
         IObservable<object> WhenEnteringBackground();
     }

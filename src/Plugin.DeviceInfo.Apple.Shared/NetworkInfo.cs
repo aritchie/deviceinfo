@@ -1,19 +1,20 @@
 using System;
 using System.Linq;
-using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Reactive.Linq;
 using SystemConfiguration;
-using CoreTelephony;
 using Foundation;
+#if __IOS__
+using CoreTelephony;
+#endif
 
 
 namespace Plugin.DeviceInfo
 {
-    public class ConnectivityImpl : IConnectivity
+    public class NetworkInfo : INetworkInfo
     {
-        public SystemConfiguration.NetworkReachability InternetReachability
+        public NetworkReachability InternetReachability
         {
             get
             {
@@ -22,20 +23,35 @@ namespace Plugin.DeviceInfo
                 switch (internet)
                 {
                     case NetworkStatus.NotReachable:
-                        return SystemConfiguration.NetworkReachability.NotReachable;
+                        return NetworkReachability.NotReachable;
 
                     case NetworkStatus.ReachableViaCarrierDataNetwork:
-                        return SystemConfiguration.NetworkReachability.Cellular;
+                        return NetworkReachability.Cellular;
 
                     case NetworkStatus.ReachableViaWiFiNetwork:
-                        return SystemConfiguration.NetworkReachability.Wifi;
+                        return NetworkReachability.Wifi;
 
                     default:
-                        return SystemConfiguration.NetworkReachability.Other;
+                        return NetworkReachability.Other;
                 }
             }
         }
 
+
+        public IObservable<NetworkReachability> WhenStatusChanged()
+        {
+            return Observable.Create<NetworkReachability>(ob =>
+            {
+                var handler = new EventHandler((sender, args) =>
+                    ob.OnNext(this.InternetReachability)
+                );
+                Reachability.ReachabilityChanged += handler;
+                return () => Reachability.ReachabilityChanged -= handler;
+            });
+        }
+
+
+#if __IOS__
         public string CellularNetworkCarrier
         {
             get
@@ -44,8 +60,11 @@ namespace Plugin.DeviceInfo
                     return info.SubscriberCellularProvider?.CarrierName;
             }
         }
+#else
+        public string CellularNetworkCarrier { get; } = null;
+#endif
 
-
+#if __IOS__ || __TVOS__
         public string IpAddress => NetworkInterface
             .GetAllNetworkInterfaces()
             .FirstOrDefault(x => x.Name.Equals("en0", StringComparison.InvariantCultureIgnoreCase))?
@@ -54,7 +73,6 @@ namespace Plugin.DeviceInfo
             .FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork)?
             .Address?
             .ToString();
-        
 
         public string WifiSsid
         {
@@ -69,18 +87,9 @@ namespace Plugin.DeviceInfo
                 return ssid?.ToString();
             }
         }
-
-
-        public IObservable<SystemConfiguration.NetworkReachability> WhenStatusChanged()
-        {
-            return Observable.Create<SystemConfiguration.NetworkReachability>(ob =>
-            {
-                var handler = new EventHandler((sender, args) =>
-                    ob.OnNext(this.InternetReachability)
-                );
-                Reachability.ReachabilityChanged += handler;
-                return () => Reachability.ReachabilityChanged -= handler;
-            });
-        }
+#else
+        public string IpAddress => null;
+        public string WifiSsid => null;
+#endif
     }
 }

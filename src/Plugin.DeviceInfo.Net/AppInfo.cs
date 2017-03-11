@@ -1,40 +1,18 @@
 ﻿using System;
-using System.Globalization;
-using System.Reactive.Linq;
 using System.Reflection;
 
 
 namespace Plugin.DeviceInfo
 {
 
-    public class AppInfo : IAppInfo
+    public class AppInfo : AbstractAppInfo
     {
-        public string Version => Assembly
+        public override string Version => Assembly
                 .GetEntryAssembly()
                 .GetName()
                 .Version
                 .ToString();
 
-        public string ShortVersion => this.Version;
-        public bool IsBackgrounded { get; } = false;
-        public CultureInfo CurrentCulture => CultureInfo.DefaultThreadCurrentCulture;
-
-
-        public IObservable<CultureInfo> WhenCultureChanged()
-        {
-            return Observable.Empty<CultureInfo>();
-        }
-
-
-        public IObservable<object> WhenEnteringForeground()
-        {
-            return Observable.Empty<object>();
-        }
-
-
-        public IObservable<object> WhenEnteringBackground()
-        {
-            return Observable.Empty<object>();
-        }
+        public override string ShortVersion => this.Version;
     }
 }

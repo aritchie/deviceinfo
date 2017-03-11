@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -33,6 +32,5 @@ namespace Plugin.DeviceInfo
         public string OperatingSystem { get; }
         public bool IsSimulator { get; } = false;
         public bool IsTablet { get; } = false;
-        public OperatingSystemType OS { get; } = OperatingSystemType.NetCore;
     }
 }

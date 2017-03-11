@@ -5,12 +5,12 @@ using UIKit;
 
 namespace Plugin.DeviceInfo
 {
-    public class BatteryImpl : IBattery
+    public class BatteryInfo : IBatteryInfo
     {
         readonly IObservable<int> levelOb;
 
 
-        public BatteryImpl()
+        public BatteryInfo()
         {
             this.levelOb = Observable
                 .Create<int>(ob =>

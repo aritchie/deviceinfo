@@ -14,6 +14,5 @@ namespace Plugin.DeviceInfo
         string OperatingSystem { get; }
         bool IsSimulator { get; }
         bool IsTablet { get; }
-        OperatingSystemType OS { get; }
     }
 }

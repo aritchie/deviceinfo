@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)BatteryInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NetworkInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HardwareInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Reachability.cs" />

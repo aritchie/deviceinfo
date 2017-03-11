@@ -17,12 +17,12 @@ using B = Android.OS.Build;
 namespace Plugin.DeviceInfo
 {
 
-    public class HardwareImpl : IHardware
+    public class HardwareInfo : IHardwareInfo
     {
         readonly TelephonyManager telManager;
 
 
-        public HardwareImpl()
+        public HardwareInfo()
         {
             var windowManager = (IWindowManager)Application
                 .Context
@@ -66,6 +66,5 @@ namespace Plugin.DeviceInfo
         public string OperatingSystem { get; } = $"{B.VERSION.Release} - SDK: {B.VERSION.SdkInt}";
         public bool IsSimulator { get; } = B.Product.Equals("google_sdk");
         public bool IsTablet => this.telManager?.PhoneType == PhoneType.None; // best I can do
-        public OperatingSystemType OS { get; } = OperatingSystemType.Android;
     }
 }
