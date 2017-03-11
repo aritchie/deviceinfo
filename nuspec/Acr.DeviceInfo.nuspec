@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>Acr.DeviceInfo</id>
-        <version>4.1.0</version>
+        <id>Plugin.DeviceInfo</id>
+        <version>5.0.0</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
 - screen res, device ID, OS, phone model, network carrier, locale, such as screen resolution, IMEI, OS, battery
 - monitor app status, battery, connectivity
-</description>
+        </description>
         <authors>Allan Ritchie</authors>
         <owners>Allan Ritchie</owners>
         <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
@@ -16,10 +16,11 @@ Get tons of device information
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>device windows xamarin xam.pcl deviceinfo</tags>
         <dependencies>
-            <dependency id="Rx-Main" version="[2.2.5,)" />
+            <dependency id="System.Reactive" version="[3.1.1,)" />
         </dependencies>
         <releaseNotes>
-4.1.0
+5.0
+[breaking] pcl => netstandard 1.0
 [breaking] remove useless feature checking
 [feature] tvOS support
 
@@ -45,22 +46,22 @@ Get tons of device information
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.DeviceInfo\bin\Release\Acr.DeviceInfo.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+        <file src="..\src\Plugin.DeviceInfo\bin\Release\Plugin.DeviceInfo.*" target="lib\netstandard1.0" />
 
         <!-- android -->
-        <file src="..\src\Acr.DeviceInfo.Android\bin\Release\Acr.DeviceInfo.*" target="lib\MonoAndroid10" />
+        <file src="..\src\Plugin.DeviceInfo.Android\bin\Release\Plugin.DeviceInfo.*" target="lib\MonoAndroid10" />
 
         <!-- ios -->
-        <file src="..\src\Acr.DeviceInfo.iOS\bin\iPhone\Release\Acr.DeviceInfo.*" target="lib\Xamarin.iOS10" />
+        <file src="..\src\Plugin.DeviceInfo.iOS\bin\iPhone\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.iOS10" />
 
         <!-- tvOS -->
-        <file src="..\src\Acr.DeviceInfo.tvOS\bin\Release\Acr.DeviceInfo.*" target="lib\Xamarin.tvOS10" />
+        <file src="..\src\Plugin.DeviceInfo.tvOS\bin\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.tvOS10" />
 
         <!-- net45 -->
-        <file src="..\src\Acr.DeviceInfo.Net45\bin\Release\Acr.DeviceInfo.*" target="lib\net45" />
+        <file src="..\src\Plugin.DeviceInfo.Net45\bin\Release\Plugin.DeviceInfo.*" target="lib\net45" />
 
         <!-- uwp -->
-        <file src="..\src\Acr.DeviceInfo.Uwp\bin\Release\Acr.DeviceInfo.*" target="lib\uap10.0" />
+        <file src="..\src\Plugin.DeviceInfo.Uwp\bin\Release\Plugin.DeviceInfo.*" target="lib\uap10.0" />
 
     </files>
 </package>
