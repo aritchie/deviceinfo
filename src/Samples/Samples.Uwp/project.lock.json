@@ -495,15 +495,6 @@
           }
         }
       },
-      "Splat/1.6.2": {
-        "type": "package",
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3236,15 +3227,6 @@
           "runtimes/win8-arm/native/clrcompression.dll": {}
         }
       },
-      "Splat/1.6.2": {
-        "type": "package",
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -5832,15 +5814,6 @@
           "runtimes/win8-arm-aot/native/_._": {}
         }
       },
-      "Splat/1.6.2": {
-        "type": "package",
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -8396,15 +8369,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "Splat/1.6.2": {
-        "type": "package",
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -11003,15 +10967,6 @@
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "Splat/1.6.2": {
-        "type": "package",
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -13567,15 +13522,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "Splat/1.6.2": {
-        "type": "package",
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -16172,15 +16118,6 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "Splat/1.6.2": {
-        "type": "package",
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -21529,37 +21466,6 @@
         "runtime.win8-arm.runtime.native.system.io.compression.4.3.0.nupkg.sha512",
         "runtime.win8-arm.runtime.native.system.io.compression.nuspec",
         "runtimes/win8-arm/native/clrcompression.dll"
-      ]
-    },
-    "Splat/1.6.2": {
-      "sha512": "DeH0MxPU+D4JchkIDPYG4vUT+hsWs9S41cFle0/4K5EJMXWurx5DzAkj2366DfK14/XKNhsu6tCl4dZXJ3CD4w==",
-      "type": "package",
-      "path": "splat/1.6.2",
-      "files": [
-        "lib/MonoMac/Splat.dll",
-        "lib/MonoMac/Splat.dll.mdb",
-        "lib/Net45/Splat.dll",
-        "lib/Net45/Splat.pdb",
-        "lib/NetCore45/Splat.dll",
-        "lib/NetCore45/Splat.pdb",
-        "lib/NetCore45/Splat.pri",
-        "lib/Portable-Win81+Wpa81/Splat.dll",
-        "lib/Portable-Win81+Wpa81/Splat.pdb",
-        "lib/Portable-Win81+Wpa81/Splat.pri",
-        "lib/Portable-net45+win+wpa81+wp80/Splat.dll",
-        "lib/Xamarin.Mac10/Splat-XamarinMac.csproj.FilesWrittenAbsolute.txt",
-        "lib/Xamarin.Mac10/Splat.dll",
-        "lib/Xamarin.Mac10/Splat.dll.mdb",
-        "lib/Xamarin.iOS10/Splat.dll",
-        "lib/Xamarin.iOS10/Splat.dll.mdb",
-        "lib/monoandroid/Splat.dll",
-        "lib/monoandroid/Splat.dll.mdb",
-        "lib/monotouch/Splat.dll",
-        "lib/monotouch/Splat.dll.mdb",
-        "lib/wp8/Splat.dll",
-        "lib/wp8/Splat.pdb",
-        "splat.1.6.2.nupkg.sha512",
-        "splat.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -26939,7 +26845,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.1",
-      "Splat >= 1.6.2",
+      "System.Reactive >= 3.1.1",
       "Xamarin.Forms >= 2.3.3.193"
     ],
     "UAP,Version=v10.0": []
@@ -26972,7 +26878,7 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
-      "Splat": "1.6.2",
+      "System.Reactive": "3.1.1",
       "Xamarin.Forms": "2.3.3.193"
     },
     "frameworks": {
