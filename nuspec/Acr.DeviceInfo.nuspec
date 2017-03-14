@@ -47,7 +47,7 @@ Get tons of device information
         </releaseNotes>
     </metadata>
     <files>
-        <!-- PCL -->
+        <!-- netstandard -->
         <file src="..\src\Plugin.DeviceInfo\bin\Release\Plugin.DeviceInfo.*" target="lib\netstandard1.0" />
 
         <!-- android -->
