@@ -26,9 +26,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.iOS", "Samples\Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Droid", "Samples\Samples.Droid\Samples.Droid.csproj", "{233C4EB1-4F77-46BB-8018-CF11CE129AD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.DeviceInfo", "Plugin.DeviceInfo\Plugin.DeviceInfo.csproj", "{D11E01F0-7FA8-4347-BF88-ABB37956F4E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.DeviceInfo", "Plugin.DeviceInfo\Plugin.DeviceInfo.csproj", "{D11E01F0-7FA8-4347-BF88-ABB37956F4E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.DeviceInfo.Abstractions", "Plugin.DeviceInfo.Abstractions\Plugin.DeviceInfo.Abstractions.csproj", "{D5ECCF1B-12F0-477F-814B-FCCDA648A85C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.DeviceInfo.Abstractions", "Plugin.DeviceInfo.Abstractions\Plugin.DeviceInfo.Abstractions.csproj", "{D5ECCF1B-12F0-477F-814B-FCCDA648A85C}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Plugin.DeviceInfo.Shared", "Plugin.DeviceInfo.Shared\Plugin.DeviceInfo.Shared.shproj", "{993982F0-3438-405E-BE5E-515842CE2842}"
 EndProject
@@ -664,6 +664,8 @@ Global
 		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.AppStore|x86.Build.0 = Release|x86
 		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.AppStore|x86.Deploy.0 = Release|x86
 		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.Debug|Any CPU.Build.0 = Debug|x86
+		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.Debug|ARM.ActiveCfg = Debug|ARM
 		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.Debug|ARM.Build.0 = Debug|ARM
 		{BC2DC8F4-2E85-44C3-ACAB-BDBA19E695CF}.Debug|ARM.Deploy.0 = Debug|ARM

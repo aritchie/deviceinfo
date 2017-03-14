@@ -22,4 +22,6 @@
     <PackageReference Update="NETStandard.Library" Version="1.6.1" />
   </ItemGroup>
 
+  <Import Project="..\Plugin.DeviceInfo.Shared\Plugin.DeviceInfo.Shared.projitems" Label="Shared" />
+
 </Project>

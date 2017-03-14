@@ -30,6 +30,7 @@ namespace Plugin.DeviceInfo
         public string Manufacturer { get; }
         public string Model { get; }
         public string OperatingSystem { get; }
+        public string OperatingSystemVersion { get; }
         public bool IsSimulator { get; } = false;
         public bool IsTablet { get; } = false;
     }

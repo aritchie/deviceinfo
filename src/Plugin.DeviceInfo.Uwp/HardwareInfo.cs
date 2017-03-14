@@ -2,6 +2,7 @@
 using Windows.ApplicationModel;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.System;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.ViewManagement;
 
@@ -19,6 +20,25 @@ namespace Plugin.DeviceInfo
         public string Manufacturer => this.deviceInfo.SystemManufacturer;
         public string Model => this.deviceInfo.SystemSku;
         public string OperatingSystem => this.deviceInfo.OperatingSystem;
+
+        string osVersion;
+        public string OperatingSystemVersion
+        {
+            get
+            {
+                if (this.osVersion == null)
+                {
+                    var deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
+                    var version = ulong.Parse(deviceFamilyVersion);
+                    var major = (version & 0xFFFF000000000000L) >> 48;
+                    var minor = (version & 0x0000FFFF00000000L) >> 32;
+                    var build = (version & 0x00000000FFFF0000L) >> 16;
+                    var revision = (version & 0x000000000000FFFFL);
+                    this.osVersion = $"{major}.{minor}.{build}.{revision}";
+                }
+                return this.osVersion;
+            }
+        }
         public bool IsSimulator { get; } = Package.Current.Id.Architecture == ProcessorArchitecture.Unknown;
         public bool IsTablet => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch;
     }

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Telephony;
@@ -63,7 +61,8 @@ namespace Plugin.DeviceInfo
         public string DeviceId => this.telManager?.DeviceId ?? Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
         public string Manufacturer { get; } = B.Manufacturer;
         public string Model { get; } = B.Model;
-        public string OperatingSystem { get; } = $"{B.VERSION.Release} - SDK: {B.VERSION.SdkInt}";
+        public string OperatingSystem { get; } = B.VERSION.Release;
+        public string OperatingSystemVersion { get; } = B.VERSION.SdkInt.ToString();
         public bool IsSimulator { get; } = B.Product.Equals("google_sdk");
         public bool IsTablet => this.telManager?.PhoneType == PhoneType.None; // best I can do
     }

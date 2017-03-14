@@ -1,6 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
-
+using Plugin.DeviceInfo;
 
 namespace Samples
 {
@@ -10,14 +10,19 @@ namespace Samples
         public MainPage()
         {
             this.InitializeComponent();
-            //this.viewModel = new MainViewModel(DeviceInfo.App, DeviceInfo.Battery, DeviceInfo.Connectivity, DeviceInfo.Hardware);
+            this.BindingContext = new MainViewModel(
+                CrossDevice.App,
+                CrossDevice.Battery,
+                CrossDevice.Connectivity,
+                CrossDevice.Hardware
+            );
         }
 
 
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    this.viewModel.OnActivate();
-        //}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((MainViewModel)this.BindingContext).Start();
+        }
     }
 }

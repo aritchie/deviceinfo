@@ -9,24 +9,6 @@ namespace Plugin.DeviceInfo
 {
     public class BatteryInfo : IBatteryInfo
     {
-        public BatteryInfo()
-        {
-            this
-                .WhenPowerStatusChanged()
-                .Take(1)
-                .Subscribe(x => this.Status = x);
-
-            this
-                .WhenBatteryPercentageChanged()
-                .Take(1)
-                .Subscribe(x => this.Percentage = x);
-        }
-
-
-        public int Percentage { get; private set; }
-        public PowerStatus Status { get; private set; }
-
-
         public IObservable<int> WhenBatteryPercentageChanged() =>
             AndroidObservables
                 .WhenIntentReceived(Intent.ActionBatteryChanged)

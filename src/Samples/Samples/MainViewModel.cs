@@ -1,140 +1,120 @@
-﻿//using System;
-//using System.Collections.ObjectModel;
-//using System.Windows.Input;
-//using Xamarin.Forms;
+﻿using System;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using Xamarin.Forms;
+using Plugin.DeviceInfo;
+using PropertyChanged;
 
 
-//namespace Samples
-//{
-//    public class MainViewModel : ReactiveObject
-//    {
-//        public MainViewModel(IApp app, IBattery battery, IConnectivity connectivity, IHardware hardware)
-//        {
-//            this.App = app;
-//            this.Battery = battery;
-//            this.Connectivity = connectivity;
-//            this.Hardware = hardware;
+namespace Samples
+{
+    [ImplementPropertyChanged]
+    public class MainViewModel : INotifyPropertyChanged
+    {
+        public MainViewModel(IAppInfo app, IBatteryInfo battery, INetworkInfo network, IHardwareInfo hardware)
+        {
+            this.App = app;
+            this.Battery = battery;
+            this.Network = network;
+            this.Hardware = hardware;
 
-//            this.ClearApp = new Command(this.AppEvents.Clear);
-//            this.ClearBattery = new Command(this.BatteryEvents.Clear);
-//            this.ClearConnectivity = new Command(this.ConnectivityEvents.Clear);
-//        }
+            this.ClearApp = new Command(this.AppEvents.Clear);
+            this.ClearBattery = new Command(this.BatteryEvents.Clear);
+            this.ClearNetwork = new Command(this.NetworkEvents.Clear);
+        }
 
-//        [Reactive] public bool HasCamera { get; private set; }
-//        [Reactive] public bool HasBluetooth { get; private set; }
-//        [Reactive] public bool HasBluetoothLE { get; private set; }
-//        [Reactive] public bool HasFrontCamera { get; private set; }
-//        [Reactive] public bool HasBackCamera { get; private set; }
-
-//        public int BatteryPercentage => this.Battery.Percentage;
-//        public PowerStatus BatteryStatus => this.Battery.Status;
-
-//        public string IpAddress => this.Connectivity.IpAddress;
-//        public string CellularNetworkCarrier => this.Connectivity.CellularNetworkCarrier;
-//        public NetworkReachability InternetReachability => this.Connectivity.InternetReachability;
-//        public string WifiSsid => this.Connectivity.WifiSsid;
-
-//        public IApp App { get; private set; }
-//        public IBattery Battery { get; private set; }
-//        public IHardware Hardware { get; private set; }
-//        public IConnectivity Connectivity { get; private set; }
-
-//        public ObservableCollection<EventViewModel> AppEvents { get; } = new ObservableCollection<EventViewModel>();
-//        public ObservableCollection<EventViewModel> ConnectivityEvents { get; } = new ObservableCollection<EventViewModel>();
-//        public ObservableCollection<EventViewModel> BatteryEvents { get; } = new ObservableCollection<EventViewModel>();
-
-//        public ICommand ClearApp { get; }
-//        public ICommand ClearBattery { get; }
-//        public ICommand ClearConnectivity { get; }
-
-//        bool firstStart = true;
-//        IDisposable batteryPower;
-//        IDisposable batteryPercent;
-//        IDisposable connectivityChange;
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
-//        public async void OnActivate()
-//        {
-//            if (!this.firstStart)
-//                return;
+        public string IpAddress => this.Network.IpAddress;
+        public string CellularNetworkCarrier => this.Network.CellularNetworkCarrier;
+        public NetworkReachability InternetReachability => this.Network.InternetReachability;
+        public string WifiSsid => this.Network.WifiSsid;
 
-//            this.batteryPower = this.Battery
-//                .WhenPowerStatusChanged()
-//                .Subscribe(x => this.OnBatteryEvent($"Status Change: {x}"));
+        public PowerStatus BatteryStatus { get; set; }
+        public int BatteryPercent { get; set; }
 
-//            this.batteryPercent = this.Battery
-//                .WhenBatteryPercentageChanged()
-//                .Subscribe(x => this.OnBatteryEvent($"Battery Charge Change: {x}%"));
+        public IAppInfo App { get; private set; }
+        public IBatteryInfo Battery { get; private set; }
+        public IHardwareInfo Hardware { get; private set; }
+        public INetworkInfo Network { get; private set; }
 
-//            this.connectivityChange = this.Connectivity
-//                .WhenStatusChanged()
-//                .Subscribe(x =>
-//                {
-//                    this.RaiseAndSafe("Connectivity", () =>
-//                    {
-//                        this.RaisePropertyChanged("IpAddress");
-//                        this.RaisePropertyChanged("CellularNetworkCarrier");
-//                        this.RaisePropertyChanged("InternetReachability");
-//                        this.RaisePropertyChanged("WifiSsid");
-//                        this.ConnectivityEvents.Insert(0, new EventViewModel
-//                        {
-//                            Detail = $"Network Reachability Change: {x}"
-//                        });
-//                    });
-//                });
+        public ObservableCollection<EventViewModel> AppEvents { get; } = new ObservableCollection<EventViewModel>();
+        public ObservableCollection<EventViewModel> NetworkEvents { get; } = new ObservableCollection<EventViewModel>();
+        public ObservableCollection<EventViewModel> BatteryEvents { get; } = new ObservableCollection<EventViewModel>();
 
-//            this.App
-//                .WhenEnteringForeground()
-//                .Subscribe(x => this.OnAppEvent("Foregrounding App"));
+        public ICommand ClearApp { get; }
+        public ICommand ClearBattery { get; }
+        public ICommand ClearNetwork { get; }
 
-//            this.App
-//                .WhenEnteringBackground()
-//                .Subscribe(x => this.OnAppEvent("Backgrounding App"));
-
-//            this.HasCamera = await this.Hardware.HasFeature(Feature.Camera);
-//            this.HasFrontCamera = await this.Hardware.HasFeature(Feature.CameraFront);
-//            this.HasBackCamera = await this.Hardware.HasFeature(Feature.CameraBack);
-//            this.HasBluetooth = await this.Hardware.HasFeature(Feature.Bluetooth);
-//            this.HasBluetoothLE = await this.Hardware.HasFeature(Feature.BluetoothLE);
-//        }
+        bool firstStart = true;
+        IDisposable batteryPower;
+        IDisposable batteryPercent;
+        IDisposable connectivityChange;
 
 
-//        void RaiseAndSafe(string raise, Action action)
-//        {
-//            this.RaisePropertyChanged(raise);
-//            if (this.Hardware.OS == OperatingSystemType.WindowUniversal)
-//            {
-//                Device.BeginInvokeOnMainThread(action);
-//            }
-//            else
-//            {
-//                action();
-//            }
-//        }
+        public void Start()
+        {
+            if (!this.firstStart)
+                return;
+
+            this.batteryPower = this.Battery
+                .WhenPowerStatusChanged()
+                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                {
+                    this.BatteryStatus = x;
+                    this.BatteryEvents.Insert(0, new EventViewModel
+                    {
+                        Detail = $"Status Change: {x}"
+                    });
+                }));
+
+            this.batteryPercent = this.Battery
+                .WhenBatteryPercentageChanged()
+                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                {
+                    this.BatteryPercent = x;
+                    this.BatteryEvents.Insert(0, new EventViewModel
+                    {
+                        Detail = $"Charge Change: {x}%"
+                    });
+                }));
+
+            this.connectivityChange = this.Network
+                .WhenStatusChanged()
+                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                {
+                    this.Raise(nameof(IpAddress));
+                    this.Raise(nameof(CellularNetworkCarrier));
+                    this.Raise(nameof(InternetReachability));
+                    this.Raise(nameof(WifiSsid));
+                    this.NetworkEvents.Insert(0, new EventViewModel
+                    {
+                        Detail = $"Network Reachability Change: {x}"
+                    });
+                }));
+
+            this.App
+                .WhenEnteringForeground()
+                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                    this.AppEvents.Insert(0, new EventViewModel
+                    {
+                        Detail = "Foregrounding App"
+                    }))
+                );
+
+            this.App
+                .WhenEnteringBackground()
+                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                    this.AppEvents.Insert(0, new EventViewModel
+                    {
+                        Detail = "Backgrounding App"
+                    }))
+                );
+        }
 
 
-//        void OnAppEvent(string detail)
-//        {
-//            this.RaiseAndSafe("App", () =>
-//                this.AppEvents.Insert(0, new EventViewModel
-//                {
-//                    Detail = detail
-//                })
-//            );
-//        }
-
-
-//        void OnBatteryEvent(string detail)
-//        {
-//            this.RaiseAndSafe("Battery", () =>
-//            {
-//                this.RaisePropertyChanged("BatteryStatus");
-//                this.RaisePropertyChanged("BatteryPercent");
-//                this.BatteryEvents.Insert(0, new EventViewModel
-//                {
-//                    Detail = detail
-//                });
-//            });
-//        }
-//    }
-//}
+        void Raise(string propertyName) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+     }
+}

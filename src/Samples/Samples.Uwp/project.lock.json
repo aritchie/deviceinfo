@@ -2498,6 +2498,14 @@
           "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.targets": {}
         }
       },
+      "Plugin.DeviceInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.0",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
+      },
       "Plugin.DeviceInfo.Abstractions/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
@@ -2516,7 +2524,11 @@
         }
       },
       "Samples/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "Plugin.DeviceInfo": "1.0.0",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -5046,6 +5058,14 @@
           "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.targets": {}
         }
       },
+      "Plugin.DeviceInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.0",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
+      },
       "Plugin.DeviceInfo.Abstractions/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
@@ -5064,7 +5084,11 @@
         }
       },
       "Samples/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "Plugin.DeviceInfo": "1.0.0",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -7633,6 +7657,14 @@
           "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.targets": {}
         }
       },
+      "Plugin.DeviceInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.0",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
+      },
       "Plugin.DeviceInfo.Abstractions/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
@@ -7651,7 +7683,11 @@
         }
       },
       "Samples/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "Plugin.DeviceInfo": "1.0.0",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
@@ -10190,6 +10226,14 @@
           "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.targets": {}
         }
       },
+      "Plugin.DeviceInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.0",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
+      },
       "Plugin.DeviceInfo.Abstractions/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
@@ -10208,7 +10252,11 @@
         }
       },
       "Samples/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "Plugin.DeviceInfo": "1.0.0",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -12786,6 +12834,14 @@
           "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.targets": {}
         }
       },
+      "Plugin.DeviceInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.0",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
+      },
       "Plugin.DeviceInfo.Abstractions/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
@@ -12804,7 +12860,11 @@
         }
       },
       "Samples/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "Plugin.DeviceInfo": "1.0.0",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
@@ -15343,6 +15403,14 @@
           "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.targets": {}
         }
       },
+      "Plugin.DeviceInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.0",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
+      },
       "Plugin.DeviceInfo.Abstractions/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
@@ -15361,7 +15429,11 @@
         }
       },
       "Samples/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "Plugin.DeviceInfo": "1.0.0",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -17939,6 +18011,14 @@
           "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.targets": {}
         }
       },
+      "Plugin.DeviceInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.0",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
+      },
       "Plugin.DeviceInfo.Abstractions/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
@@ -17957,7 +18037,11 @@
         }
       },
       "Samples/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "Plugin.DeviceInfo": "1.0.0",
+          "Plugin.DeviceInfo.Abstractions": "1.0.0"
+        }
       }
     }
   },
@@ -26825,6 +26909,11 @@
         "xamarin.forms.2.3.3.193.nupkg.sha512",
         "xamarin.forms.nuspec"
       ]
+    },
+    "Plugin.DeviceInfo/1.0.0": {
+      "type": "project",
+      "path": "../../Plugin.DeviceInfo/Plugin.DeviceInfo.csproj",
+      "msbuildProject": "../../Plugin.DeviceInfo/Plugin.DeviceInfo.csproj"
     },
     "Plugin.DeviceInfo.Abstractions/1.0.0": {
       "type": "project",

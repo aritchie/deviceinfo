@@ -10,38 +10,29 @@
 			    <ContentPage>
 			        <TableView Intent="Data">
 			            <TableRoot>
-			                <TableSection BindingContext="{Binding Hardware}" Title="Device">
+                            <TableSection BindingContext="{Binding App}" Title="Application">
+                                <TextCell Text="Version" Detail="{Binding Version}" />
+                                <TextCell Text="Short Version" Detail="{Binding ShortVersion}" />
+                            </TableSection>
+
+                            <TableSection BindingContext="{Binding Hardware}" Title="Device">
 			                    <TextCell Text="Device ID" Detail="{Binding DeviceId}" />
 			                    <TextCell Text="Manufacturer" Detail="{Binding Manufacturer}" />
 			                    <TextCell Text="Model" Detail="{Binding Model}" />
 			                    <TextCell Text="Operating System" Detail="{Binding OperatingSystem}" />
-			                    <TextCell Text="OS Type" Detail="{Binding OS}" />
+                                <TextCell Text="Operating System Version" Detail="{Binding OperatingSystemVersion}" />
 			                    <SwitchCell Text="Simulator" IsEnabled="false" On="{Binding IsSimulator}" />
 			                    <SwitchCell Text="Tablet" IsEnabled="false" On="{Binding IsTablet}" />
 			                    <TextCell Text="Display Height" Detail="{Binding ScreenHeight}" />
 			                    <TextCell Text="Display Width" Detail="{Binding ScreenWidth}" />
 			                </TableSection>
 
-                            <TableSection Title="System Features">
-                                <SwitchCell Text="Any Camera" IsEnabled="false" On="{Binding HasCamera}" />
-                                <SwitchCell Text="Front Camera" IsEnabled="false" On="{Binding HasFrontCamera}" />
-                                <SwitchCell Text="Back Camera" IsEnabled="false" On="{Binding HasBackCamera}" />
-                                <SwitchCell Text="Bluetooth" IsEnabled="false" On="{Binding HasBluetooth}" />
-                                <SwitchCell Text="BluetoothLE" IsEnabled="false" On="{Binding HasBluetoothLE}" />
-                            </TableSection>
-
 			                <TableSection Title="Battery">
-			                    <TextCell Text="Charge Remaining" Detail="{Binding BatteryPercentage}" />
+			                    <TextCell Text="Charge Remaining" Detail="{Binding BatteryPercent}" />
 			                    <TextCell Text="Status" Detail="{Binding BatteryStatus}" />
 			                </TableSection>
 
-			                <TableSection BindingContext="{Binding App}" Title="App Info">
-			                    <TextCell Text="Version" Detail="{Binding Version}" />
-                                <TextCell Text="Short Version" Detail="{Binding ShortVersion}" />
-			                    <TextCell Text="Locale" Detail="{Binding CurrentCulture}" />
-			                </TableSection>
-
-			                <TableSection Title="Connectivity">
+			                <TableSection Title="Network">
 			                    <TextCell Text="IP Address" Detail="{Binding IpAddress}" />
 								<TextCell Text="WiFi SSID" Detail="{Binding WifiSsid}" />
 			                    <TextCell Text="Cellular Network Carrier" Detail="{Binding CellularNetworkCarrier}" />
@@ -93,15 +84,15 @@
 			</x:Arguments>
 		</NavigationPage>
 
-        <NavigationPage Title="Connectivity Events">
+        <NavigationPage Title="Network Events">
             <x:Arguments>
 				<ContentPage>
 					<ContentPage.ToolbarItems>
-						<ToolbarItem Text="Clear" Command="{Binding ClearConnectivity}" />
+						<ToolbarItem Text="Clear" Command="{Binding ClearNetwork}" />
 					</ContentPage.ToolbarItems>
 
 					<ContentPage.Content>
-						<ListView ItemsSource="{Binding ConnectivityEvents}">
+						<ListView ItemsSource="{Binding NetworkEvents}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<TextCell Text="{Binding Text}" Detail="{Binding Detail}" />
