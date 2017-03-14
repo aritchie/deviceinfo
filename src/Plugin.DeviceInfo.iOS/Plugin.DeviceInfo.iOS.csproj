@@ -8,9 +8,9 @@
     <ProjectGuid>{C3ABE1BF-0D77-42C5-880E-D9C605198BC6}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>Plugin.DeviceInfo.iOS</RootNamespace>
+    <RootNamespace>Plugin.DeviceInfo</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Plugin.DeviceInfo.iOS</AssemblyName>
+    <AssemblyName>Plugin.DeviceInfo</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

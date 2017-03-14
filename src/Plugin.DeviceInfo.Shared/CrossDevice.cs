@@ -7,7 +7,7 @@ namespace Plugin.DeviceInfo
     public static class CrossDevice
     {
 #if NETSTANDARD1_0
-        const string ERROR = "[deviceinfo] Platform implementation not found.  Have you added a nuget reference to your platform project?";
+        const string ERROR = "[Plugin.DeviceInfo] Platform implementation not found.  Have you added a nuget reference to your platform project?";
 #endif
 
 

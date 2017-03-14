@@ -22,9 +22,13 @@ Get tons of device information
 5.0
 [breaking] new namespace Plugin.DeviceInfo
 [breaking] pcl => netstandard 1.0
+[breaking] using reactive extensions 3
 [breaking] remove useless feature checking
+[fix][ios] will request hardware information on the UI thread
 [feature] tvOS support
 [feature] macOS support
+[feature][ios] better model info (thanks to @escamoteur)
+[feature] return operating system version as a separate field
 
 4.0.2
 [fix][ios] battery monitoring observable now registers properly
