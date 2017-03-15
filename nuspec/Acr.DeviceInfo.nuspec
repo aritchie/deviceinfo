@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>5.0.0</version>
+        <version>5.0.1</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -52,7 +52,7 @@ Get tons of device information
     </metadata>
     <files>
         <!-- netstandard -->
-        <file src="..\src\Plugin.DeviceInfo\bin\Release\Plugin.DeviceInfo.*" target="lib\netstandard1.0" />
+        <file src="..\src\Plugin.DeviceInfo\bin\Release\netstandard1.0\Plugin.DeviceInfo.*" target="lib\netstandard1.0" />
 
         <!-- android -->
         <file src="..\src\Plugin.DeviceInfo.Android\bin\Release\Plugin.DeviceInfo.*" target="lib\MonoAndroid10" />
