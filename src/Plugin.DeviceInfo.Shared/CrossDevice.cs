@@ -44,7 +44,7 @@ namespace Plugin.DeviceInfo
 
 
         static INetworkInfo network;
-        public static INetworkInfo Connectivity
+        public static INetworkInfo Network
         {
             get
             {

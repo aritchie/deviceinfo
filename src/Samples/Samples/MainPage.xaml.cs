@@ -13,7 +13,7 @@ namespace Samples
             this.BindingContext = new MainViewModel(
                 CrossDevice.App,
                 CrossDevice.Battery,
-                CrossDevice.Connectivity,
+                CrossDevice.Network,
                 CrossDevice.Hardware
             );
         }
