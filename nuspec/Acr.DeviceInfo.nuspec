@@ -58,7 +58,7 @@ Get tons of device information
         <file src="..\src\Plugin.DeviceInfo.Android\bin\Release\Plugin.DeviceInfo.*" target="lib\MonoAndroid10" />
 
         <!-- ios -->
-        <file src="..\src\Plugin.DeviceInfo.iOS\bin\iPhone\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.iOS10" />
+        <file src="..\src\Plugin.DeviceInfo.iOS\bin\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.iOS10" />
 
         <!-- tvOS -->
         <file src="..\src\Plugin.DeviceInfo.tvOS\bin\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.tvOS10" />
@@ -67,7 +67,7 @@ Get tons of device information
         <file src="..\src\Plugin.DeviceInfo.Mac\bin\Release\Plugin.DeviceInfo.*" target="lib\Xamarin.Mac20" />
 
         <!-- net45 -->
-        <file src="..\src\Plugin.DeviceInfo.Net45\bin\Release\Plugin.DeviceInfo.*" target="lib\net45" />
+        <file src="..\src\Plugin.DeviceInfo.Net\bin\Release\Plugin.DeviceInfo.*" target="lib\net45" />
 
         <!-- uwp -->
         <file src="..\src\Plugin.DeviceInfo.Uwp\bin\Release\Plugin.DeviceInfo.*" target="lib\uap10.0" />
