@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 
 namespace Plugin.DeviceInfo
@@ -21,6 +23,52 @@ namespace Plugin.DeviceInfo
                 .ToString();
 
         public string WifiSsid => null;
-        public IObservable<NetworkReachability> WhenStatusChanged() => Observable.Empty<NetworkReachability>();
+
+
+        IObservable<NetworkReachability> statusOb;
+        public IObservable<NetworkReachability> WhenStatusChanged()
+        {
+            this.statusOb = this.statusOb ?? Observable.Create<NetworkReachability>(async ob =>
+            {
+                var current = await this.IsReachable();
+                ob.OnNext(current
+                    ? NetworkReachability.Other
+                    : NetworkReachability.NotReachable);
+
+                var handler = new NetworkAddressChangedEventHandler(async (sender, args) =>
+                {
+                    var reachable = await this.IsReachable();
+                    if (current != reachable)
+                    {
+                        current = reachable;
+                        ob.OnNext(current
+                            ? NetworkReachability.Other
+                            : NetworkReachability.NotReachable);
+                    }
+                });
+                NetworkChange.NetworkAddressChanged += handler;
+                return () => NetworkChange.NetworkAddressChanged += handler;
+            })
+            .Replay(1)
+            .RefCount();
+
+            return this.statusOb;
+        }
+
+
+        async Task<bool> IsReachable()
+        {
+            try
+            {
+                var ping = new Ping();
+
+                var result = await ping.SendPingAsync("google.com", 3000);
+                return (result.Status == IPStatus.Success);
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
