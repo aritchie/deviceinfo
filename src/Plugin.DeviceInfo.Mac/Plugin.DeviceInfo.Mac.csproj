@@ -86,7 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\Plugin.DeviceInfo.Shared\Plugin.DeviceInfo.Shared.projitems" Label="Shared" Condition="Exists('..\Plugin.DeviceInfo.Shared\Plugin.DeviceInfo.Shared.projitems')" />

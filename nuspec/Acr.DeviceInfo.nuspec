@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>5.0.3</version>
+        <version>5.0.4</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -19,6 +19,9 @@ Get tons of device information
             <dependency id="System.Reactive" version="[3.1.1,)" />
         </dependencies>
         <releaseNotes>
+5.0.4
+[fix] remove app.config artifacts from netstandard to help deal with VS file locking issues
+
 5.0.3
 [feature][net45] network reachability
 
