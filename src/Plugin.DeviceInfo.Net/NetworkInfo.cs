@@ -47,7 +47,7 @@ namespace Plugin.DeviceInfo
                     }
                 });
                 NetworkChange.NetworkAddressChanged += handler;
-                return () => NetworkChange.NetworkAddressChanged += handler;
+                return () => NetworkChange.NetworkAddressChanged -= handler;
             })
             .Replay(1)
             .RefCount();
