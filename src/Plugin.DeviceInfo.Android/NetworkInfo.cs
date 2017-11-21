@@ -59,7 +59,10 @@ namespace Plugin.DeviceInfo
         public string IpAddress => Dns
             .GetHostEntry(Dns.GetHostName())
             .AddressList
-            .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
+            .FirstOrDefault(x =>
+                x.AddressFamily == AddressFamily.InterNetwork ||
+                x.AddressFamily == AddressFamily.InterNetworkV6
+            )?
             .ToString();
 
 
@@ -67,10 +70,8 @@ namespace Plugin.DeviceInfo
         public string WifiSsid => this.wifiManager.ConnectionInfo?.SSID;
 
         public IObservable<NetworkReachability> WhenStatusChanged()
-        {
-            return AndroidObservables
+            => AndroidObservables
                 .WhenIntentReceived(ConnectivityManager.ConnectivityAction)
                 .Select(intent => this.InternetReachability);
-        }
     }
 }

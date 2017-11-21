@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.DeviceInfo</id>
-        <version>5.0.5</version>
+        <version>5.1.0</version>
         <title>ACR Device Info Plugin for Xamarin and Windows</title>
         <description>
 Get tons of device information
@@ -19,6 +19,9 @@ Get tons of device information
             <dependency id="System.Reactive" version="[3.1.1,)" />
         </dependencies>
         <releaseNotes>
+5.1
+[feature] .NET Standard 2.0
+
 5.0.5
 [fix][net45] event handler leak in network info
 [fix][net45] add some additional properties for hardware info without adding System.Management

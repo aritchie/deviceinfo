@@ -19,7 +19,10 @@ namespace Plugin.DeviceInfo
         public string IpAddress => Dns
                 .GetHostEntry(Dns.GetHostName())
                 .AddressList
-                .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork)?
+                .FirstOrDefault(x =>
+                    x.AddressFamily == AddressFamily.InterNetwork ||
+                    x.AddressFamily == AddressFamily.InterNetworkV6
+                )?
                 .ToString();
 
         public string WifiSsid => null;
