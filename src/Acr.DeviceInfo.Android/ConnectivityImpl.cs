@@ -15,25 +15,13 @@ namespace Acr.DeviceInfo
 {
     public class ConnectivityImpl : IConnectivity
     {
-        readonly WifiManager wifiManager;
-        readonly TelephonyManager telManager;
-        readonly ConnectivityManager connectivityManager;
-
-
-        public ConnectivityImpl()
-        {
-            this.wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-            this.telManager = (TelephonyManager)Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService);
-            this.connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-        }
-
-
         public NetworkReachability InternetReachability
         {
             get
             {
-                var an = this.connectivityManager.ActiveNetworkInfo;
-                if (an == null || !an.IsConnected)
+                var mgr = (ConnectivityManager) Application.Context.GetSystemService(Context.ConnectivityService);
+                var an = mgr.ActiveNetworkInfo;
+                if (mgr?.ActiveNetworkInfo == null || !mgr.ActiveNetworkInfo.IsConnected)
                     return NetworkReachability.NotReachable;
 
                 switch (an.Type)
@@ -53,7 +41,7 @@ namespace Acr.DeviceInfo
         }
 
 
-        public string CellularNetworkCarrier => this.telManager.NetworkOperatorName;
+        public string CellularNetworkCarrier => ((TelephonyManager)Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService)).NetworkOperator;
 
 
         public string IpAddress => Dns
@@ -64,7 +52,7 @@ namespace Acr.DeviceInfo
 
 
         //<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-        public string WifiSsid => this.wifiManager.ConnectionInfo?.SSID;
+        public string WifiSsid => ((WifiManager) Application.Context.GetSystemService(Context.WifiService)) ?.ConnectionInfo.SSID;
 
         public IObservable<NetworkReachability> WhenStatusChanged()
         {
