@@ -2,13 +2,15 @@
 
  - [] iOS
  - [] Android
- - [] UWP
+ - [] tvOS
+ - [] macOS
  - [] .NET Standard
+ - UWP IS NOT SUPPORTED DURING THE BETA PERIOD - ONLY PRs ARE WELCOME FOR NOW
 
 ## Version of OS(s) listed above with issue
 
 
-## Version of this library
+## Version of Library
 
 
 ## Expected Behaviour
