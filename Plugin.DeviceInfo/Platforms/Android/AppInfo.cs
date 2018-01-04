@@ -1,11 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reactive;
 using System.Reactive.Linq;
 using Android.App;
 using Android.Content;
 using Java.Util;
-using Plugin.DeviceInfo.Internals;
+using Acr;
 using App = Android.App.Application;
 using Observable = System.Reactive.Linq.Observable;
 
@@ -32,29 +33,25 @@ namespace Plugin.DeviceInfo
         public CultureInfo CurrentCulture => this.GetCurrentCulture();
 
 
-        public IObservable<CultureInfo> WhenCultureChanged() =>
-            AndroidObservables
-                .WhenIntentReceived(Intent.ActionLocaleChanged)
-                .Select(x => this.GetCurrentCulture());
+        public IObservable<CultureInfo> WhenCultureChanged() => AndroidObservables
+            .WhenIntentReceived(Intent.ActionLocaleChanged)
+            .Select(x => this.GetCurrentCulture());
 
 
-        public IObservable<object> WhenEnteringForeground()
+        public IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
         {
-            return Observable.Create<object>(ob =>
+            var handler = new EventHandler((sender, args) =>
             {
-                var handler = new EventHandler((sender, args) =>
+                if (this.appState.IsActive)
                 {
-                    if (this.appState.IsActive)
-                    {
-                        Debug.WriteLine("Firing WhenEnteringForeground Observable");
-                        ob.OnNext(null);
-                    }
-                });
-                this.appState.StatusChanged += handler;
-
-                return () => this.appState.StatusChanged -= handler;
+                    Debug.WriteLine("Firing WhenEnteringForeground Observable");
+                    ob.OnNext(Unit.Default);
+                }
             });
-        }
+            this.appState.StatusChanged += handler;
+
+            return () => this.appState.StatusChanged -= handler;
+        });
 
 
         public IObservable<object> WhenEnteringBackground()

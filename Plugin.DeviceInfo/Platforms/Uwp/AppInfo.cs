@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive;
 using System.Reactive.Linq;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
@@ -13,33 +14,27 @@ namespace Plugin.DeviceInfo
         public override bool IsBackgrounded => !Window.Current.Visible;
 
 
-        public override IObservable<object> WhenEnteringForeground()
+        public override IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
         {
-            return Observable.Create<object>(ob =>
+            var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
             {
-                var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
-                {
-                    if (args.Visible)
-                        ob.OnNext(null);
-                });
-                Window.Current.VisibilityChanged += handler;
-                return () => Window.Current.VisibilityChanged -= handler;
+                if (args.Visible)
+                    ob.OnNext(Unit.Default);
             });
-        }
+            Window.Current.VisibilityChanged += handler;
+            return () => Window.Current.VisibilityChanged -= handler;
+        });
 
 
-        public override IObservable<object> WhenEnteringBackground()
+        public override IObservable<Unit> WhenEnteringBackground() => Observable.Create<Unit>(ob =>
         {
-            return Observable.Create<object>(ob =>
+            var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
             {
-                var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
-                {
-                    if (!args.Visible)
-                        ob.OnNext(null);
-                });
-                Window.Current.VisibilityChanged += handler;
-                return () => Window.Current.VisibilityChanged -= handler;
+                if (!args.Visible)
+                    ob.OnNext(Unit.Default);
             });
-        }
+            Window.Current.VisibilityChanged += handler;
+            return () => Window.Current.VisibilityChanged -= handler;
+        });
     }
 }

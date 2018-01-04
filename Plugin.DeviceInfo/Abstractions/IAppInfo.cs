@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Reactive;
 
 
 namespace Plugin.DeviceInfo
@@ -13,7 +14,7 @@ namespace Plugin.DeviceInfo
         IObservable<CultureInfo> WhenCultureChanged();
 
         bool IsBackgrounded { get; }
-        IObservable<object> WhenEnteringForeground();
-        IObservable<object> WhenEnteringBackground();
+        IObservable<Unit> WhenEnteringForeground();
+        IObservable<Unit> WhenEnteringBackground();
     }
 }

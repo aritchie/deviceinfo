@@ -19,36 +19,30 @@ namespace Plugin.DeviceInfo
         public IObservable<object> WhenEnteringForeground() => Observable.Empty<object>();
 #else
         public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
-        public IObservable<object> WhenEnteringForeground()
+        public IObservable<Unit> WhenEnteringForeground() => Observable.Create<object>(ob =>
         {
-            return Observable.Create<object>(ob =>
-            {
-                NSObject token = null;
-                UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                    token = UIApplication
-                        .Notifications
-                        .ObserveWillEnterForeground((sender, args) => ob.OnNext(null))
-                );
+            NSObject token = null;
+            UIApplication.SharedApplication.InvokeOnMainThread(() =>
+                token = UIApplication
+                    .Notifications
+                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(null))
+            );
 
-                return () => token?.Dispose();
-            });
-        }
+            return () => token?.Dispose();
+        });
 
 
-        public IObservable<object> WhenEnteringBackground()
+        public IObservable<Unit> WhenEnteringBackground() => Observable.Create<Unit>(ob =>
         {
-            return Observable.Create<object>(ob =>
-            {
-                NSObject token = null;
-                UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                    token = UIApplication
-                        .Notifications
-                        .ObserveDidEnterBackground((sender, args) => ob.OnNext(null))
-                );
+            NSObject token = null;
+            UIApplication.SharedApplication.InvokeOnMainThread(() =>
+                token = UIApplication
+                    .Notifications
+                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(null))
+            );
 
-                return () => token?.Dispose();
-            });
-        }
+            return () => token?.Dispose();
+        });
 #endif
 
         public CultureInfo CurrentCulture => this.GetSystemCultureInfo();

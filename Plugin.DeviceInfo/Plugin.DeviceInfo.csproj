@@ -54,7 +54,7 @@ Supported Platforms
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(TargetFramework)' == 'net46' ">
-        <DefineConstants>$(DefineConstants);BLUEZ</DefineConstants>
+        <DefineConstants>$(DefineConstants);__NETFX__</DefineConstants>
         <Product>Plugin.DeviceInfo - .NET Framework</Product>
     </PropertyGroup>
 
@@ -82,9 +82,22 @@ Supported Platforms
         <PackageReference Include="Acr.Core" Version="1.1.0" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' OR '$(TargetFramework)' == 'Xamarin.tvOS10' OR '$(TargetFramework)' == 'Xamarin.Mac20' ">
+    <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
         <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Apple\**\*.cs" />
+        <Compile Include="Platforms\iOS\**\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.tvOS10' ">
+        <Compile Include="Platforms\Shared\**\*.cs" />
+        <Compile Include="Platforms\Apple\**\*.cs" />
+        <Compile Include="Platforms\tvOS\**\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
+        <Compile Include="Platforms\Shared\**\*.cs" />
+        <Compile Include="Platforms\Apple\**\*.cs" />
+        <Compile Include="Platforms\macOS\**\*.cs" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">

@@ -57,19 +57,14 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public IObservable<int> WhenBatteryPercentageChanged()
-        {
-            return this.levelOb;
-        }
+        public IObservable<int> WhenBatteryPercentageChanged() => this.levelOb;
 
 
-        public IObservable<PowerStatus> WhenPowerStatusChanged()
-        {
-            return Observable.Create<PowerStatus>(ob =>
+        public IObservable<PowerStatus> WhenPowerStatusChanged() => Observable
+            .Create<PowerStatus>(ob =>
                 UIDevice
                     .Notifications
                     .ObserveBatteryStateDidChange((sender, args) => ob.OnNext(this.Status))
             );
-        }
     }
 }

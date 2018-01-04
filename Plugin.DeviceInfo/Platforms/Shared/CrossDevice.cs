@@ -6,9 +6,7 @@ namespace Plugin.DeviceInfo
 
     public static class CrossDevice
     {
-#if NETSTANDARD1_0
         const string ERROR = "[Plugin.DeviceInfo] Platform implementation not found.  Have you added a nuget reference to your platform project?";
-#endif
 
 
         static IAppInfo app;
@@ -16,14 +14,14 @@ namespace Plugin.DeviceInfo
         {
             get
             {
-#if NETSTANDARD1_0
+#if NETSTANDARD
                 throw new Exception(ERROR);
 #else
                 app = app ?? new AppInfo();
                 return app;
 #endif
             }
-            set { app = value; }
+            set => app = value;
         }
 
 
@@ -32,14 +30,14 @@ namespace Plugin.DeviceInfo
         {
             get
             {
-#if NETSTANDARD1_0
+#if NETSTANDARD
                 throw new Exception(ERROR);
 #else
                 batt = batt ?? new BatteryInfo();
                 return batt;
 #endif
             }
-            set { batt = value; }
+            set => batt = value;
         }
 
 
@@ -48,14 +46,14 @@ namespace Plugin.DeviceInfo
         {
             get
             {
-#if NETSTANDARD1_0
+#if NETSTANDARD
                 throw new Exception(ERROR);
 #else
                 network = network ?? new NetworkInfo();
                 return network;
 #endif
             }
-            set { network = value; }
+            set => network = value;
         }
 
 
@@ -64,14 +62,14 @@ namespace Plugin.DeviceInfo
         {
             get
             {
-#if NETSTANDARD1_0
+#if NETSTANDARD
                 throw new Exception(ERROR);
 #else
                 hardware = hardware ?? new HardwareInfo();
                 return hardware;
 #endif
             }
-            set { hardware = value; }
+            set => hardware = value;
         }
     }
 }
