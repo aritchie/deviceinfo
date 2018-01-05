@@ -245,3 +245,4 @@ src/.vs/Acr.DeviceInfo/v15/sqlite3/storage.ide
 src/.vs/Acr.DeviceInfo/v15/sqlite3/storage.ide-wal
 src/.vs/Acr.DeviceInfo/v15/sqlite3/storage.ide-shm
 /.vs/Acr.DeviceInfo/v15/Server/sqlite3
+/.vs/config/applicationhost.config

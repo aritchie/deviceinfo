@@ -54,25 +54,22 @@ namespace Plugin.DeviceInfo
         });
 
 
-        public IObservable<object> WhenEnteringBackground()
+        public IObservable<Unit> WhenEnteringBackground() => Observable.Create<Unit>(ob =>
         {
-            return Observable.Create<object>(ob =>
+            var handler = new EventHandler((sender, args) =>
             {
-                var handler = new EventHandler((sender, args) =>
+                Debug.WriteLine("Firing 1 WhenEnteringBackground Observable");
+
+                if (!this.appState.IsActive)
                 {
-                    Debug.WriteLine("Firing 1 WhenEnteringBackground Observable");
-
-                    if (!this.appState.IsActive)
-                    {
-                        Debug.WriteLine("Firing WhenEnteringBackground Observable");
-                        ob.OnNext(null);
-                    }
-                });
-                this.appState.StatusChanged += handler;
-
-                return () => this.appState.StatusChanged -= handler;
+                    Debug.WriteLine("Firing WhenEnteringBackground Observable");
+                    ob.OnNext(Unit.Default);
+                }
             });
-        }
+            this.appState.StatusChanged += handler;
+
+            return () => this.appState.StatusChanged -= handler;
+        });
 
 
         public string Version => App

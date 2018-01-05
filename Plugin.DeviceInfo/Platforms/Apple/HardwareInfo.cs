@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-#if MAC
+#if __MACOS__
 using AppKit;
 #else
 using System.Runtime.InteropServices;

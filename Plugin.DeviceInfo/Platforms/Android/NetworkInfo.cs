@@ -3,36 +3,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reactive.Linq;
+using Acr;
 using Android.App;
 using Android.Content;
 using Android.Net;
 using Android.Net.Wifi;
 using Android.Telephony;
-using Plugin.DeviceInfo.Internals;
 
 
 namespace Plugin.DeviceInfo
 {
     public class NetworkInfo : INetworkInfo
     {
-        readonly WifiManager wifiManager;
-        readonly TelephonyManager telManager;
-        readonly ConnectivityManager connectivityManager;
-
-
-        public NetworkInfo()
-        {
-            this.wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-            this.telManager = (TelephonyManager)Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService);
-            this.connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-        }
-
-
         public NetworkReachability InternetReachability
         {
             get
             {
-                var an = this.connectivityManager.ActiveNetworkInfo;
+                var an = this.Connectivity().ActiveNetworkInfo;
                 if (an == null || !an.IsConnected)
                     return NetworkReachability.NotReachable;
 
@@ -53,7 +40,7 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public string CellularNetworkCarrier => this.telManager.NetworkOperatorName;
+        public string CellularNetworkCarrier => this.Tel().NetworkOperatorName;
 
 
         public string IpAddress => Dns
@@ -67,11 +54,40 @@ namespace Plugin.DeviceInfo
 
 
         //<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-        public string WifiSsid => this.wifiManager.ConnectionInfo?.SSID;
+        public string WifiSsid => this.Wifi().ConnectionInfo?.SSID;
 
-        public IObservable<NetworkReachability> WhenStatusChanged()
-            => AndroidObservables
-                .WhenIntentReceived(ConnectivityManager.ConnectivityAction)
-                .Select(intent => this.InternetReachability);
+        public IObservable<NetworkReachability> WhenStatusChanged() => AndroidObservables
+            .WhenIntentReceived(ConnectivityManager.ConnectivityAction)
+            .Select(intent => this.InternetReachability);
+
+
+        WifiManager wifiMgr;
+        WifiManager Wifi()
+        {
+            if (this.wifiMgr == null || this.wifiMgr.Handle == IntPtr.Zero)
+                this.wifiMgr = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+
+            return this.wifiMgr;
+        }
+
+
+
+        TelephonyManager telMgr;
+        TelephonyManager Tel()
+        {
+            if (this.telMgr == null || this.telMgr.Handle == IntPtr.Zero)
+                this.telMgr = (TelephonyManager)Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService);
+            return this.telMgr;
+        }
+
+
+        ConnectivityManager connectivityMgr;
+        ConnectivityManager Connectivity()
+        {
+            if (this.connectivityMgr == null || this.connectivityMgr.Handle == IntPtr.Zero)
+                this.connectivityMgr = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+
+            return this.connectivityMgr;
+        }
     }
 }

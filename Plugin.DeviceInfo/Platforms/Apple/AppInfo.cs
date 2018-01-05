@@ -1,9 +1,10 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using Foundation;
-#if !MAC
+#if !__MACOS__
 using UIKit;
 #endif
 
@@ -13,19 +14,19 @@ namespace Plugin.DeviceInfo
     {
         public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
         public string ShortVersion => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
-#if MAC
+#if __MACOS__
         public bool IsBackgrounded { get; } = false;
-        public IObservable<object> WhenEnteringBackground() => Observable.Empty<object>();
-        public IObservable<object> WhenEnteringForeground() => Observable.Empty<object>();
+        public IObservable<Unit> WhenEnteringBackground() => Observable.Empty<Unit>();
+        public IObservable<Unit> WhenEnteringForeground() => Observable.Empty<Unit>();
 #else
         public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
-        public IObservable<Unit> WhenEnteringForeground() => Observable.Create<object>(ob =>
+        public IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
         {
             NSObject token = null;
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
                 token = UIApplication
                     .Notifications
-                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(null))
+                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(Unit.Default))
             );
 
             return () => token?.Dispose();
@@ -38,7 +39,7 @@ namespace Plugin.DeviceInfo
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
                 token = UIApplication
                     .Notifications
-                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(null))
+                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(Unit.Default))
             );
 
             return () => token?.Dispose();
@@ -48,18 +49,15 @@ namespace Plugin.DeviceInfo
         public CultureInfo CurrentCulture => this.GetSystemCultureInfo();
 
 
-        public IObservable<CultureInfo> WhenCultureChanged()
-        {
-            return Observable.Create<CultureInfo>(ob =>
-                NSLocale
-                    .Notifications
-                    .ObserveCurrentLocaleDidChange((sender, args) =>
-                    {
-                        var culture = this.GetSystemCultureInfo();
-                        ob.OnNext(culture);
-                    })
-            );
-        }
+        public IObservable<CultureInfo> WhenCultureChanged() => Observable.Create<CultureInfo>(ob =>
+            NSLocale
+                .Notifications
+                .ObserveCurrentLocaleDidChange((sender, args) =>
+                {
+                    var culture = this.GetSystemCultureInfo();
+                    ob.OnNext(culture);
+                })
+        );
 
 
         // taken from https://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/ with modifications

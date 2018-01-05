@@ -1,7 +1,20 @@
 {
   "version": 3,
   "targets": {
-    "UAP,Version=v10.0.14393": {
+    "UAP,Version=v10.0.16299": {
+      "Acr.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+          "System.Reactive": "3.1.1"
+        },
+        "compile": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -406,7 +419,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.AppContext.dll": {}
+          "ref/netstandard1.6/System.AppContext.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.AppContext.dll": {}
@@ -994,6 +1007,10 @@
           "lib/win8/_._": {}
         },
         "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.6/System.Net.Http.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
           "runtimes/win/lib/netcore50/System.Net.Http.dll": {
             "assetType": "runtime",
             "rid": "win"
@@ -1594,7 +1611,7 @@
           "System.Runtime.Extensions": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
+          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.Reflection.TypeExtensions.dll": {}
@@ -1873,9 +1890,13 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
+          "ref/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
           "runtimes/win/lib/netcore50/System.Security.Cryptography.Algorithms.dll": {
             "assetType": "runtime",
             "rid": "win"
@@ -1898,10 +1919,14 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.6/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/win/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {
+          "runtimes/unix/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -1981,6 +2006,10 @@
           "ref/netstandard1.4/System.Security.Cryptography.X509Certificates.dll": {}
         },
         "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.6/System.Security.Cryptography.X509Certificates.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
           "runtimes/win/lib/netcore50/System.Security.Cryptography.X509Certificates.dll": {
             "assetType": "runtime",
             "rid": "win"
@@ -2407,12 +2436,28 @@
       },
       "Samples/1.0.0": {
         "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Acr.DeviceInfo": "1.0.0"
+          "Acr.Core": "1.1.0",
+          "Acr.DeviceInfo": "6.0.0",
+          "Xamarin.Forms": "2.5.0.121934"
         }
       }
     },
-    "UAP,Version=v10.0.14393/win10-arm": {
+    "UAP,Version=v10.0.16299/win10-arm": {
+      "Acr.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+          "System.Reactive": "3.1.1"
+        },
+        "compile": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -3090,7 +3135,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.AppContext.dll": {}
+          "ref/netstandard1.6/System.AppContext.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.AppContext.dll": {}
@@ -4175,7 +4220,7 @@
           "System.Runtime.Extensions": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
+          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.Reflection.TypeExtensions.dll": {}
@@ -4411,7 +4456,7 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
+          "ref/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Security.Cryptography.Algorithms.dll": {}
@@ -4433,10 +4478,10 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.6/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {}
+          "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.0.0": {
@@ -4907,12 +4952,28 @@
       },
       "Samples/1.0.0": {
         "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Acr.DeviceInfo": "1.0.0"
+          "Acr.Core": "1.1.0",
+          "Acr.DeviceInfo": "6.0.0",
+          "Xamarin.Forms": "2.5.0.121934"
         }
       }
     },
-    "UAP,Version=v10.0.14393/win10-arm-aot": {
+    "UAP,Version=v10.0.16299/win10-arm-aot": {
+      "Acr.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+          "System.Reactive": "3.1.1"
+        },
+        "compile": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -5626,7 +5687,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.AppContext.dll": {}
+          "ref/netstandard1.6/System.AppContext.dll": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.AppContext.dll": {}
@@ -6711,7 +6772,7 @@
           "System.Runtime.Extensions": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
+          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Reflection.TypeExtensions.dll": {}
@@ -6947,7 +7008,7 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
+          "ref/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Security.Cryptography.Algorithms.dll": {}
@@ -6969,10 +7030,10 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.6/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {}
+          "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.0.0": {
@@ -7443,12 +7504,28 @@
       },
       "Samples/1.0.0": {
         "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Acr.DeviceInfo": "1.0.0"
+          "Acr.Core": "1.1.0",
+          "Acr.DeviceInfo": "6.0.0",
+          "Xamarin.Forms": "2.5.0.121934"
         }
       }
     },
-    "UAP,Version=v10.0.14393/win10-x64": {
+    "UAP,Version=v10.0.16299/win10-x64": {
+      "Acr.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+          "System.Reactive": "3.1.1"
+        },
+        "compile": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -8135,7 +8212,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.AppContext.dll": {}
+          "ref/netstandard1.6/System.AppContext.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.AppContext.dll": {}
@@ -9220,7 +9297,7 @@
           "System.Runtime.Extensions": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
+          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.Reflection.TypeExtensions.dll": {}
@@ -9456,7 +9533,7 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
+          "ref/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Security.Cryptography.Algorithms.dll": {}
@@ -9478,10 +9555,10 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.6/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {}
+          "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.0.0": {
@@ -9952,12 +10029,28 @@
       },
       "Samples/1.0.0": {
         "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Acr.DeviceInfo": "1.0.0"
+          "Acr.Core": "1.1.0",
+          "Acr.DeviceInfo": "6.0.0",
+          "Xamarin.Forms": "2.5.0.121934"
         }
       }
     },
-    "UAP,Version=v10.0.14393/win10-x64-aot": {
+    "UAP,Version=v10.0.16299/win10-x64-aot": {
+      "Acr.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+          "System.Reactive": "3.1.1"
+        },
+        "compile": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -10680,7 +10773,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.AppContext.dll": {}
+          "ref/netstandard1.6/System.AppContext.dll": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.AppContext.dll": {}
@@ -11765,7 +11858,7 @@
           "System.Runtime.Extensions": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
+          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Reflection.TypeExtensions.dll": {}
@@ -12001,7 +12094,7 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
+          "ref/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Security.Cryptography.Algorithms.dll": {}
@@ -12023,10 +12116,10 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.6/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {}
+          "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.0.0": {
@@ -12497,12 +12590,28 @@
       },
       "Samples/1.0.0": {
         "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Acr.DeviceInfo": "1.0.0"
+          "Acr.Core": "1.1.0",
+          "Acr.DeviceInfo": "6.0.0",
+          "Xamarin.Forms": "2.5.0.121934"
         }
       }
     },
-    "UAP,Version=v10.0.14393/win10-x86": {
+    "UAP,Version=v10.0.16299/win10-x86": {
+      "Acr.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+          "System.Reactive": "3.1.1"
+        },
+        "compile": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -13189,7 +13298,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.AppContext.dll": {}
+          "ref/netstandard1.6/System.AppContext.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.AppContext.dll": {}
@@ -14274,7 +14383,7 @@
           "System.Runtime.Extensions": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
+          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
         },
         "runtime": {
           "lib/netcore50/System.Reflection.TypeExtensions.dll": {}
@@ -14510,7 +14619,7 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
+          "ref/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Security.Cryptography.Algorithms.dll": {}
@@ -14532,10 +14641,10 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.6/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {}
+          "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.0.0": {
@@ -15006,12 +15115,28 @@
       },
       "Samples/1.0.0": {
         "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Acr.DeviceInfo": "1.0.0"
+          "Acr.Core": "1.1.0",
+          "Acr.DeviceInfo": "6.0.0",
+          "Xamarin.Forms": "2.5.0.121934"
         }
       }
     },
-    "UAP,Version=v10.0.14393/win10-x86-aot": {
+    "UAP,Version=v10.0.16299/win10-x86-aot": {
+      "Acr.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+          "System.Reactive": "3.1.1"
+        },
+        "compile": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Acr.Core.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -15734,7 +15859,7 @@
           "System.Threading": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.3/System.AppContext.dll": {}
+          "ref/netstandard1.6/System.AppContext.dll": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.AppContext.dll": {}
@@ -16819,7 +16944,7 @@
           "System.Runtime.Extensions": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
+          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Reflection.TypeExtensions.dll": {}
@@ -17055,7 +17180,7 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
+          "ref/netstandard1.6/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Security.Cryptography.Algorithms.dll": {}
@@ -17077,10 +17202,10 @@
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.6/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {}
+          "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.0.0": {
@@ -17551,13 +17676,31 @@
       },
       "Samples/1.0.0": {
         "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Acr.DeviceInfo": "1.0.0"
+          "Acr.Core": "1.1.0",
+          "Acr.DeviceInfo": "6.0.0",
+          "Xamarin.Forms": "2.5.0.121934"
         }
       }
     }
   },
   "libraries": {
+    "Acr.Core/1.1.0": {
+      "sha512": "4PYIJxya7wdxT1hE3/o0E979wX+royEgV2RnfJHJTPY9ltePYKKss94ibFaa19lFKN92MK1mTyp/oUCKpnDPtg==",
+      "type": "package",
+      "path": "acr.core/1.1.0",
+      "files": [
+        "acr.core.1.1.0.nupkg.sha512",
+        "acr.core.nuspec",
+        "lib/monoandroid70/Acr.Core.dll",
+        "lib/monoandroid80/Acr.Core.dll",
+        "lib/netstandard2.0/Acr.Core.dll",
+        "lib/uap10.0/Acr.Core.dll",
+        "lib/uap10.0/Acr.Core.pri",
+        "lib/xamarinios10/Acr.Core.dll"
+      ]
+    },
     "Microsoft.CSharp/4.0.1": {
       "sha512": "17h8b5mXa87XYKrrVqdgZ38JefSUqLChUQpXgSnpzsM0nDOhE40FTeNWOJ/YmySGV6tG6T8+hjz6vxbknHJr6A==",
       "type": "package",
@@ -26218,7 +26361,7 @@
       "System.Reactive >= 3.1.1",
       "Xamarin.Forms >= 2.3.3.193"
     ],
-    "UAP,Version=v10.0.14393": []
+    "UAP,Version=v10.0.16299": []
   },
   "packageFolders": {
     "C:\\Users\\allan\\.nuget\\packages\\": {},
@@ -26247,7 +26390,7 @@
         "https://www.myget.org/F/plexxis/auth/9bec0804-d7ba-4503-8746-917cefcc170b/api/v3/index.json": {}
       },
       "frameworks": {
-        "uap10.0.14393": {
+        "uap10.0.16299": {
           "projectReferences": {
             "C:\\dev\\acr\\deviceinfo\\Samples\\Samples\\Samples.csproj": {
               "projectPath": "C:\\dev\\acr\\deviceinfo\\Samples\\Samples\\Samples.csproj"
@@ -26262,7 +26405,7 @@
       "Xamarin.Forms": "[2.3.3.193, )"
     },
     "frameworks": {
-      "uap10.0.14393": {}
+      "uap10.0.16299": {}
     },
     "runtimes": {
       "win10-arm": {
@@ -26290,16 +26433,48 @@
       "code": "NU1605",
       "level": "Warning",
       "warningLevel": 1,
+      "message": "Detected package downgrade: Xamarin.Forms from 2.5.0.121934 to 2.3.3.193. Reference the package directly from the project to select a different version. \r\n Samples.Uwp -> Samples -> Xamarin.Forms (>= 2.5.0.121934) \r\n Samples.Uwp -> Xamarin.Forms (>= 2.3.3.193)",
+      "libraryId": "Xamarin.Forms",
+      "targetGraphs": [
+        "UAP,Version=v10.0.16299",
+        "UAP,Version=v10.0.16299/win10-arm",
+        "UAP,Version=v10.0.16299/win10-arm-aot",
+        "UAP,Version=v10.0.16299/win10-x64",
+        "UAP,Version=v10.0.16299/win10-x64-aot",
+        "UAP,Version=v10.0.16299/win10-x86",
+        "UAP,Version=v10.0.16299/win10-x86-aot"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.NETCore.UniversalWindowsPlatform from 6.0.5 to 5.3.1. Reference the package directly from the project to select a different version. \r\n Samples.Uwp -> Samples -> Acr.Core 1.1.0 -> Microsoft.NETCore.UniversalWindowsPlatform (>= 6.0.5) \r\n Samples.Uwp -> Microsoft.NETCore.UniversalWindowsPlatform (>= 5.3.1)",
+      "libraryId": "Microsoft.NETCore.UniversalWindowsPlatform",
+      "targetGraphs": [
+        "UAP,Version=v10.0.16299",
+        "UAP,Version=v10.0.16299/win10-arm",
+        "UAP,Version=v10.0.16299/win10-arm-aot",
+        "UAP,Version=v10.0.16299/win10-x64",
+        "UAP,Version=v10.0.16299/win10-x64-aot",
+        "UAP,Version=v10.0.16299/win10-x86",
+        "UAP,Version=v10.0.16299/win10-x86-aot"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
       "message": "Detected package downgrade: Microsoft.NETCore.UniversalWindowsPlatform from 6.0.5 to 5.3.1. Reference the package directly from the project to select a different version. \r\n Samples.Uwp -> Samples -> Acr.DeviceInfo -> Microsoft.NETCore.UniversalWindowsPlatform (>= 6.0.5) \r\n Samples.Uwp -> Microsoft.NETCore.UniversalWindowsPlatform (>= 5.3.1)",
       "libraryId": "Microsoft.NETCore.UniversalWindowsPlatform",
       "targetGraphs": [
-        "UAP,Version=v10.0.14393",
-        "UAP,Version=v10.0.14393/win10-arm",
-        "UAP,Version=v10.0.14393/win10-arm-aot",
-        "UAP,Version=v10.0.14393/win10-x64",
-        "UAP,Version=v10.0.14393/win10-x64-aot",
-        "UAP,Version=v10.0.14393/win10-x86",
-        "UAP,Version=v10.0.14393/win10-x86-aot"
+        "UAP,Version=v10.0.16299",
+        "UAP,Version=v10.0.16299/win10-arm",
+        "UAP,Version=v10.0.16299/win10-arm-aot",
+        "UAP,Version=v10.0.16299/win10-x64",
+        "UAP,Version=v10.0.16299/win10-x64-aot",
+        "UAP,Version=v10.0.16299/win10-x86",
+        "UAP,Version=v10.0.16299/win10-x86-aot"
       ]
     }
   ]

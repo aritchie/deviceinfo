@@ -38,17 +38,14 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public IObservable<NetworkReachability> WhenStatusChanged()
+        public IObservable<NetworkReachability> WhenStatusChanged() => Observable.Create<NetworkReachability>(ob =>
         {
-            return Observable.Create<NetworkReachability>(ob =>
-            {
-                var handler = new EventHandler((sender, args) =>
-                    ob.OnNext(this.InternetReachability)
-                );
-                Reachability.ReachabilityChanged += handler;
-                return () => Reachability.ReachabilityChanged -= handler;
-            });
-        }
+            var handler = new EventHandler((sender, args) =>
+                ob.OnNext(this.InternetReachability)
+            );
+            Reachability.ReachabilityChanged += handler;
+            return () => Reachability.ReachabilityChanged -= handler;
+        });
 
 
 #if __IOS__

@@ -4,12 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Plugin.DeviceInfo;
-using PropertyChanged;
 
 
 namespace Samples
 {
-    [ImplementPropertyChanged]
     public class MainViewModel : INotifyPropertyChanged
     {
         public MainViewModel(IAppInfo app, IBatteryInfo battery, INetworkInfo network, IHardwareInfo hardware)
