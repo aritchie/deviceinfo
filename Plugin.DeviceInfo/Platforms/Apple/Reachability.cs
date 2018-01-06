@@ -4,43 +4,55 @@ using SystemConfiguration;
 
 using CoreFoundation;
 
-    public enum NetworkStatus {
+
+namespace Plugin.DeviceInfo
+{
+    public enum NetworkStatus
+    {
         NotReachable,
         ReachableViaCarrierDataNetwork,
         ReachableViaWiFiNetwork
     }
 
 
-    public static class Reachability {
+    public static class Reachability
+    {
         public static string HostName = "www.google.com";
 
-        public static bool IsReachableWithoutRequiringConnection(NetworkReachabilityFlags flags) {
+
+        public static bool IsReachableWithoutRequiringConnection(NetworkReachabilityFlags flags)
+        {
             // Is it reachable with the current network configuration?
             var isReachable = (flags & NetworkReachabilityFlags.Reachable) != 0;
 
             // Do we need a connection to reach it?
-#if MAC
+#if __MACOS__
             var noConnectionRequired = (flags & NetworkReachabilityFlags.ConnectionRequired) == 0;
 #else
             var noConnectionRequired = (flags & NetworkReachabilityFlags.ConnectionRequired) == 0
-                || (flags & NetworkReachabilityFlags.IsWWAN) != 0;
+                                       || (flags & NetworkReachabilityFlags.IsWWAN) != 0;
 #endif
             return isReachable && noConnectionRequired;
         }
 
+
         // Is the host reachable with the current network configuration
-        public static bool IsHostReachable(string host) {
+        public static bool IsHostReachable(string host)
+        {
             if (string.IsNullOrEmpty(host))
                 return false;
 
-            using (var r = new NetworkReachability(host)) {
+            using (var r = new NetworkReachability(host))
+            {
                 NetworkReachabilityFlags flags;
 
                 if (r.TryGetFlags(out flags))
                     return IsReachableWithoutRequiringConnection(flags);
             }
+
             return false;
         }
+
 
         //
         // Raised every time there is an interesting reachable event,
@@ -58,9 +70,12 @@ using CoreFoundation;
         //
         static NetworkReachability adHocWiFiNetworkReachability;
 
-        public static bool IsAdHocWiFiNetworkAvailable(out NetworkReachabilityFlags flags) {
-            if (adHocWiFiNetworkReachability == null) {
-                adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] { 169, 254, 0, 0 }));
+
+        public static bool IsAdHocWiFiNetworkAvailable(out NetworkReachabilityFlags flags)
+        {
+            if (adHocWiFiNetworkReachability == null)
+            {
+                adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] {169, 254, 0, 0}));
                 adHocWiFiNetworkReachability.SetNotification(OnChange);
                 adHocWiFiNetworkReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
@@ -68,24 +83,33 @@ using CoreFoundation;
             return adHocWiFiNetworkReachability.TryGetFlags(out flags) && IsReachableWithoutRequiringConnection(flags);
         }
 
+
         static NetworkReachability defaultRouteReachability;
 
-        static bool IsNetworkAvailable(out NetworkReachabilityFlags flags) {
-            if (defaultRouteReachability == null) {
+
+        static bool IsNetworkAvailable(out NetworkReachabilityFlags flags)
+        {
+            if (defaultRouteReachability == null)
+            {
                 defaultRouteReachability = new NetworkReachability(new IPAddress(0));
                 defaultRouteReachability.SetNotification(OnChange);
                 defaultRouteReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
+
             return defaultRouteReachability.TryGetFlags(out flags) && IsReachableWithoutRequiringConnection(flags);
         }
 
+
         static NetworkReachability remoteHostReachability;
 
-        public static NetworkStatus RemoteHostStatus() {
+
+        public static NetworkStatus RemoteHostStatus()
+        {
             NetworkReachabilityFlags flags;
             bool reachable;
 
-            if (remoteHostReachability == null) {
+            if (remoteHostReachability == null)
+            {
                 remoteHostReachability = new NetworkReachability(HostName);
 
                 // Need to probe before we queue, or we wont get any meaningful values
@@ -94,7 +118,9 @@ using CoreFoundation;
 
                 remoteHostReachability.SetNotification(OnChange);
                 remoteHostReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
-            } else {
+            }
+            else
+            {
                 reachable = remoteHostReachability.TryGetFlags(out flags);
             }
 
@@ -104,21 +130,24 @@ using CoreFoundation;
             if (!IsReachableWithoutRequiringConnection(flags))
                 return NetworkStatus.NotReachable;
 
-#if MAC
+#if __MACOS__
              return NetworkStatus.ReachableViaWiFiNetwork;
 #else
-            return (flags & NetworkReachabilityFlags.IsWWAN) != 0 ?
-                NetworkStatus.ReachableViaCarrierDataNetwork : NetworkStatus.ReachableViaWiFiNetwork;
+            return (flags & NetworkReachabilityFlags.IsWWAN) != 0
+                ? NetworkStatus.ReachableViaCarrierDataNetwork
+                : NetworkStatus.ReachableViaWiFiNetwork;
 #endif
-    }
+        }
 
-        public static NetworkStatus InternetConnectionStatus() {
+
+        public static NetworkStatus InternetConnectionStatus()
+        {
             NetworkReachabilityFlags flags;
             var defaultNetworkAvailable = IsNetworkAvailable(out flags);
 
             if (defaultNetworkAvailable && ((flags & NetworkReachabilityFlags.IsDirect) != 0))
                 return NetworkStatus.NotReachable;
-#if !MAC
+#if !__MACOS__
             if ((flags & NetworkReachabilityFlags.IsWWAN) != 0)
                 return NetworkStatus.ReachableViaCarrierDataNetwork;
 #endif
@@ -128,7 +157,9 @@ using CoreFoundation;
             return NetworkStatus.ReachableViaWiFiNetwork;
         }
 
-        public static NetworkStatus LocalWifiConnectionStatus() {
+
+        public static NetworkStatus LocalWifiConnectionStatus()
+        {
             NetworkReachabilityFlags flags;
             if (IsAdHocWiFiNetworkAvailable(out flags))
                 if ((flags & NetworkReachabilityFlags.IsDirect) != 0)
@@ -136,4 +167,5 @@ using CoreFoundation;
 
             return NetworkStatus.NotReachable;
         }
+    }
 }
