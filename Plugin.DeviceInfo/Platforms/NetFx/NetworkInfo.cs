@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,10 @@ namespace Plugin.DeviceInfo
     public class NetworkInfo : INetworkInfo
     {
         public bool IsInternetAvailable => false; // NetworkInterface.GetIsNetworkAvailable()
+        public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Empty<IWifiScanResult>();
+        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
+
+
         public NetworkReachability InternetReachability => NetworkReachability.Other;
         public string CellularNetworkCarrier => null;
 
@@ -24,6 +29,7 @@ namespace Plugin.DeviceInfo
                     x.AddressFamily == AddressFamily.InterNetworkV6
                 )?
                 .ToString();
+
 
         public string WifiSsid => null;
 

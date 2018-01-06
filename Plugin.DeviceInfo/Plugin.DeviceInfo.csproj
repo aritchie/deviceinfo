@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;uap10.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;uap10.0;net46</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>aritchie</Authors>
         <Company />
@@ -104,6 +104,7 @@ Supported Platforms
     <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
         <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\NetFx\**\*.cs" />
+        <Reference Include="System.Windows.Forms" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">

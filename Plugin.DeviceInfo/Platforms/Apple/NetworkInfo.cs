@@ -6,7 +6,9 @@ using System.Reactive;
 using System.Reactive.Linq;
 using SystemConfiguration;
 using Foundation;
+using CoreFoundation;
 #if __IOS__
+using UIKit;
 using CoreTelephony;
 using NetworkExtension;
 #endif
@@ -17,19 +19,27 @@ namespace Plugin.DeviceInfo
     public class NetworkInfo : INetworkInfo
     {
 #if __IOS__
-        public IObservable<IWifiInfo> ScanForWifiNetworks() => Observable.Create<IWifiInfo>(ob =>
+        public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Create<IWifiScanResult>(ob =>
         {
-            //NEHotspotHelper.Register(new NEHotspotHelperOptions(), DispatchQueue.CurrentQueue, handler =>
-            //{
-            //    handler.Network.
-            //});
+            //UIDevice.CurrentDevice.CheckSystemVersion(11, 0)
+            NEHotspotHelper.Register(new NEHotspotHelperOptions(), DispatchQueue.CurrentQueue, handler =>
+            {
+                ob.OnNext(new WifiScanResult
+                {
+                    // Bssid
+                    Ssid = handler.Network.Ssid,
+                    IsSecure = handler.Network.Secure,
+                    SignalStrength = handler.Network.SignalStrength
+                });
+            });
             return () => {};
         });
 
 
-        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.FromAsync(async ct =>
+        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.FromAsync(_ =>
         {
-            var config = new NEHotspotConfiguration(ssid, password, isWep) { JoinOnce = true };
+            var config = new NEHotspotConfiguration(ssid, password, true) { JoinOnce = true };
+            return NEHotspotConfigurationManager.SharedManager.ApplyConfigurationAsync(config);
         });
 
 

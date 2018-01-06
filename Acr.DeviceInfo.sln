@@ -5,6 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B46D2F8-5264-44C7-93F1-BE0DAA9DF061}"
 	ProjectSection(SolutionItems) = preProject
+		changelog.md = changelog.md
 		ISSUE_TEMPLATE = ISSUE_TEMPLATE
 		LICENSE.md = LICENSE.md
 		nuget.exe = nuget.exe
@@ -12,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples\Samples.csproj", "{5B47DDBE-E702-4D70-8E37-B6CFB03FA8DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples", "Samples\Samples\Samples.csproj", "{5B47DDBE-E702-4D70-8E37-B6CFB03FA8DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.iOS", "Samples\Samples.iOS\Samples.iOS.csproj", "{D053B505-4911-4602-9982-4BB7DCDC0CCD}"
 EndProject
