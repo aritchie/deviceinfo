@@ -31,23 +31,13 @@ namespace Plugin.DeviceInfo
 
 
         public int Percentage => Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent);
-        public IObservable<int> WhenBatteryPercentageChanged() => Observable.Create<int>(ob =>
-        {
-            var last = this.Percentage;
-            ob.OnNext(last);
 
-            return Observable
-                .Interval(TimeSpan.FromSeconds(30))
-                .Subscribe(x =>
-                {
-                    var now = this.Percentage;
-                    if (now != last)
-                    {
-                        last = now;
-                        ob.OnNext(last);
-                    }
-                });
-        });
+
+        public IObservable<int> WhenBatteryPercentageChanged() => Observable
+            .Interval(TimeSpan.FromSeconds(30))
+            .StartWith(this.Percentage)
+            .Select(x => this.Percentage)
+            .DistinctUntilChanged();
 
 
         public IObservable<PowerStatus> WhenPowerStatusChanged() => Observable.Create<PowerStatus>(ob =>
