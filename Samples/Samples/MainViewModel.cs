@@ -33,10 +33,10 @@ namespace Samples
         public PowerStatus BatteryStatus { get; set; }
         public int BatteryPercent { get; set; }
 
-        public IAppInfo App { get; private set; }
-        public IBatteryInfo Battery { get; private set; }
-        public IHardwareInfo Hardware { get; private set; }
-        public INetworkInfo Network { get; private set; }
+        public IAppInfo App { get; }
+        public IBatteryInfo Battery { get; }
+        public IHardwareInfo Hardware { get; }
+        public INetworkInfo Network { get; }
 
         public ObservableCollection<EventViewModel> AppEvents { get; } = new ObservableCollection<EventViewModel>();
         public ObservableCollection<EventViewModel> NetworkEvents { get; } = new ObservableCollection<EventViewModel>();
