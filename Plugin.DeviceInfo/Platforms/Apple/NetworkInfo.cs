@@ -2,11 +2,13 @@ using System;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Reactive;
 using System.Reactive.Linq;
 using SystemConfiguration;
 using Foundation;
 #if __IOS__
 using CoreTelephony;
+using NetworkExtension;
 #endif
 
 
@@ -14,6 +16,37 @@ namespace Plugin.DeviceInfo
 {
     public class NetworkInfo : INetworkInfo
     {
+#if __IOS__
+        public IObservable<IWifiInfo> ScanForWifiNetworks() => Observable.Create<IWifiInfo>(ob =>
+        {
+            //NEHotspotHelper.Register(new NEHotspotHelperOptions(), DispatchQueue.CurrentQueue, handler =>
+            //{
+            //    handler.Network.
+            //});
+            return () => {};
+        });
+
+
+        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.FromAsync(async ct =>
+        {
+            var config = new NEHotspotConfiguration(ssid, password, isWep) { JoinOnce = true };
+        });
+
+
+        public string CellularNetworkCarrier
+        {
+            get
+            {
+                using (var info = new CTTelephonyNetworkInfo())
+                    return info.SubscriberCellularProvider?.CarrierName;
+            }
+        }
+#else
+        public IObservable<IWifiScanResult> ScanForWifiNetworks() =>  Observable.Empty<IWifiScanResult>();
+        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
+        public string CellularNetworkCarrier { get; } = null;
+#endif
+
         public NetworkReachability InternetReachability
         {
             get
@@ -47,19 +80,6 @@ namespace Plugin.DeviceInfo
             return () => Reachability.ReachabilityChanged -= handler;
         });
 
-
-#if __IOS__
-        public string CellularNetworkCarrier
-        {
-            get
-            {
-                using (var info = new CTTelephonyNetworkInfo())
-                    return info.SubscriberCellularProvider?.CarrierName;
-            }
-        }
-#else
-        public string CellularNetworkCarrier { get; } = null;
-#endif
 
 #if __IOS__ || __TVOS__
         public string IpAddress => NetworkInterface
