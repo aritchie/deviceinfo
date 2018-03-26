@@ -6,8 +6,9 @@ using System.Reactive.Linq;
 
 namespace Plugin.DeviceInfo
 {
-    public abstract class AbstractAppInfo : IAppInfo
+    public abstract class AbstractApp : IApp
     {
+        public abstract bool EnableSleepMode { get; set; }
         public abstract string Version { get; }
         public abstract string ShortVersion { get; }
         public virtual CultureInfo CurrentCulture => CultureInfo.CurrentCulture;

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Plugin.DeviceInfo
 {
 
-    public class NetworkInfo : INetworkInfo
+    public class NetworkInfo : INetwork
     {
         public bool IsInternetAvailable => false; // NetworkInterface.GetIsNetworkAvailable()
         public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Empty<IWifiScanResult>();

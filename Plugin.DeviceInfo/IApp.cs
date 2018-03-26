@@ -6,7 +6,7 @@ using System.Reactive;
 namespace Plugin.DeviceInfo
 {
 
-    public interface IAppInfo
+    public interface IApp
     {
         string Version { get; }
         string ShortVersion { get; }

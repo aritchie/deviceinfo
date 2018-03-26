@@ -33,7 +33,7 @@ namespace Plugin.DeviceInfo
 #if NETSTANDARD
                 throw new Exception(ERROR);
 #else
-                batt = batt ?? new BatteryInfo();
+                batt = batt ?? new PowerStateImpl();
                 return batt;
 #endif
             }
@@ -41,8 +41,8 @@ namespace Plugin.DeviceInfo
         }
 
 
-        static INetworkInfo network;
-        public static INetworkInfo Network
+        static INetwork network;
+        public static INetwork Network
         {
             get
             {

@@ -14,7 +14,7 @@ using Android.Telephony;
 
 namespace Plugin.DeviceInfo
 {
-    public class NetworkInfo : INetworkInfo
+    public class NetworkImpl : INetwork
     {
         /*
 WifiConfiguration wifiConfig = new WifiConfiguration();
@@ -57,26 +57,26 @@ wifiManager.reconnect();
          }
         UPD: In case of WEP, if your password is in hex, you do not need to surround it with quotes.
          */
-        public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Create<IWifiScanResult>(ob =>
-        {
-            this.Wifi.StartScan();
-            var sr = this.Wifi.ScanResults[0];
-            //sr.Ssid;
-            //sr.Level;
-            return () => { };
-        });
+        //public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Create<IWifiScanResult>(ob =>
+        //{
+        //    this.Wifi.StartScan();
+        //    var sr = this.Wifi.ScanResults[0];
+        //    //sr.Ssid;
+        //    //sr.Level;
+        //    return () => { };
+        //});
 
 
-        public IObservable<Unit> ConnectToWifi(string ssid, string password)
-        {
-            var cfg = new WifiConfiguration
-            {
-                Ssid = ssid
-            };
-            //cfg.WepKeys
-            this.Wifi.AddNetwork(cfg);
-            throw new NotImplementedException();
-        }
+        //public IObservable<Unit> ConnectToWifi(string ssid, string password)
+        //{
+        //    var cfg = new WifiConfiguration
+        //    {
+        //        Ssid = ssid
+        //    };
+        //    //cfg.WepKeys
+        //    this.Wifi.AddNetwork(cfg);
+        //    throw new NotImplementedException();
+        //}
 
 
         public NetworkReachability InternetReachability

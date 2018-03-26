@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Reactive;
 
 
 namespace Plugin.DeviceInfo
 {
 
-    public interface INetworkInfo
+    public interface INetwork
     {
         //IObservable<IWifiScanResult> ScanForWifiNetworks();
         //IObservable<Unit> ConnectToWifi(string ssid, string password);

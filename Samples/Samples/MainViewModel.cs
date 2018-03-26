@@ -10,7 +10,7 @@ namespace Samples
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public MainViewModel(IAppInfo app, IBatteryInfo battery, INetworkInfo network, IHardwareInfo hardware)
+        public MainViewModel(IAppInfo app, IBatteryInfo battery, INetwork network, IHardwareInfo hardware)
         {
             this.App = app;
             this.Battery = battery;
@@ -36,7 +36,7 @@ namespace Samples
         public IAppInfo App { get; }
         public IBatteryInfo Battery { get; }
         public IHardwareInfo Hardware { get; }
-        public INetworkInfo Network { get; }
+        public INetwork Network { get; }
 
         public ObservableCollection<EventViewModel> AppEvents { get; } = new ObservableCollection<EventViewModel>();
         public ObservableCollection<EventViewModel> NetworkEvents { get; } = new ObservableCollection<EventViewModel>();

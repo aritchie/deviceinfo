@@ -3,7 +3,7 @@
 
 namespace Plugin.DeviceInfo
 {
-    public interface IBatteryInfo
+    public interface IPowerState
     {
         IObservable<int> WhenBatteryPercentageChanged();
         IObservable<PowerStatus> WhenPowerStatusChanged();

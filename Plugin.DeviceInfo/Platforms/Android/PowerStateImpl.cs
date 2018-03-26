@@ -7,7 +7,7 @@ using Android.OS;
 
 namespace Plugin.DeviceInfo
 {
-    public class BatteryInfo : IBatteryInfo
+    public class PowerStateImpl : IPowerState
     {
         public IObservable<int> WhenBatteryPercentageChanged() => AndroidObservables
             .WhenIntentReceived(Intent.ActionBatteryChanged)

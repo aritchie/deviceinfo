@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;uap10.0;net46</TargetFrameworks>
+        <TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;uap10.0;net46</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>aritchie</Authors>
         <Company />
@@ -27,13 +27,13 @@ Supported Platforms
         <PackageId>Acr.DeviceInfo</PackageId>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard2.0' ">
         <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
         <Product>Plugin.DeviceInfo - .NET Standard 2</Product>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' OR '$(TargetFramework)' == 'MonoAndroid70' ">
+    <PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR '$(TargetFramework)' == 'MonoAndroid80' ">
         <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
         <Product>Plugin.DeviceInfo - Android</Product>
     </PropertyGroup>
@@ -68,7 +68,6 @@ Supported Platforms
     <ItemGroup>
         <Compile Remove="Platforms\**\*.cs" />
         <None Include="Platforms\**\*.cs" />
-        <None Remove="Platforms\Shared\WifiScanResult.cs" />
         <PackageReference Include="System.Reactive" Version="3.1.1" />
         <PackageReference Include="MSBuild.Sdk.Extras" Version="1.1.0" PrivateAssets="all" />
     </ItemGroup>
@@ -77,10 +76,10 @@ Supported Platforms
         <Compile Include="Platforms\Shared\**\*.cs" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' OR '$(TargetFramework)' == 'MonoAndroid70' ">
+    <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR '$(TargetFramework)' == 'MonoAndroid80' ">
         <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Android\**\*.cs" />
-        <PackageReference Include="Acr.Core" Version="1.1.0" />
+        <PackageReference Include="Acr.Core" Version="1.2.0" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">

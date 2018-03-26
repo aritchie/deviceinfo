@@ -13,7 +13,7 @@ using Windows.Security.Credentials;
 
 namespace Plugin.DeviceInfo
 {
-    public class NetworkInfo : INetworkInfo
+    public class NetworkInfo : INetwork
     {
         public string CellularNetworkCarrier { get; } = null;
 

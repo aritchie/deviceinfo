@@ -16,7 +16,7 @@ using NetworkExtension;
 
 namespace Plugin.DeviceInfo
 {
-    public class NetworkInfo : INetworkInfo
+    public class NetworkInfo : INetwork
     {
 #if __IOS__
         public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Create<IWifiScanResult>(ob =>

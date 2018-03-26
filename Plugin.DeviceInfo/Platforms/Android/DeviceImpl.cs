@@ -15,12 +15,12 @@ using B = Android.OS.Build;
 namespace Plugin.DeviceInfo
 {
 
-    public class HardwareInfo : IHardwareInfo
+    public class DeviceImpl : IDevice
     {
         readonly TelephonyManager telManager;
 
 
-        public HardwareInfo()
+        public DeviceImpl()
         {
             var windowManager = (IWindowManager)Application
                 .Context
@@ -51,6 +51,31 @@ namespace Plugin.DeviceInfo
             }
 
             this.telManager = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
+        }
+
+
+        PowerManager.WakeLock wakeLock;
+        public bool EnableSleep
+        {
+            get => this.wakeLock == null;
+            set
+            {
+                var mgr = (PowerManager)Application.Context.GetSystemService(Context.PowerService);
+
+                if (value)
+                {
+                    if (this.wakeLock == null)
+                        return;
+
+                    this.wakeLock = mgr.NewWakeLock(WakeLockFlags.Partial, this.GetType().FullName);
+                    this.wakeLock.Acquire();
+                }
+                else
+                {
+                    this.wakeLock?.Release();
+                    this.wakeLock = null;
+                }
+            }
         }
 
 

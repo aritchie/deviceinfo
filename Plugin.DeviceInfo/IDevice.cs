@@ -3,8 +3,10 @@
 
 namespace Plugin.DeviceInfo
 {
-    public interface IHardwareInfo
+    public interface IDevice
     {
+        bool EnableSleep { get; set; }
+
         int ScreenHeight { get; }
         int ScreenWidth { get; }
 

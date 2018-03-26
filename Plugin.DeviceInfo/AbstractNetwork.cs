@@ -5,10 +5,10 @@ using System.Reactive.Linq;
 
 namespace Plugin.DeviceInfo
 {
-    public abstract class AbstractNetworkInfo : INetworkInfo
+    public abstract class AbstractNetwork : INetwork
     {
-        public virtual IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Empty<IWifiScanResult>();
-        public virtual IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
+        //public virtual IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Empty<IWifiScanResult>();
+        //public virtual IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
 
         public virtual NetworkReachability InternetReachability => NetworkReachability.Unknown;
         public virtual string CellularNetworkCarrier => null;
