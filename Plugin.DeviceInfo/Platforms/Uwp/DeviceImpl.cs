@@ -2,6 +2,7 @@
 using Windows.ApplicationModel;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.System;
+using Windows.System.Display;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.ViewManagement;
@@ -9,7 +10,7 @@ using Windows.UI.ViewManagement;
 
 namespace Plugin.DeviceInfo
 {
-    public class HardwareInfo : IHardwareInfo
+    public class DeviceImpl : IDevice
     {
         readonly EasClientDeviceInformation deviceInfo = new EasClientDeviceInformation();
 
@@ -41,5 +42,26 @@ namespace Plugin.DeviceInfo
         }
         public bool IsSimulator { get; } = Package.Current.Id.Architecture == ProcessorArchitecture.Unknown;
         public bool IsTablet => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch;
+
+
+        DisplayRequest displayRequest;
+        public bool EnableSleep
+        {
+            get => this.displayRequest == null;
+            set
+            {
+                if (value)
+                {
+                    this.displayRequest?.RequestRelease();
+                    this.displayRequest = null;
+                }
+                else
+                {
+                    this.displayRequest = new DisplayRequest();
+                    this.displayRequest.RequestActive();
+                }
+
+            }
+        }
     }
 }

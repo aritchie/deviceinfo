@@ -64,16 +64,16 @@ namespace Plugin.DeviceInfo
 
                 if (value)
                 {
+                    this.wakeLock?.Release();
+                    this.wakeLock = null;
+                }
+                else
+                {
                     if (this.wakeLock == null)
                         return;
 
                     this.wakeLock = mgr.NewWakeLock(WakeLockFlags.Partial, this.GetType().FullName);
                     this.wakeLock.Acquire();
-                }
-                else
-                {
-                    this.wakeLock?.Release();
-                    this.wakeLock = null;
                 }
             }
         }
