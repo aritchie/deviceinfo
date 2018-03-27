@@ -12,9 +12,9 @@ namespace Samples
             this.InitializeComponent();
             this.BindingContext = new MainViewModel(
                 CrossDevice.App,
-                CrossDevice.Battery,
+                CrossDevice.PowerState,
                 CrossDevice.Network,
-                CrossDevice.Hardware
+                CrossDevice.Device
             );
         }
 

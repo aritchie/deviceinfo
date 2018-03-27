@@ -17,9 +17,6 @@ namespace Plugin.DeviceInfo
 
     public class DeviceImpl : IDevice
     {
-        readonly TelephonyManager telManager;
-
-
         public DeviceImpl()
         {
             var windowManager = (IWindowManager)Application
@@ -49,8 +46,6 @@ namespace Plugin.DeviceInfo
                 this.ScreenHeight = metrics.HeightPixels;
                 this.ScreenWidth = metrics.WidthPixels;
             }
-
-            this.telManager = Application.Context.ApplicationContext.GetSystemService(Context.TelephonyService) as TelephonyManager;
         }
 
 
@@ -83,12 +78,16 @@ namespace Plugin.DeviceInfo
         public int ScreenWidth { get; }
 
         //public string DeviceId { get; } = B.Serial;
-        public string DeviceId => this.telManager?.DeviceId ?? Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
+        public string DeviceId => Settings.Secure.GetString(Application.Context.ApplicationContext.ContentResolver, Settings.Secure.AndroidId);
         public string Manufacturer { get; } = B.Manufacturer;
         public string Model { get; } = B.Model;
         public string OperatingSystem { get; } = B.VERSION.Release;
         public string OperatingSystemVersion { get; } = B.VERSION.SdkInt.ToString();
         public bool IsSimulator { get; } = B.Product.Equals("google_sdk");
-        public bool IsTablet => this.telManager?.PhoneType == PhoneType.None; // best I can do
+        public bool IsTablet => ((TelephonyManager)Application
+            .Context
+            .ApplicationContext
+            .GetSystemService(Context.TelephonyService))
+            .PhoneType == PhoneType.None; // best I can do
     }
 }

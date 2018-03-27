@@ -10,15 +10,15 @@ namespace Samples
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public MainViewModel(IAppInfo app, IBatteryInfo battery, INetwork network, IHardwareInfo hardware)
+        public MainViewModel(IApp app, IPowerState power, INetwork network, IDevice device)
         {
             this.App = app;
-            this.Battery = battery;
+            this.Device = device;
             this.Network = network;
-            this.Hardware = hardware;
+            this.Power = power;
 
             this.ClearApp = new Command(this.AppEvents.Clear);
-            this.ClearBattery = new Command(this.BatteryEvents.Clear);
+            this.ClearPower = new Command(this.BatteryEvents.Clear);
             this.ClearNetwork = new Command(this.NetworkEvents.Clear);
         }
 
@@ -33,17 +33,17 @@ namespace Samples
         public PowerStatus BatteryStatus { get; set; }
         public int BatteryPercent { get; set; }
 
-        public IAppInfo App { get; }
-        public IBatteryInfo Battery { get; }
-        public IHardwareInfo Hardware { get; }
+        public IApp App { get; }
+        public IDevice Device { get; }
         public INetwork Network { get; }
+        public IPowerState Power { get; }
 
         public ObservableCollection<EventViewModel> AppEvents { get; } = new ObservableCollection<EventViewModel>();
         public ObservableCollection<EventViewModel> NetworkEvents { get; } = new ObservableCollection<EventViewModel>();
         public ObservableCollection<EventViewModel> BatteryEvents { get; } = new ObservableCollection<EventViewModel>();
 
         public ICommand ClearApp { get; }
-        public ICommand ClearBattery { get; }
+        public ICommand ClearPower { get; }
         public ICommand ClearNetwork { get; }
 
         bool firstStart = true;
@@ -57,9 +57,9 @@ namespace Samples
             if (!this.firstStart)
                 return;
 
-            this.batteryPower = this.Battery
+            this.batteryPower = this.Power
                 .WhenPowerStatusChanged()
-                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                .Subscribe(x => Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     this.BatteryStatus = x;
                     this.BatteryEvents.Insert(0, new EventViewModel
@@ -68,9 +68,9 @@ namespace Samples
                     });
                 }));
 
-            this.batteryPercent = this.Battery
+            this.batteryPercent = this.Power
                 .WhenBatteryPercentageChanged()
-                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                .Subscribe(x => Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     this.BatteryPercent = x;
                     this.BatteryEvents.Insert(0, new EventViewModel
@@ -81,7 +81,7 @@ namespace Samples
 
             this.connectivityChange = this.Network
                 .WhenStatusChanged()
-                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                .Subscribe(x => Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     this.Raise(nameof(IpAddress));
                     this.Raise(nameof(CellularNetworkCarrier));
@@ -95,7 +95,7 @@ namespace Samples
 
             this.App
                 .WhenEnteringForeground()
-                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                .Subscribe(x => Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     this.AppEvents.Insert(0, new EventViewModel
                     {
                         Detail = "Foregrounding App"
@@ -104,7 +104,7 @@ namespace Samples
 
             this.App
                 .WhenEnteringBackground()
-                .Subscribe(x => Device.BeginInvokeOnMainThread(() =>
+                .Subscribe(x => Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     this.AppEvents.Insert(0, new EventViewModel
                     {
                         Detail = "Backgrounding App"
