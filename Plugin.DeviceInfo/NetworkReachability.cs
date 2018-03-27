@@ -3,7 +3,7 @@
 
 namespace Plugin.DeviceInfo
 {
-    public enum NetworkReachability
+    public enum NetworkType
     {
         Unknown,
         NotReachable,

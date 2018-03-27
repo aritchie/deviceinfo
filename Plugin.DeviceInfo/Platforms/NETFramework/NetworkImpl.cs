@@ -17,7 +17,7 @@ namespace Plugin.DeviceInfo
         //public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
 
 
-        public NetworkReachability InternetReachability => NetworkReachability.Other;
+        public NetworkType InternetNetworkType => NetworkType.Other;
         public string CellularNetworkCarrier => null;
 
         public string IpAddress => Dns
@@ -33,15 +33,15 @@ namespace Plugin.DeviceInfo
         public string WifiSsid => null;
 
 
-        IObservable<NetworkReachability> statusOb;
-        public IObservable<NetworkReachability> WhenStatusChanged()
+        IObservable<NetworkType> statusOb;
+        public IObservable<NetworkType> WhenNetworkTypeChanged()
         {
-            this.statusOb = this.statusOb ?? Observable.Create<NetworkReachability>(async ob =>
+            this.statusOb = this.statusOb ?? Observable.Create<NetworkType>(async ob =>
             {
                 var current = await this.IsReachable();
                 ob.OnNext(current
-                    ? NetworkReachability.Other
-                    : NetworkReachability.NotReachable);
+                    ? NetworkType.Other
+                    : NetworkType.NotReachable);
 
                 var handler = new NetworkAddressChangedEventHandler(async (sender, args) =>
                 {
@@ -50,8 +50,8 @@ namespace Plugin.DeviceInfo
                     {
                         current = reachable;
                         ob.OnNext(current
-                            ? NetworkReachability.Other
-                            : NetworkReachability.NotReachable);
+                            ? NetworkType.Other
+                            : NetworkType.NotReachable);
                     }
                 });
                 NetworkChange.NetworkAddressChanged += handler;

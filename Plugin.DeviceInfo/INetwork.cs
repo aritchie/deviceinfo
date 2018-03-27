@@ -9,11 +9,11 @@ namespace Plugin.DeviceInfo
         //IObservable<IWifiScanResult> ScanForWifiNetworks();
         //IObservable<Unit> ConnectToWifi(string ssid, string password);
 
-        NetworkReachability InternetReachability { get; }
+        NetworkType InternetNetworkType { get; }
         string CellularNetworkCarrier { get; }
         string IpAddress { get; }
         string WifiSsid { get; }
 
-        IObservable<NetworkReachability> WhenStatusChanged();
+        IObservable<NetworkType> WhenNetworkTypeChanged();
     }
 }

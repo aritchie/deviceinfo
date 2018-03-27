@@ -45,22 +45,24 @@ namespace Plugin.DeviceInfo
 
 
         DisplayRequest displayRequest;
-        public bool EnableSleep
+        public bool IdleTimerDisabled
         {
-            get => this.displayRequest == null;
+            get => this.displayRequest != null;
             set
             {
                 if (value)
                 {
-                    this.displayRequest?.RequestRelease();
-                    this.displayRequest = null;
-                }
-                else
-                {
+                    if (this.displayRequest != null)
+                        return;
+
                     this.displayRequest = new DisplayRequest();
                     this.displayRequest.RequestActive();
                 }
-
+                else
+                {
+                    this.displayRequest?.RequestRelease();
+                    this.displayRequest = null;
+                }
             }
         }
     }

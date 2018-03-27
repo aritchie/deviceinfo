@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Reactive;
 using System.Reactive.Linq;
 using Acr;
 using Android.App;
@@ -79,26 +78,26 @@ wifiManager.reconnect();
         //}
 
 
-        public NetworkReachability InternetReachability
+        public NetworkType InternetNetworkType
         {
             get
             {
                 var an = this.Connectivity.ActiveNetworkInfo;
                 if (an == null || !an.IsConnected)
-                    return NetworkReachability.NotReachable;
+                    return NetworkType.NotReachable;
 
                 switch (an.Type)
                 {
 
                     case ConnectivityType.Wimax:
                     case ConnectivityType.Wifi:
-                        return NetworkReachability.Wifi;
+                        return NetworkType.Wifi;
 
                     case ConnectivityType.Mobile:
-                        return NetworkReachability.Cellular;
+                        return NetworkType.Cellular;
 
                     default:
-                        return NetworkReachability.Other;
+                        return NetworkType.Other;
                 }
             }
         }
@@ -120,9 +119,9 @@ wifiManager.reconnect();
         //<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
         public string WifiSsid => this.Wifi.ConnectionInfo?.SSID;
 
-        public IObservable<NetworkReachability> WhenStatusChanged() => AndroidObservables
+        public IObservable<NetworkType> WhenNetworkTypeChanged() => AndroidObservables
             .WhenIntentReceived(ConnectivityManager.ConnectivityAction)
-            .Select(intent => this.InternetReachability);
+            .Select(intent => this.InternetNetworkType);
 
 
         WifiManager wifiMgr;

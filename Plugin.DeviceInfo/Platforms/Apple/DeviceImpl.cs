@@ -20,7 +20,7 @@ namespace Plugin.DeviceInfo
 
             this.init = true;
             var tcs = new TaskCompletionSource<object>();
-#if MAC
+#if __MACOS__
             NSApplication.SharedApplication.InvokeOnMainThread(() =>
             {
                 this.screenHeight = (int)NSScreen.MainScreen.Frame.Height;
@@ -148,24 +148,32 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public bool EnableSleep
+#if __IOS__
+        public bool IdleTimerDisabled
         {
-            get => !UIApplication.SharedApplication.IdleTimerDisabled;
+            get => UIApplication.SharedApplication.IdleTimerDisabled;
             set
             {
                 var s = UIApplication.SharedApplication;
-                if (value && s.IdleTimerDisabled)
+                if (value && !s.IdleTimerDisabled)
                 {
-                    s.InvokeOnMainThread(() => s.IdleTimerDisabled = false);
+                    s.InvokeOnMainThread(() => s.IdleTimerDisabled = true);
                     return;
                 }
 
-                if (!value && !s.IdleTimerDisabled)
+                if (!value && s.IdleTimerDisabled)
                 {
-                    s.InvokeOnMainThread(() => s.IdleTimerDisabled = true);
+                    s.InvokeOnMainThread(() => s.IdleTimerDisabled = false);
                 }
             }
         }
+#else
+        public bool IdleTimerDisabled
+        {
+            get => false;
+            set {}
+        }
+#endif
 
 #if __IOS__
         [DllImport(Constants.SystemLibrary)]

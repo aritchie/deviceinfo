@@ -27,7 +27,7 @@ namespace Samples
 
         public string IpAddress => this.Network.IpAddress;
         public string CellularNetworkCarrier => this.Network.CellularNetworkCarrier;
-        public NetworkReachability InternetReachability => this.Network.InternetReachability;
+        public NetworkType InternetReachability => this.Network.InternetNetworkType;
         public string WifiSsid => this.Network.WifiSsid;
 
         public PowerStatus BatteryStatus { get; set; }
@@ -80,7 +80,7 @@ namespace Samples
                 }));
 
             this.connectivityChange = this.Network
-                .WhenStatusChanged()
+                .WhenNetworkTypeChanged()
                 .Subscribe(x => Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     this.Raise(nameof(IpAddress));

@@ -50,25 +50,25 @@ namespace Plugin.DeviceInfo
 
 
         PowerManager.WakeLock wakeLock;
-        public bool EnableSleep
+        public bool IdleTimerDisabled
         {
-            get => this.wakeLock == null;
+            get => this.wakeLock != null;
             set
             {
                 var mgr = (PowerManager)Application.Context.GetSystemService(Context.PowerService);
 
                 if (value)
                 {
-                    this.wakeLock?.Release();
-                    this.wakeLock = null;
-                }
-                else
-                {
                     if (this.wakeLock == null)
                         return;
 
                     this.wakeLock = mgr.NewWakeLock(WakeLockFlags.Partial, this.GetType().FullName);
                     this.wakeLock.Acquire();
+                }
+                else
+                {
+                    this.wakeLock?.Release();
+                    this.wakeLock = null;
                 }
             }
         }

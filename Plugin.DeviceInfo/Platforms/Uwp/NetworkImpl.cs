@@ -18,30 +18,30 @@ namespace Plugin.DeviceInfo
             .DisplayName;
 
 
-        public NetworkReachability InternetReachability
+        public NetworkType InternetNetworkType
         {
             get
             {
                 var avail = NetworkInterface.GetIsNetworkAvailable();
 
                 if (!avail)
-                    return NetworkReachability.NotReachable;
+                    return NetworkType.NotReachable;
 
                 var profile = NetworkInformation.GetInternetConnectionProfile();
                 if (profile == null)
-                    return NetworkReachability.NotReachable;
+                    return NetworkType.NotReachable;
 
                 switch (profile.NetworkAdapter.IanaInterfaceType)
                 {
                     case 71:
-                        return NetworkReachability.Wifi;
+                        return NetworkType.Wifi;
 
                     case 243:
                     case 244:
-                        return NetworkReachability.Cellular;
+                        return NetworkType.Cellular;
 
                     default:
-                        return NetworkReachability.Other;
+                        return NetworkType.Other;
                 }
             }
         }
@@ -87,9 +87,9 @@ namespace Plugin.DeviceInfo
             //});
 
 
-        public IObservable<NetworkReachability> WhenStatusChanged() => Observable.Create<NetworkReachability>(ob =>
+        public IObservable<NetworkType> WhenNetworkTypeChanged() => Observable.Create<NetworkType>(ob =>
         {
-            var handler = new NetworkStatusChangedEventHandler(sender => ob.OnNext(this.InternetReachability));
+            var handler = new NetworkStatusChangedEventHandler(sender => ob.OnNext(this.InternetNetworkType));
             NetworkInformation.NetworkStatusChanged += handler;
             return () => NetworkInformation.NetworkStatusChanged -= handler;
         });

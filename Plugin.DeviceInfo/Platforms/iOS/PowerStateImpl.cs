@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using UIKit;
 
 
-namespace Plugin.DeviceInfo.Platforms.iOS
+namespace Plugin.DeviceInfo
 {
     public class PowerStateImpl : IPowerState
     {

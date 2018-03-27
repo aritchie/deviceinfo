@@ -6,9 +6,7 @@ using System.Reactive.Linq;
 using SystemConfiguration;
 using Foundation;
 #if __IOS__
-using UIKit;
 using CoreTelephony;
-using NetworkExtension;
 #endif
 
 
@@ -55,7 +53,7 @@ namespace Plugin.DeviceInfo
         public string CellularNetworkCarrier { get; } = null;
 #endif
 
-        public NetworkReachability InternetReachability
+        public NetworkType InternetNetworkType
         {
             get
             {
@@ -64,25 +62,25 @@ namespace Plugin.DeviceInfo
                 switch (internet)
                 {
                     case NetworkStatus.NotReachable:
-                        return NetworkReachability.NotReachable;
+                        return NetworkType.NotReachable;
 
                     case NetworkStatus.ReachableViaCarrierDataNetwork:
-                        return NetworkReachability.Cellular;
+                        return NetworkType.Cellular;
 
                     case NetworkStatus.ReachableViaWiFiNetwork:
-                        return NetworkReachability.Wifi;
+                        return NetworkType.Wifi;
 
                     default:
-                        return NetworkReachability.Other;
+                        return NetworkType.Other;
                 }
             }
         }
 
 
-        public IObservable<NetworkReachability> WhenStatusChanged() => Observable.Create<NetworkReachability>(ob =>
+        public IObservable<NetworkType> WhenNetworkTypeChanged() => Observable.Create<NetworkType>(ob =>
         {
             var handler = new EventHandler((sender, args) =>
-                ob.OnNext(this.InternetReachability)
+                ob.OnNext(this.InternetNetworkType)
             );
             Reachability.ReachabilityChanged += handler;
             return () => Reachability.ReachabilityChanged -= handler;
