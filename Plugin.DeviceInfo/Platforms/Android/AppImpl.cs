@@ -13,7 +13,7 @@ using Observable = System.Reactive.Linq.Observable;
 
 namespace Plugin.DeviceInfo
 {
-    public class AppInfo : IApp
+    public class AppImpl : IApp
     {
         readonly AppStateLifecyle appState;
 

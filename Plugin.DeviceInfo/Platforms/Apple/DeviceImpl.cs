@@ -10,7 +10,7 @@ using ObjCRuntime;
 
 namespace Plugin.DeviceInfo
 {
-    public class HardwareInfo : IHardwareInfo
+    public class DeviceImpl : IDevice
     {
         bool init;
         void Init()
@@ -147,6 +147,25 @@ namespace Plugin.DeviceInfo
             }
         }
 
+
+        public bool EnableSleepMode
+        {
+            get => !UIApplication.SharedApplication.IdleTimerDisabled;
+            set
+            {
+                var s = UIApplication.SharedApplication;
+                if (value && s.IdleTimerDisabled)
+                {
+                    s.InvokeOnMainThread(() => s.IdleTimerDisabled = false);
+                    return;
+                }
+
+                if (!value && !s.IdleTimerDisabled)
+                {
+                    s.InvokeOnMainThread(() => s.IdleTimerDisabled = true);
+                }
+            }
+        }
 
 #if __IOS__
         [DllImport(Constants.SystemLibrary)]

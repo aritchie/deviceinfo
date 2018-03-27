@@ -7,7 +7,7 @@ using Windows.System.Power;
 
 namespace Plugin.DeviceInfo
 {
-    public class BatteryInfo : IBatteryInfo
+    public class PowerStateImpl : IPowerState
     {
         public int Percentage
         {

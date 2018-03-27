@@ -16,31 +16,31 @@ using NetworkExtension;
 
 namespace Plugin.DeviceInfo
 {
-    public class NetworkInfo : INetwork
+    public class NetworkImpl : INetwork
     {
 #if __IOS__
-        public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Create<IWifiScanResult>(ob =>
-        {
-            //UIDevice.CurrentDevice.CheckSystemVersion(11, 0)
-            NEHotspotHelper.Register(new NEHotspotHelperOptions(), DispatchQueue.CurrentQueue, handler =>
-            {
-                ob.OnNext(new WifiScanResult
-                {
-                    // Bssid
-                    Ssid = handler.Network.Ssid,
-                    IsSecure = handler.Network.Secure,
-                    SignalStrength = handler.Network.SignalStrength
-                });
-            });
-            return () => {};
-        });
+        //        public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Create<IWifiScanResult>(ob =>
+        //        {
+        //            //UIDevice.CurrentDevice.CheckSystemVersion(11, 0)
+        //            NEHotspotHelper.Register(new NEHotspotHelperOptions(), DispatchQueue.CurrentQueue, handler =>
+        //            {
+        //                ob.OnNext(new WifiScanResult
+        //                {
+        //                    // Bssid
+        //                    Ssid = handler.Network.Ssid,
+        //                    IsSecure = handler.Network.Secure,
+        //                    SignalStrength = handler.Network.SignalStrength
+        //                });
+        //            });
+        //            return () => {};
+        //        });
 
 
-        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.FromAsync(_ =>
-        {
-            var config = new NEHotspotConfiguration(ssid, password, true) { JoinOnce = true };
-            return NEHotspotConfigurationManager.SharedManager.ApplyConfigurationAsync(config);
-        });
+        //        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.FromAsync(_ =>
+        //        {
+        //            var config = new NEHotspotConfiguration(ssid, password, true) { JoinOnce = true };
+        //            return NEHotspotConfigurationManager.SharedManager.ApplyConfigurationAsync(config);
+        //        });
 
 
         public string CellularNetworkCarrier
@@ -52,8 +52,8 @@ namespace Plugin.DeviceInfo
             }
         }
 #else
-        public IObservable<IWifiScanResult> ScanForWifiNetworks() =>  Observable.Empty<IWifiScanResult>();
-        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
+        //        public IObservable<IWifiScanResult> ScanForWifiNetworks() =>  Observable.Empty<IWifiScanResult>();
+        //        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
         public string CellularNetworkCarrier { get; } = null;
 #endif
 

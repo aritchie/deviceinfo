@@ -3,7 +3,7 @@
 
 namespace Plugin.DeviceInfo
 {
-    public class BatteryInfo : AbstractPowerState
+    public class PowerStateImpl : AbstractPowerState
     {
     }
 }

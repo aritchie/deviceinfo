@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 
 namespace Plugin.DeviceInfo
 {
-    public class AppInfo : AbstractAppInfo
+    public class AppImpl : AbstractApp
     {
         public override string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
         public override string ShortVersion { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}";

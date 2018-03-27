@@ -30,7 +30,7 @@ Supported Platforms
     <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard2.0' ">
         <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
-        <Product>Plugin.DeviceInfo - .NET Standard 2</Product>
+        <Product>Plugin.DeviceInfo - .NET Standard</Product>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR '$(TargetFramework)' == 'MonoAndroid80' ">
@@ -69,10 +69,10 @@ Supported Platforms
         <Compile Remove="Platforms\**\*.cs" />
         <None Include="Platforms\**\*.cs" />
         <PackageReference Include="System.Reactive" Version="3.1.1" />
-        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.1.0" PrivateAssets="all" />
+        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.2" PrivateAssets="all" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard2.0' ">
         <Compile Include="Platforms\Shared\**\*.cs" />
     </ItemGroup>
 
@@ -102,7 +102,7 @@ Supported Platforms
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
         <Compile Include="Platforms\Shared\**\*.cs" />
-        <Compile Include="Platforms\NetFx\**\*.cs" />
+        <Compile Include="Platforms\NETFramework\**\*.cs" />
         <Reference Include="System.Windows.Forms" />
     </ItemGroup>
 

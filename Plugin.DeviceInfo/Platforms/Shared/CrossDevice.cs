@@ -4,40 +4,36 @@
 namespace Plugin.DeviceInfo
 {
 
-    public static class CrossDevice
+    public static partial class CrossDevice
     {
         const string ERROR = "[Plugin.DeviceInfo] Platform implementation not found.  Have you added a nuget reference to your platform project?";
 
 
-        static IAppInfo app;
-        public static IAppInfo App
+        static IApp app;
+        public static IApp App
         {
             get
             {
-#if NETSTANDARD
-                throw new Exception(ERROR);
-#else
-                app = app ?? new AppInfo();
+                if (app == null)
+                    throw new Exception(ERROR);
+
                 return app;
-#endif
             }
             set => app = value;
         }
 
 
-        static IBatteryInfo batt;
-        public static IBatteryInfo Battery
+        static IPowerState powerState;
+        public static IPowerState PowerState
         {
             get
             {
-#if NETSTANDARD
-                throw new Exception(ERROR);
-#else
-                batt = batt ?? new PowerStateImpl();
-                return batt;
-#endif
+                if (powerState == null)
+                    throw new Exception(ERROR);
+
+                return powerState;
             }
-            set => batt = value;
+            set => powerState = value;
         }
 
 
@@ -46,30 +42,26 @@ namespace Plugin.DeviceInfo
         {
             get
             {
-#if NETSTANDARD
-                throw new Exception(ERROR);
-#else
-                network = network ?? new NetworkInfo();
+                if (network == null)
+                    throw new Exception(ERROR);
+
                 return network;
-#endif
             }
             set => network = value;
         }
 
 
-        static IHardwareInfo hardware;
-        public static IHardwareInfo Hardware
+        static IDevice device;
+        public static IDevice Device
         {
             get
             {
-#if NETSTANDARD
-                throw new Exception(ERROR);
-#else
-                hardware = hardware ?? new HardwareInfo();
-                return hardware;
-#endif
+                if (device == null)
+                    throw new Exception(ERROR);
+
+                return device;
             }
-            set => hardware = value;
+            set => device = value;
         }
     }
 }

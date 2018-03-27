@@ -10,7 +10,7 @@ using UIKit;
 
 namespace Plugin.DeviceInfo
 {
-    public class AppInfo : IAppInfo
+    public class AppImpl : IApp
     {
         public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
         public string ShortVersion => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
@@ -11,11 +10,11 @@ using System.Threading.Tasks;
 namespace Plugin.DeviceInfo
 {
 
-    public class NetworkInfo : INetwork
+    public class NetworkImpl : INetwork
     {
         public bool IsInternetAvailable => false; // NetworkInterface.GetIsNetworkAvailable()
-        public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Empty<IWifiScanResult>();
-        public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
+        //public IObservable<IWifiScanResult> ScanForWifiNetworks() => Observable.Empty<IWifiScanResult>();
+        //public IObservable<Unit> ConnectToWifi(string ssid, string password) => Observable.Empty<Unit>();
 
 
         public NetworkReachability InternetReachability => NetworkReachability.Other;
