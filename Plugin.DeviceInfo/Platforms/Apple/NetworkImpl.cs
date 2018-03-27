@@ -2,11 +2,9 @@ using System;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Reactive;
 using System.Reactive.Linq;
 using SystemConfiguration;
 using Foundation;
-using CoreFoundation;
 #if __IOS__
 using UIKit;
 using CoreTelephony;

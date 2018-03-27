@@ -6,11 +6,21 @@ using System.Windows.Forms;
 namespace Plugin.DeviceInfo
 {
 
-    public class BatteryInfo : IBatteryInfo
+    public class PowerStateImpl : IPowerState
     {
-        public PowerStatus Status
-        {
-            get
+        int Percentage => Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent);
+
+
+        public IObservable<int> WhenBatteryPercentageChanged() => Observable
+            .Interval(TimeSpan.FromSeconds(30))
+            .StartWith(this.Percentage)
+            .Select(x => this.Percentage)
+            .DistinctUntilChanged();
+
+
+        public IObservable<PowerStatus> WhenPowerStatusChanged() => Observable
+            .Interval(TimeSpan.FromSeconds(5))
+            .Select(_ =>
             {
                 switch (SystemInformation.PowerStatus.BatteryChargeStatus)
                 {
@@ -26,36 +36,7 @@ namespace Plugin.DeviceInfo
                     default:
                         return PowerStatus.Discharging;
                 }
-            }
-        }
-
-
-        public int Percentage => Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent);
-
-
-        public IObservable<int> WhenBatteryPercentageChanged() => Observable
-            .Interval(TimeSpan.FromSeconds(30))
-            .StartWith(this.Percentage)
-            .Select(x => this.Percentage)
+            })
             .DistinctUntilChanged();
-
-
-        public IObservable<PowerStatus> WhenPowerStatusChanged() => Observable.Create<PowerStatus>(ob =>
-        {
-            var last = this.Status;
-            ob.OnNext(last);
-
-            return Observable
-                .Interval(TimeSpan.FromSeconds(5))
-                .Subscribe(x =>
-                {
-                    var now = this.Status;
-                    if (now != last)
-                    {
-                        last = now;
-                        ob.OnNext(last);
-                    }
-                });
-        });
     }
 }

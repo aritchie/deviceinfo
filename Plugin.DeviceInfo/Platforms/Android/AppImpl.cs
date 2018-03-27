@@ -18,7 +18,7 @@ namespace Plugin.DeviceInfo
         readonly AppStateLifecyle appState;
 
 
-        public AppInfo()
+        public AppImpl()
         {
             this.appState = new AppStateLifecyle();
             var app = Application.Context.ApplicationContext as Application;

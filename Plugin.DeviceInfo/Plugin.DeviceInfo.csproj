@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;uap10.0;net46</TargetFrameworks>
+        <TargetFrameworks></TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;net46;uap10.0</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;net46</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>aritchie</Authors>
         <Company />
@@ -10,10 +12,9 @@
 Cross Platform Device Information Plugin for Xamarin and Windows
 
 Supported Platforms
-* .NET Standard 2
+* .NET Standard
 * Android
 * iOS
-* tvOS
 * macOS
 * UWP
         </Description>

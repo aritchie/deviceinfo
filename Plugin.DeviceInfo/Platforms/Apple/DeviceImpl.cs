@@ -148,7 +148,7 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public bool EnableSleepMode
+        public bool EnableSleep
         {
             get => !UIApplication.SharedApplication.IdleTimerDisabled;
             set
