@@ -4,10 +4,9 @@ using System.Windows.Forms;
 
 namespace Plugin.DeviceInfo
 {
-
     public class DeviceImpl : IDevice
     {
-        public bool EnableSleep { get; set; }
+        public bool IdleTimerDisabled { get; set; } = true;
         public int ScreenHeight { get; } = SystemInformation.VirtualScreen.Height;
         public int ScreenWidth { get; } = SystemInformation.VirtualScreen.Width;
         public string DeviceId { get; }
