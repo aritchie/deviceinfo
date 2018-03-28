@@ -4,29 +4,32 @@ A cross platform plugin to get device and application details
 * Unique DeviceID
     * IMEI on android
     * Vendor ID on iOS (this is unique to your applications on a device)
-* Camera Availability
 * Screen Dimensions
 * Manufacturer and Model
 * Operating System
 * Application Version Information
 * Current Culture
-* Battery Monitoring
+* Power State Monitoring
 * Network Monitoring
 
-## Supported Operating Systems
-* NET Standard 1.0
+
+[![NuGet](https://img.shields.io/nuget/v/Acr.DeviceInfo.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.DeviceInfo/)
+[Change Log - Mar 27, 2018](changelog.md)
+
+## Supported Runtimes
+* NET Standard
 * Android
 * iOS
-* tvOS
 * macOS
 * Windows UWP
 
 ## Setup
 
+* Make sure to install the nuget package to your core net standard library as well as your platform projects (iOS, Android, etc)
+
 ### Android
 
 _Permissions_
-* Device ID- IMEI (DeviceInfo.Hardware.DeviceId), set permission READ_PHONE_STATE
 * Battery status - set permissions BATTERY_STATE and DEVICE_POWER
 * Network Monitoring - set permission ACCESS_NETWORK_STATE
 
@@ -35,9 +38,9 @@ _Permissions_
 
 Make sure to install the nuget package in your platform and PCL projects.  To use, simply start calling
 
-    CrossDevice.Hardware.<property>
+    CrossDevice.Device.<property>
     CrossDevice.App.<property>
-    CrossDevice.Battery.<property>
+    CrossDevice.PowerState.<property>
     CrossDevice.Network.<property>
 
 ## FAQ
