@@ -93,7 +93,10 @@ namespace Plugin.DeviceInfo
             .FirstOrDefault(x => x.Name.Equals("en0", StringComparison.InvariantCultureIgnoreCase))?
             .GetIPProperties()
             .UnicastAddresses
-            .FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork)?
+            .FirstOrDefault(x =>
+                x.Address.AddressFamily == AddressFamily.InterNetwork ||
+                x.Address.AddressFamily == AddressFamily.InterNetworkV6
+            )?
             .Address?
             .ToString();
 
