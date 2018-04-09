@@ -20,11 +20,17 @@ namespace Samples
             this.ClearApp = new Command(this.AppEvents.Clear);
             this.ClearPower = new Command(this.BatteryEvents.Clear);
             this.ClearNetwork = new Command(this.NetworkEvents.Clear);
+            this.ToggleIdleTimer = new Command(() =>
+            {
+                this.Device.IdleTimerDisabled = !this.Device.IdleTimerDisabled;
+                this.Raise(nameof(this.IdleTimerText));
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
+        public string IdleTimerText => this.Device.IdleTimerDisabled ? "Enable Idle Timer" : "Disable Idle Timer";
         public string IpAddress => this.Network.IpAddress;
         public string CellularNetworkCarrier => this.Network.CellularNetworkCarrier;
         public NetworkType InternetReachability => this.Network.InternetNetworkType;
@@ -45,6 +51,7 @@ namespace Samples
         public ICommand ClearApp { get; }
         public ICommand ClearPower { get; }
         public ICommand ClearNetwork { get; }
+        public ICommand ToggleIdleTimer { get; }
 
         bool firstStart = true;
         IDisposable batteryPower;

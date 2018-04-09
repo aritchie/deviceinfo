@@ -9,7 +9,7 @@
         <Company />
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <Description>
-Cross Platform Device Information Plugin for Xamarin and Windows
+ACR Device Info Plugin Information Plugin for Xamarin and Windows
 
 Supported Platforms
 * .NET Standard
@@ -18,7 +18,7 @@ Supported Platforms
 * macOS
 * UWP
         </Description>
-        <Product>ACR Device Info Plugin for Xamarin and Windows</Product>
+        <Product>ACR Device Info Plugin ($(TargetFramework))</Product>
         <Version>6.0.0</Version>
         <PackageProjectUrl>https://github.com/aritchie/deviceinfo</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/aritchie/deviceinfo/blob/master/LICENSE.md</PackageLicenseUrl>
@@ -28,49 +28,16 @@ Supported Platforms
         <PackageId>Acr.DeviceInfo</PackageId>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard2.0' ">
-        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
-        <DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
-        <Product>Plugin.DeviceInfo - .NET Standard</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR '$(TargetFramework)' == 'MonoAndroid80' ">
-        <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
-        <Product>Plugin.DeviceInfo - Android</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
-        <DefineConstants>$(DefineConstants);__IOS__</DefineConstants>
-        <Product>Plugin.DeviceInfo - iOS</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'xamarin.tvOS10' ">
-        <DefineConstants>$(DefineConstants);__TVOS__</DefineConstants>
-        <Product>Plugin.DeviceInfo - tvOS</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
-        <DefineConstants>$(DefineConstants);__MACOS__</DefineConstants>
-        <Product>Plugin.DeviceInfo - macOS</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'net462' ">
-        <DefineConstants>$(DefineConstants);__NETFX__</DefineConstants>
-        <Product>Plugin.DeviceInfo - .NET Framework</Product>
-    </PropertyGroup>
-
     <PropertyGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
         <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
         <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
-        <DefineConstants>$(DefineConstants);WINDOWS_UWP</DefineConstants>
-        <Product>Plugin.DeviceInfo - UWP</Product>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Remove="Platforms\**\*.cs" />
         <None Include="Platforms\**\*.cs" />
         <PackageReference Include="System.Reactive" Version="3.1.1" />
-        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.2" PrivateAssets="all" />
+        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.3.1" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard2.0' ">
@@ -80,7 +47,7 @@ Supported Platforms
     <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR '$(TargetFramework)' == 'MonoAndroid80' ">
         <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Android\**\*.cs" />
-        <PackageReference Include="Acr.Core" Version="1.2.0" />
+        <PackageReference Include="Acr.Core" Version="1.2.2" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
@@ -111,7 +78,7 @@ Supported Platforms
         <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Uwp\**\*.cs" />
         <EmbeddedResource Include="Platforms\Uwp\Plugin.DeviceInfo.rd.xml" />
-        <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.5" />
+        <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.8" />
     </ItemGroup>
 
     <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />

@@ -16,6 +16,7 @@
                             </TableSection>
 
                             <TableSection BindingContext="{Binding Hardware}" Title="Device">
+                                <TextCell Text="{Binding IdleTimerText}" Command="{Binding ToggleIdleTimer}" />
 			                    <TextCell Text="Device ID" Detail="{Binding DeviceId}" />
 			                    <TextCell Text="Manufacturer" Detail="{Binding Manufacturer}" />
 			                    <TextCell Text="Model" Detail="{Binding Model}" />
