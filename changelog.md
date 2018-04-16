@@ -1,5 +1,8 @@
 ﻿# CHANGELOG
 
-## 5.0
-* .NET Standard 2.0
-* WiFi scanning and connections
+## 6.1.0
+* [fix] Screen lock thread on iOS
+
+## 6.0
+* .NET Standard, Multiple Android Targets, and cleanup
+* [feature] Screen Lock
