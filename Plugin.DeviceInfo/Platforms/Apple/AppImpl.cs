@@ -1,51 +1,16 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Reactive;
 using System.Reactive.Linq;
 using Foundation;
-#if !__MACOS__
-using UIKit;
-#endif
+
 
 namespace Plugin.DeviceInfo
 {
-    public class AppImpl : IApp
+    public partial class AppImpl : IApp
     {
         public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
         public string ShortVersion => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
-#if __MACOS__
-        public bool IsBackgrounded { get; } = false;
-        public IObservable<Unit> WhenEnteringBackground() => Observable.Empty<Unit>();
-        public IObservable<Unit> WhenEnteringForeground() => Observable.Empty<Unit>();
-#else
-        public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
-        public IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
-        {
-            NSObject token = null;
-            UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                token = UIApplication
-                    .Notifications
-                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(Unit.Default))
-            );
-
-            return () => token?.Dispose();
-        });
-
-
-        public IObservable<Unit> WhenEnteringBackground() => Observable.Create<Unit>(ob =>
-        {
-            NSObject token = null;
-            UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                token = UIApplication
-                    .Notifications
-                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(Unit.Default))
-            );
-
-            return () => token?.Dispose();
-        });
-#endif
-
         public CultureInfo CurrentCulture => this.GetSystemCultureInfo();
 
 

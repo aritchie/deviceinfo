@@ -16,5 +16,12 @@ namespace Plugin.DeviceInfo
         bool IsBackgrounded { get; }
         IObservable<Unit> WhenEnteringForeground();
         IObservable<Unit> WhenEnteringBackground();
+
+        /// <summary>
+        /// Setting this to false, forces the screen to remain on
+        /// </summary>
+        IObservable<Unit> EnableIdleTimer(bool enabled);
+
+        bool IsIdleTimerEnabled { get; }
     }
 }

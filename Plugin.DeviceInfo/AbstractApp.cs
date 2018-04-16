@@ -16,5 +16,7 @@ namespace Plugin.DeviceInfo
         public virtual bool IsBackgrounded => false;
         public virtual IObservable<Unit> WhenEnteringForeground() => Observable.Empty<Unit>();
         public virtual IObservable<Unit> WhenEnteringBackground() => Observable.Empty<Unit>();
+        public virtual IObservable<Unit> EnableIdleTimer(bool enabled) => Observable.Empty<Unit>();
+        public virtual bool IsIdleTimerEnabled => true;
     }
 }

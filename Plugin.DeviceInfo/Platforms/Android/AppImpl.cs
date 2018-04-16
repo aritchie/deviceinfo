@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -7,7 +6,9 @@ using Android.App;
 using Android.Content;
 using Java.Util;
 using Acr;
+using Android.OS;
 using App = Android.App.Application;
+using Debug = System.Diagnostics.Debug;
 using Observable = System.Reactive.Linq.Observable;
 
 
@@ -72,6 +73,32 @@ namespace Plugin.DeviceInfo
         });
 
 
+        PowerManager.WakeLock wakeLock;
+        public bool IsIdleTimerEnabled => this.wakeLock != null;
+
+
+        public IObservable<Unit> EnableIdleTimer(bool enabled)
+        {
+            var mgr = (PowerManager)Application.Context.GetSystemService(Context.PowerService);
+
+            if (enabled)
+            {
+                if (this.wakeLock == null)
+                {
+                    this.wakeLock = mgr.NewWakeLock(WakeLockFlags.Partial, this.GetType().FullName);
+                    this.wakeLock.Acquire();
+                }
+            }
+            else
+            {
+                this.wakeLock?.Release();
+                this.wakeLock = null;
+            }
+
+            return Observable.Return(Unit.Default);
+        }
+
+
         public string Version => App
             .Context
             .ApplicationContext
@@ -101,5 +128,7 @@ namespace Plugin.DeviceInfo
             var value = Locale.Default.ToString().Replace("_", "-");
             return new CultureInfo(value);
         }
+
+
     }
 }
