@@ -2,6 +2,7 @@
 using System.Reactive;
 using System.Reactive.Linq;
 using Windows.ApplicationModel;
+using Windows.System.Display;
 using Windows.UI.Xaml;
 
 
@@ -36,5 +37,28 @@ namespace Plugin.DeviceInfo
             Window.Current.VisibilityChanged += handler;
             return () => Window.Current.VisibilityChanged -= handler;
         });
+
+
+        DisplayRequest displayRequest;
+        public override bool IsIdleTimerEnabled => this.displayRequest == null;
+
+
+        public override IObservable<Unit> EnableIdleTimer(bool enabled)
+        {
+            if (enabled)
+            {
+                if (this.displayRequest == null)
+                {
+                    this.displayRequest = new DisplayRequest();
+                    this.displayRequest.RequestActive();
+                }
+            }
+            else
+            {
+                this.displayRequest?.RequestRelease();
+                this.displayRequest = null;
+            }
+            return Observable.Return(Unit.Default);
+        }
     }
 }

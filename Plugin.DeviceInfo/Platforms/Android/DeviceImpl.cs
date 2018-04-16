@@ -14,7 +14,6 @@ using B = Android.OS.Build;
 
 namespace Plugin.DeviceInfo
 {
-
     public class DeviceImpl : IDevice
     {
         public DeviceImpl()
@@ -45,31 +44,6 @@ namespace Plugin.DeviceInfo
                 windowManager.DefaultDisplay.GetMetrics(metrics);
                 this.ScreenHeight = metrics.HeightPixels;
                 this.ScreenWidth = metrics.WidthPixels;
-            }
-        }
-
-
-        PowerManager.WakeLock wakeLock;
-        public bool IdleTimerDisabled
-        {
-            get => this.wakeLock != null;
-            set
-            {
-                var mgr = (PowerManager)Application.Context.GetSystemService(Context.PowerService);
-
-                if (value)
-                {
-                    if (this.wakeLock == null)
-                        return;
-
-                    this.wakeLock = mgr.NewWakeLock(WakeLockFlags.Partial, this.GetType().FullName);
-                    this.wakeLock.Acquire();
-                }
-                else
-                {
-                    this.wakeLock?.Release();
-                    this.wakeLock = null;
-                }
             }
         }
 

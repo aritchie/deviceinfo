@@ -2,7 +2,6 @@
 using Windows.ApplicationModel;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.System;
-using Windows.System.Display;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.ViewManagement;
@@ -42,28 +41,5 @@ namespace Plugin.DeviceInfo
         }
         public bool IsSimulator { get; } = Package.Current.Id.Architecture == ProcessorArchitecture.Unknown;
         public bool IsTablet => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch;
-
-
-        DisplayRequest displayRequest;
-        public bool IdleTimerDisabled
-        {
-            get => this.displayRequest != null;
-            set
-            {
-                if (value)
-                {
-                    if (this.displayRequest != null)
-                        return;
-
-                    this.displayRequest = new DisplayRequest();
-                    this.displayRequest.RequestActive();
-                }
-                else
-                {
-                    this.displayRequest?.RequestRelease();
-                    this.displayRequest = null;
-                }
-            }
-        }
     }
 }

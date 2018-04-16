@@ -5,11 +5,6 @@ namespace Plugin.DeviceInfo
 {
     public interface IDevice
     {
-        /// <summary>
-        /// Setting this to true disables the screen from turning off
-        /// </summary>
-        bool IdleTimerDisabled { get; set; }
-
         int ScreenHeight { get; }
         int ScreenWidth { get; }
 
