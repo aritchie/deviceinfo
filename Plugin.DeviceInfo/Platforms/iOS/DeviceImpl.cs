@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using UIKit;
@@ -31,6 +32,30 @@ namespace Plugin.DeviceInfo
                 tcs.TrySetResult(null);
             });
             tcs.Task.Wait();
+        }
+
+
+        public bool IsJailBreakDetected
+        {
+            get
+            {
+                var paths = new[]
+                {
+                    "/Applications/Cydia.app",
+                    "/private/var/lib/cydia",
+                    "/private/var/tmp/cydia.log",
+                    "/System/Library/LaunchDaemons/com.saurik.Cydia.Startup.plist",
+                    "/usr/libexec/sftp-server",
+                    "/usr/bin/sshd",
+                    "/usr/sbin/sshd",
+                    "/Applications/FakeCarrier.app",
+                    "/Applications/SBSettings.app",
+                    "/Applications/WinterBoard.app",
+                };
+
+
+                return paths.Any(System.IO.File.Exists);
+            }
         }
 
 

@@ -19,7 +19,7 @@ Supported Platforms
 * UWP
         </Description>
         <Product>ACR Device Info Plugin ($(TargetFramework))</Product>
-        <Version>6.1.0</Version>
+        <Version>6.2.0</Version>
         <PackageProjectUrl>https://github.com/aritchie/deviceinfo</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/aritchie/deviceinfo/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/aritchie/deviceinfo/raw/master/icon.png</PackageIconUrl>
@@ -37,7 +37,7 @@ Supported Platforms
         <Compile Remove="Platforms\**\*.cs" />
         <None Include="Platforms\**\*.cs" />
         <PackageReference Include="System.Reactive" Version="3.1.1" />
-        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.3.1" PrivateAssets="all" />
+        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.4.0" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR '$(TargetFramework)' == 'MonoAndroid80' ">

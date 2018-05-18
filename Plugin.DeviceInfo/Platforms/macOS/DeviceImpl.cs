@@ -32,5 +32,8 @@ namespace Plugin.DeviceInfo
 
             tcs.Task.Wait();
         }
+
+
+        public bool IsJailBreakDetected { get; } = false;
     }
 }

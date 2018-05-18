@@ -16,5 +16,7 @@ namespace Plugin.DeviceInfo
         public string OperatingSystemVersion => Environment.OSVersion.VersionString;
         public bool IsSimulator { get; } = false;
         public bool IsTablet { get; } = false;
+
+        public bool IsJailBreakDetected { get; } = false;
     }
 }

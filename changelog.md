@@ -1,5 +1,8 @@
 ﻿# CHANGELOG
 
+## 6.2.0
+* [feature] Detect jail break methods on iOS & Android
+
 ## 6.1.0
 * [fix] Screen lock thread on iOS
 

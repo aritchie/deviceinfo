@@ -5,6 +5,8 @@ namespace Plugin.DeviceInfo
 {
     public interface IDevice
     {
+        bool IsJailBreakDetected { get; }
+
         int ScreenHeight { get; }
         int ScreenWidth { get; }
 

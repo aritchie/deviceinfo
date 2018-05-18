@@ -41,5 +41,6 @@ namespace Plugin.DeviceInfo
         }
         public bool IsSimulator { get; } = Package.Current.Id.Architecture == ProcessorArchitecture.Unknown;
         public bool IsTablet => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Touch;
+        public bool IsJailBreakDetected { get; } = false;
     }
 }
