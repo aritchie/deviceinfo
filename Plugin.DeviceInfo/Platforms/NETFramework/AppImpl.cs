@@ -6,6 +6,8 @@ namespace Plugin.DeviceInfo
 {
     public class AppImpl : AbstractApp
     {
+        public override string BundleName => this.Version;
+
         public override string Version => Assembly
             .GetEntryAssembly()
             .GetName()

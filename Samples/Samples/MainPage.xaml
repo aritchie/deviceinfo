@@ -11,11 +11,13 @@
 			        <TableView Intent="Data">
 			            <TableRoot>
                             <TableSection BindingContext="{Binding App}" Title="Application">
+                                <TextCell Text="Bundle" Detail="{Binding Bundle}" />
                                 <TextCell Text="Version" Detail="{Binding Version}" />
                                 <TextCell Text="Short Version" Detail="{Binding ShortVersion}" />
                             </TableSection>
 
                             <TableSection BindingContext="{Binding Hardware}" Title="Device">
+                                <SwitchCell Text="Jail Break Detected" On="{Binding IsJailBreakDetected}" />
                                 <TextCell Text="{Binding IdleTimerText}" Command="{Binding ToggleIdleTimer}" />
 			                    <TextCell Text="Device ID" Detail="{Binding DeviceId}" />
 			                    <TextCell Text="Manufacturer" Detail="{Binding Manufacturer}" />

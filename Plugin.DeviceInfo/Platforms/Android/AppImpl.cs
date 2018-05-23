@@ -6,6 +6,7 @@ using Android.App;
 using Android.Content;
 using Java.Util;
 using Acr;
+using Android.Content.PM;
 using Android.OS;
 using App = Android.App.Application;
 using Debug = System.Diagnostics.Debug;
@@ -99,21 +100,16 @@ namespace Plugin.DeviceInfo
         }
 
 
-        public string Version => App
+        static PackageInfo GetPackage() => App
             .Context
             .ApplicationContext
             .PackageManager
-            .GetPackageInfo(App.Context.PackageName, 0)
-            .VersionName;
+            .GetPackageInfo(App.Context.PackageName, 0);
 
 
-        public string ShortVersion => App
-            .Context
-            .ApplicationContext
-            .PackageManager
-            .GetPackageInfo(App.Context.PackageName, 0)
-            .VersionCode
-            .ToString();
+        public string BundleName => GetPackage().PackageName;
+        public string Version => GetPackage().VersionName;
+        public string ShortVersion => GetPackage().VersionCode.ToString();
 
 
         public bool IsBackgrounded => !this.appState.IsActive;

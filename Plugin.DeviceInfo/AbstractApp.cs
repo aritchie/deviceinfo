@@ -8,6 +8,7 @@ namespace Plugin.DeviceInfo
 {
     public abstract class AbstractApp : IApp
     {
+        public abstract string BundleName { get; }
         public abstract string Version { get; }
         public abstract string ShortVersion { get; }
         public virtual CultureInfo CurrentCulture => CultureInfo.CurrentCulture;

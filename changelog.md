@@ -1,5 +1,8 @@
 ﻿# CHANGELOG
 
+## 6.2.1
+* [feature] BundleName added to IApp
+
 ## 6.2.0
 * [feature] Detect jail break methods on iOS & Android
 

@@ -10,6 +10,7 @@ namespace Plugin.DeviceInfo
 {
     public class AppImpl : AbstractApp
     {
+        public override string BundleName => Package.Current.Id.Name;
         public override string Version { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
         public override string ShortVersion { get; } = $"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}";
         public override bool IsBackgrounded => !Window.Current.Visible;

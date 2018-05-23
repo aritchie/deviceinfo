@@ -9,6 +9,7 @@ namespace Plugin.DeviceInfo
 {
     public partial class AppImpl : IApp
     {
+        public string BundleName => NSBundle.MainBundle.BundleIdentifier;
         public string Version => NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
         public string ShortVersion => NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
         public CultureInfo CurrentCulture => this.GetSystemCultureInfo();

@@ -7,7 +7,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>aritchie</Authors>
         <Company />
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
         <Description>
 ACR Device Info Plugin Information Plugin for Xamarin and Windows
 
@@ -19,7 +19,7 @@ Supported Platforms
 * UWP
         </Description>
         <Product>ACR Device Info Plugin ($(TargetFramework))</Product>
-        <Version>6.2.0</Version>
+        <PackageVersion>6.2.1</PackageVersion>
         <PackageProjectUrl>https://github.com/aritchie/deviceinfo</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/aritchie/deviceinfo/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/aritchie/deviceinfo/raw/master/icon.png</PackageIconUrl>

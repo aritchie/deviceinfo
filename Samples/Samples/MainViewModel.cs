@@ -22,7 +22,7 @@ namespace Samples
             this.ClearNetwork = new Command(this.NetworkEvents.Clear);
             this.ToggleIdleTimer = new Command(() =>
             {
-                this.Device.IdleTimerDisabled = !this.Device.IdleTimerDisabled;
+                this.App.EnableIdleTimer(!this.App.IsIdleTimerEnabled).Subscribe();
                 this.Raise(nameof(this.IdleTimerText));
             });
         }
@@ -30,7 +30,8 @@ namespace Samples
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public string IdleTimerText => this.Device.IdleTimerDisabled ? "Enable Idle Timer" : "Disable Idle Timer";
+        public bool IsJailBreakDetected => this.Device.IsJailBreakDetected;
+        public string IdleTimerText => this.App.IsIdleTimerEnabled ? "Disable Idle Timer" : "Enable Idle Timer";
         public string IpAddress => this.Network.IpAddress;
         public string CellularNetworkCarrier => this.Network.CellularNetworkCarrier;
         public NetworkType InternetReachability => this.Network.InternetNetworkType;

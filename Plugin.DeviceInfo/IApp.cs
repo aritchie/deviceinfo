@@ -8,6 +8,7 @@ namespace Plugin.DeviceInfo
 
     public interface IApp
     {
+        string BundleName { get; }
         string Version { get; }
         string ShortVersion { get; }
         CultureInfo CurrentCulture { get; }
