@@ -4,6 +4,8 @@
         <TargetFrameworks></TargetFrameworks>
         <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;net462;net47;uap10.0</TargetFrameworks>
         <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;net462;net47</TargetFrameworks>
+        <!--<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;net462;net47;uap10.0</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;net462;net47</TargetFrameworks>-->
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>aritchie</Authors>
         <Company />
@@ -50,7 +52,7 @@ Supported Platforms
         <Compile Include="Platforms\iOS\**\*.cs" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.tvOS10' ">
+    <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
         <Compile Include="Platforms\Apple\**\*.cs" />
         <Compile Include="Platforms\tvOS\**\*.cs" />
     </ItemGroup>

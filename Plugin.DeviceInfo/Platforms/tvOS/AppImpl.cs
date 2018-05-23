@@ -10,8 +10,6 @@ namespace Plugin.DeviceInfo
 {
     public partial class AppImpl : IApp
     {
-
-
         public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
         public IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
         {
