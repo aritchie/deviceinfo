@@ -1,5 +1,9 @@
 ﻿# CHANGELOG
 
+## 6.3.0
+* [feature] Added WhenConnected/Disconnect extensions to network
+* update ACR core for RXv4
+
 ## 6.2.1
 * [feature] BundleName added to IApp
 
