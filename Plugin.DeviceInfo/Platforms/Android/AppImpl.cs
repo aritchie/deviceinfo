@@ -9,7 +9,6 @@ using Acr;
 using Android.Content.PM;
 using Android.OS;
 using App = Android.App.Application;
-using Debug = System.Diagnostics.Debug;
 using Observable = System.Reactive.Linq.Observable;
 
 
@@ -40,33 +39,12 @@ namespace Plugin.DeviceInfo
             .Select(x => this.GetCurrentCulture());
 
 
-        public IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
+        public IObservable<AppState> WhenStateChanged() => Observable.Create<AppState>(ob =>
         {
             var handler = new EventHandler((sender, args) =>
             {
-                if (this.appState.IsActive)
-                {
-                    Debug.WriteLine("Firing WhenEnteringForeground Observable");
-                    ob.OnNext(Unit.Default);
-                }
-            });
-            this.appState.StatusChanged += handler;
-
-            return () => this.appState.StatusChanged -= handler;
-        });
-
-
-        public IObservable<Unit> WhenEnteringBackground() => Observable.Create<Unit>(ob =>
-        {
-            var handler = new EventHandler((sender, args) =>
-            {
-                Debug.WriteLine("Firing 1 WhenEnteringBackground Observable");
-
-                if (!this.appState.IsActive)
-                {
-                    Debug.WriteLine("Firing WhenEnteringBackground Observable");
-                    ob.OnNext(Unit.Default);
-                }
+                var state = this.appState.IsActive ? AppState.Foreground : AppState.Background;
+                ob.OnNext(state);
             });
             this.appState.StatusChanged += handler;
 

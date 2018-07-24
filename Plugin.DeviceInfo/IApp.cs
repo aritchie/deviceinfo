@@ -15,8 +15,8 @@ namespace Plugin.DeviceInfo
         IObservable<CultureInfo> WhenCultureChanged();
 
         bool IsBackgrounded { get; }
-        IObservable<Unit> WhenEnteringForeground();
-        IObservable<Unit> WhenEnteringBackground();
+        IObservable<AppState> WhenStateChanged();
+        
 
         /// <summary>
         /// Setting this to false, forces the screen to remain on

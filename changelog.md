@@ -1,5 +1,9 @@
 ﻿# CHANGELOG
 
+## 6.4.0
+* [feature] AppState observable now serves both foreground & background (extension methods added for backwards compat)
+* [feature] Helper method for INetwork.IsConnected()
+
 ## 6.3.0
 * [feature] Added WhenConnected/Disconnect extensions to network
 * update ACR core for RXv4

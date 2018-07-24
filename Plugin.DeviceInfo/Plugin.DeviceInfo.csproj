@@ -18,7 +18,7 @@ Supported Platforms
 * UWP
         </Description>
         <Product>ACR Device Info Plugin ($(TargetFramework))</Product>
-        <PackageVersion>6.3.0</PackageVersion>
+        <PackageVersion>6.4.0</PackageVersion>
         <PackageProjectUrl>https://github.com/aritchie/deviceinfo</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/aritchie/deviceinfo/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/aritchie/deviceinfo/raw/master/icon.png</PackageIconUrl>

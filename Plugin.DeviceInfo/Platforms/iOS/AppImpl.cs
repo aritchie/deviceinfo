@@ -11,29 +11,26 @@ namespace Plugin.DeviceInfo
     public partial class AppImpl : IApp
     {
         public bool IsBackgrounded => UIApplication.SharedApplication.ApplicationState != UIApplicationState.Active;
-        public IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
+        public IObservable<AppState> WhenStateChanged() => Observable.Create<AppState>(ob =>
         {
-            NSObject token = null;
+            NSObject token1 = null;
+            NSObject token2 = null;
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                token = UIApplication
+            {
+                token1 = UIApplication
                     .Notifications
-                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(Unit.Default))
-            );
+                    .ObserveWillEnterForeground((sender, args) => ob.OnNext(AppState.Foreground));
 
-            return () => token?.Dispose();
-        });
-
-
-        public IObservable<Unit> WhenEnteringBackground() => Observable.Create<Unit>(ob =>
-        {
-            NSObject token = null;
-            UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                token = UIApplication
+                token2 = UIApplication
                     .Notifications
-                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(Unit.Default))
-            );
+                    .ObserveDidEnterBackground((sender, args) => ob.OnNext(AppState.Background));
+            });
 
-            return () => token?.Dispose();
+            return () =>
+            {
+                token1?.Dispose();
+                token2?.Dispose();
+            };
         });
 
 

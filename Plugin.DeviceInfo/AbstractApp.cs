@@ -15,8 +15,7 @@ namespace Plugin.DeviceInfo
 
         public virtual IObservable<CultureInfo> WhenCultureChanged() => Observable.Return(CultureInfo.CurrentCulture);
         public virtual bool IsBackgrounded => false;
-        public virtual IObservable<Unit> WhenEnteringForeground() => Observable.Empty<Unit>();
-        public virtual IObservable<Unit> WhenEnteringBackground() => Observable.Empty<Unit>();
+        public virtual IObservable<AppState> WhenStateChanged() => Observable.Empty<AppState>();
         public virtual IObservable<Unit> EnableIdleTimer(bool enabled) => Observable.Empty<Unit>();
         public virtual bool IsIdleTimerEnabled => true;
     }

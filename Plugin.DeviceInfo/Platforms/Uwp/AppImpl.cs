@@ -16,24 +16,12 @@ namespace Plugin.DeviceInfo
         public override bool IsBackgrounded => !Window.Current.Visible;
 
 
-        public override IObservable<Unit> WhenEnteringForeground() => Observable.Create<Unit>(ob =>
+        public override IObservable<AppState> WhenStateChanged() => Observable.Create<AppState>(ob =>
         {
             var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
             {
-                if (args.Visible)
-                    ob.OnNext(Unit.Default);
-            });
-            Window.Current.VisibilityChanged += handler;
-            return () => Window.Current.VisibilityChanged -= handler;
-        });
-
-
-        public override IObservable<Unit> WhenEnteringBackground() => Observable.Create<Unit>(ob =>
-        {
-            var handler = new WindowVisibilityChangedEventHandler((sender, args) =>
-            {
-                if (!args.Visible)
-                    ob.OnNext(Unit.Default);
+                var state = args.Visible ? AppState.Foreground : AppState.Background;
+                ob.OnNext(state);
             });
             Window.Current.VisibilityChanged += handler;
             return () => Window.Current.VisibilityChanged -= handler;
