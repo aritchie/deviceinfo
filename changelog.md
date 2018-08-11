@@ -1,5 +1,8 @@
 ﻿# CHANGELOG
 
+## 6.5.0
+* [feature] Push to System.Reactive 4.0
+
 ## 6.4.0
 * [feature] AppState observable now serves both foreground & background (extension methods added for backwards compat)
 * [feature] Helper method for INetwork.IsConnected()

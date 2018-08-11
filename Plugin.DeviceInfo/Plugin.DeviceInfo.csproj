@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;net462;net47;uap10.0</TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;net462;net47</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;net462;net47;uap10.0</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;net462;net47</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>aritchie</Authors>
         <Company />
@@ -18,7 +18,7 @@ Supported Platforms
 * UWP
         </Description>
         <Product>ACR Device Info Plugin ($(TargetFramework))</Product>
-        <PackageVersion>6.4.0</PackageVersion>
+        <PackageVersion>6.5.0</PackageVersion>
         <PackageProjectUrl>https://github.com/aritchie/deviceinfo</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/aritchie/deviceinfo/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/aritchie/deviceinfo/raw/master/icon.png</PackageIconUrl>
@@ -35,13 +35,13 @@ Supported Platforms
     <ItemGroup>
         <Compile Remove="Platforms\**\*.cs" />
         <None Include="Platforms\**\*.cs" />
-        <PackageReference Include="System.Reactive" Version="[3.1.1, 5)" />
-        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.5.4" PrivateAssets="all" />
+        <PackageReference Include="Acr.Core" Version="2.2.0" />
+        <PackageReference Include="System.Reactive" Version="4.0.0" />
+        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.46" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
         <Compile Include="Platforms\Android\**\*.cs" />
-        <PackageReference Include="Acr.Core" Version="2.1.0" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
