@@ -14,7 +14,7 @@ A cross platform plugin to get device and application details
 
 
 [![NuGet](https://img.shields.io/nuget/v/Acr.DeviceInfo.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.DeviceInfo/)
-[Change Log - Mar 27, 2018](changelog.md)
+[Change Log - August 8, 2018](changelog.md)
 
 ## Supported Runtimes
 * NET Standard
