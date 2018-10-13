@@ -16,6 +16,8 @@ A cross platform plugin to get device and application details
 [![NuGet](https://img.shields.io/nuget/v/Acr.DeviceInfo.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.DeviceInfo/)
 [Change Log - August 8, 2018](changelog.md)
 
+### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
+
 ## Supported Runtimes
 * NET Standard
 * Android
