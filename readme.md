@@ -1,6 +1,15 @@
 ﻿# ACR Device Information for Xamarin & Windows
 A cross platform plugin to get device and application details
 
+[![NuGet](https://img.shields.io/nuget/v/Acr.DeviceInfo.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.DeviceInfo/)
+[![Build status](https://allanritchie.visualstudio.com/Plugins/_apis/build/status/DeviceInfo)](https://allanritchie.visualstudio.com/Plugins/_build/latest?definitionId=0)
+
+[Change Log - August 8, 2018](changelog.md)
+
+### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
+
+
+## Features
 * Unique DeviceID
     * IMEI on android
     * Vendor ID on iOS (this is unique to your applications on a device)
@@ -13,17 +22,15 @@ A cross platform plugin to get device and application details
 * Network Monitoring
 
 
-[![NuGet](https://img.shields.io/nuget/v/Acr.DeviceInfo.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.DeviceInfo/)
-[Change Log - August 8, 2018](changelog.md)
 
-### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
-
-## Supported Runtimes
-* NET Standard
-* Android
-* iOS
-* macOS
-* Windows UWP
+## Platforms
+|Platform|Version|
+|--------|-------|
+NET Standard|v2+
+Android|4.3+
+iOS|6+
+macOS|10ish
+Windows UWP|16299+
 
 ## Setup
 
