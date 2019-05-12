@@ -1,4 +1,6 @@
-﻿# ACR Device Information for Xamarin & Windows
+# UPDATE - This library has now moved to the Shiny Framework at https://github.com/shinyorg/shiny
+
+## ACR Device Information for Xamarin & Windows
 _A cross platform plugin to get device and application details_
 
 ### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
